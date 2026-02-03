@@ -19,7 +19,7 @@ from utility import date_utility as du
 def print_hi(name):
    # fileds_to_use=['col_1','col_2']
     #print(type(fileds_to_use))
-    #sd.init_data()
+    sd.init_data()
     #sd.daily_update()
     #ll_start.compute_low_level_start()
     #gdtr.init_dragon_tiger_ranklist()

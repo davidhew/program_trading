@@ -1,5 +1,5 @@
 # 这是一个示例 Python 脚本。
-
+import config
 # 按 ⌃R 执行或将其替换为您的代码。
 # 按 双击 ⇧ 在所有地方搜索类、文件、工具窗口、操作和设置。
 from get_stock_data import save_daily_data as sd
@@ -23,12 +23,12 @@ def print_hi(name):
     #sd.daily_update()
     #ll_start.compute_low_level_start()
     #gdtr.init_dragon_tiger_ranklist()
-
+    print(config.CHINA_STOCK_DATA_DIR)
    #for i in range(31,-1,-1):
-    date_str = str(du.days_befor('20260128',0))
-    momentum.compute(date_str)
-    one_year_highest.compute(date_str)
-    jf.compute(date_str)
+   # date_str = str(du.days_befor('20260128',0))
+   # momentum.compute(date_str)
+   # one_year_highest.compute(date_str)
+   # jf.compute(date_str)
         #cross_MA120.compute(date_str)
         #ll_start.compute(date_str)
     #print(date_str)

@@ -13,4 +13,4 @@ services:
       - .:/app              # 将当前代码目录映射到容器
     working_dir: /app
     command: >
-      sh -c "pip install -i http://mirrors.aliyun.com/simple/ --trusted-host mirrors.aliyun.com -r requirements.txt && python main.py"
+      sh -c "pip install -r requirements.txt && python main.py"

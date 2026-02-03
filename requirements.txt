@@ -1,3 +1,3 @@
-pandas
-tushare
+pandas == 2.33
+tushare == 1.4.24
 numpy

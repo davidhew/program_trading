@@ -9,9 +9,6 @@ services:
       - http_proxy= 
       - https_proxy= 
     restart: always
-    dns:
-      - 8.8.8.8
-      - 114.114.114.114
     volumes:
       - .:/app              # 将当前代码目录映射到容器
     working_dir: /app

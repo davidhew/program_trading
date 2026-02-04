@@ -23,25 +23,27 @@ def compute(date_str:str =None):
         date_str = datetime.now().strftime('%Y%m%d')
 
     stoack_list_df = pd.DataFrame(columns=['ts_code','name'])
-    stock_datas = gd.get_all_stock_data()
-    for stock in stock_datas:
-        #一年认为是252个交易日，然后再用最后一个交易日去和这252个交易日价格相比，所以总共需要253个
-        if(len(stock)<253):
-            logger.info("one_year_highest, %s's data less than one year!",stock.iloc[0]['ts_code'])
-            continue
-        else:
-            matched_indices = stock.index[stock['trade_date'] == int(date_str)].tolist()
-            if len(matched_indices) == 0:
+    for batch in gd.get_stock_data_batches():
+
+        for stock in batch:
+
+            #一年认为是252个交易日，然后再用最后一个交易日去和这252个交易日价格相比，所以总共需要253个
+            if(len(stock)<253):
+                logger.info("one_year_highest, %s's data less than one year!",stock.iloc[0]['ts_code'])
                 continue
-            row_idx = matched_indices[0]
-            if row_idx - 253 >=0 and stock.iloc[row_idx]['trade_date'] == int(date_str):
-                one_year_high = stock.iloc[row_idx-253:row_idx]['close'].max()
-                #上一个交易日的盘中最高价，大于最近一年的最高价，证实其就是近一年的最高价
-                if(stock.iloc[row_idx]['close'] > one_year_high):
-                    ts_code = stock.iloc[row_idx]['ts_code']
-                    name = gd_base_info.get_name_from_code(ts_code)
-                    new_row_values = [ts_code, name]
-                    stoack_list_df.loc[len(stoack_list_df)] = new_row_values
+            else:
+                matched_indices = stock.index[stock['trade_date'] == int(date_str)].tolist()
+                if len(matched_indices) == 0:
+                    continue
+                row_idx = matched_indices[0]
+                if row_idx - 253 >=0 and stock.iloc[row_idx]['trade_date'] == int(date_str):
+                    one_year_high = stock.iloc[row_idx-253:row_idx]['close'].max()
+                    #上一个交易日的盘中最高价，大于最近一年的最高价，证实其就是近一年的最高价
+                    if(stock.iloc[row_idx]['close'] > one_year_high):
+                        ts_code = stock.iloc[row_idx]['ts_code']
+                        name = gd_base_info.get_name_from_code(ts_code)
+                        new_row_values = [ts_code, name]
+                        stoack_list_df.loc[len(stoack_list_df)] = new_row_values
 
     stoack_list_df.to_csv(config.STOCK_STRATEGY_RESULT_DIR +'one-year-highest-list-' + date_str + '.csv', index=False)
 

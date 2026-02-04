@@ -23,26 +23,27 @@ def compute(date_str:str =None,day_num:int =20):
         date_str = datetime.now().strftime('%Y%m%d')
 
     df = pd.DataFrame(columns=['ts_code','name','price_up_ratio'])
-    stock_datas = gd.get_all_stock_data()
-    for stock in stock_datas:
-        # 至少已经上市一年了，新近上市的剔除掉影响
-        if (len(stock) < 253):
-            logger.info("compute_momentum, %s's data less than one year!", stock.iloc[0]['ts_code'])
-            continue
-        else:
-            matched_indices = stock.index[stock['trade_date'] == int(date_str)].tolist()
-            if len(matched_indices) == 0:
+    for batch in gd.get_stock_data_batches():
+
+        for stock in batch:
+            # 至少已经上市一年了，新近上市的剔除掉影响
+            if (len(stock) < 253):
+                logger.info("compute_momentum, %s's data less than one year!", stock.iloc[0]['ts_code'])
                 continue
-            row_idx = matched_indices[0]
-            if row_idx-day_num >= 0 and stock.iloc[row_idx]['trade_date'] == int(date_str):
-                price_up_ratio = stock.iloc[row_idx]['close']/stock.iloc[row_idx-day_num]['close']
-                ts_code = stock.iloc[row_idx]['ts_code']
-                name = gd_base_info.get_name_from_code(ts_code)
-                new_row_values=[ts_code,name,price_up_ratio]
-                #最近n个交易日，每个交易日平均交易金额要大于10个亿
-                is_average_amount_enough = (stock.iloc[row_idx-day_num:row_idx]['amount'].sum()*1000>=day_num*10*10000*10000)
-                if(is_average_amount_enough):
-                    df.loc[len(df)]=new_row_values
+            else:
+                matched_indices = stock.index[stock['trade_date'] == int(date_str)].tolist()
+                if len(matched_indices) == 0:
+                    continue
+                row_idx = matched_indices[0]
+                if row_idx-day_num >= 0 and stock.iloc[row_idx]['trade_date'] == int(date_str):
+                    price_up_ratio = stock.iloc[row_idx]['close']/stock.iloc[row_idx-day_num]['close']
+                    ts_code = stock.iloc[row_idx]['ts_code']
+                    name = gd_base_info.get_name_from_code(ts_code)
+                    new_row_values=[ts_code,name,price_up_ratio]
+                    #最近n个交易日，每个交易日平均交易金额要大于10个亿
+                    is_average_amount_enough = (stock.iloc[row_idx-day_num:row_idx]['amount'].sum()*1000>=day_num*10*10000*10000)
+                    if(is_average_amount_enough):
+                        df.loc[len(df)]=new_row_values
     df = df.sort_values(by=['price_up_ratio'], ascending=[False], ignore_index=True)
     print("momentum-total-number:"+str(len(df)))
     df = df.head(int(config.CHINA_STOCK_MOMENTUM_TOP_NUMBER))

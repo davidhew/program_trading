@@ -61,3 +61,5 @@ SEND_TELEGRAM=os.getenv('SEND_TELEGRAM')
 #简放股池策略里，股池里股票的淘汰周期（以自然天计算，而非只算交易日）
 #暂时先赋值一个月；后续观察是否要扩大到2个月
 JIANFANG_POOL_EXPIRE_DAYS=os.getenv('JIANFANG_POOL_EXPIRE_DAYS')
+
+LOG_FILE_PATH=os.getenv('LOG_FILE_PATH')

@@ -18,7 +18,7 @@ from us_get_stock_data import us_get_stock_base_info as gs
 from us_get_stock_data import us_get_pink_spot  as gs_pink_spot
 from utility import secrets_config as secrets_config
 
-logging.basicConfig(filename='../program_trading_log.log', level=logging.INFO)
+logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
 logger = logging.getLogger()
 secrest = secrets_config.load_external_config()
 ts.set_token(secrest.get('TUSHARE_TOKEN'))

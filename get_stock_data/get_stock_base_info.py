@@ -13,7 +13,7 @@ import logging
 import tushare as ts
 from utility import secrets_config as secrets_config
 from functools import lru_cache
-logging.basicConfig(filename='../program_trading_log.log', level=logging.INFO)
+logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
 logger = logging.getLogger()
 file_name = 'china_stock_list.csv'
 

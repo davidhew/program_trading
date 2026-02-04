@@ -9,7 +9,7 @@ import config
 import sys
 import pandas as pd
 import logging
-logging.basicConfig(filename='../program_trading_log.log', level=logging.INFO)
+logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
 logger = logging.getLogger()
 
 def get_stock_data_batches(batch_size=10):

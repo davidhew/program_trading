@@ -14,12 +14,16 @@ from select_stock_strategy import low_level_start as ll_start
 from select_stock_strategy import cross_MA120
 from get_stock_data import get_dragon_tiger_ranklist as gdtr
 from utility import date_utility as du
+import logging
+logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
+logger = logging.getLogger()
 
 
 def print_hi(name):
+    logger.info("run in docker! it's great!")
    # fileds_to_use=['col_1','col_2']
     #print(type(fileds_to_use))
-    sd.init_data()
+    #sd.init_data()
     #sd.daily_update()
     #ll_start.compute_low_level_start()
     #gdtr.init_dragon_tiger_ranklist()

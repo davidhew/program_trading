@@ -33,33 +33,34 @@ STOCK_DRAGON_TIGER_RANK_LIST_FILE=os.getenv('STOCK_DRAGON_TIGER_RANK_LIST_FILE')
 USA_STOCK_STRATEGY_RESULT_DIR=os.getenv('USA_STOCK_STRATEGY_RESULT_DIR')
 
 #动量策略时，按照涨幅排序后，挑取前面的多少家公司进行后续的分析处理
-CHINA_STOCK_MOMENTUM_TOP_NUMBER=os.getenv('CHINA_STOCK_MOMENTUM_TOP_NUMBER')
+CHINA_STOCK_MOMENTUM_TOP_NUMBER=820
 
 #动量策略时，按照涨幅排序后，挑取前面的多少家公司进行后续的分析处理
-USA_STOCK_MOMENTUM_TOP_NUMBER=os.getenv('USA_STOCK_MOMENTUM_TOP_NUMBER')
+USA_STOCK_MOMENTUM_TOP_NUMBER=100
 
 #A股日线数据存放时保留的列
-CHINA_STOCK_DATA_COLUMN=os.getenv('CHINA_STOCK_DATA_COLUMN')
+CHINA_STOCK_DATA_COLUMN=['ts_code','trade_date','open','high','low','close','pre_close','change','pct_chg','vol','amount']
 
 #美股日线数据存放时保留的列
-USA_STOCK_DATA_COLUMN=os.getenv('USA_STOCK_DATA_COLUMN')
+USA_STOCK_DATA_COLUMN=['ts_code','trade_date','close','open','high','low','pre_close','pct_change','vol','amount','vwap']
 
-CHINA_DRAGON_TIGER_RANK_LIST_COLUMN=os.getenv('CHINA_DRAGON_TIGER_RANK_LIST_COLUMN')
+CHINA_DRAGON_TIGER_RANK_LIST_COLUMN=['trade_date','ts_code','name','close','pct_change','turnover_rate','amount','l_sell','l_buy','l_amount','net_amount','net_rate','amount_rate','float_values','reason']
 
 #简放的股池数据保存时保留的列
-JIANFANG_STOCK_POOL_DATA_COLUMN=os.getenv('JIANFANG_STOCK_POOL_DATA_COLUMN')
+JIANFANG_STOCK_POOL_DATA_COLUMN=['ts_code','name','price_up_ratio','trade_date']
 
 #一只股票日线最多存放多少个自然日的数据（太久远的数据对交易没有作用）
-DAY_NUMBER=os.getenv('DAY_NUMBER')
+DAY_NUMBER=1000
 #龙虎榜历史数据存放的最长天数
-DRAGON_TIGER_RANK_LIST_DAY_NUMBER=os.getenv('DRAGON_TIGER_RANK_LIST_DAY_NUMBER')
+DRAGON_TIGER_RANK_LIST_DAY_NUMBER=1000
 
-SECRET_CONFIG_PATH=os.getenv('SECRET_CONFIG_PATH')
+SECRET_CONFIG_PATH="secret_config.json"
 #是否发送telegram，0表示不发送--调试场景；1表示发送--生产场景
 SEND_TELEGRAM=os.getenv('SEND_TELEGRAM')
 
 #简放股池策略里，股池里股票的淘汰周期（以自然天计算，而非只算交易日）
 #暂时先赋值一个月；后续观察是否要扩大到2个月
-JIANFANG_POOL_EXPIRE_DAYS=os.getenv('JIANFANG_POOL_EXPIRE_DAYS')
+JIANFANG_POOL_EXPIRE_DAYS=31
 
-LOG_FILE_PATH=os.getenv('LOG_FILE_PATH')
+#日志文件路径
+LOG_FILE_PATH='program_trading.log'

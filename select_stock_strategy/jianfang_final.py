@@ -37,7 +37,12 @@ def compute(date_str:str =None):
     if (os.path.isfile(file_path)):
         old_df = pd.read_csv(file_path)
 
-    new_enlist = list(set(result_inner['ts_code'])-set(old_df['ts_code']))
+    if old_df is not None and not old_df.empty and 'ts_code' in old_df.columns:
+        old_enlist_set = set(old_df['ts_code'])
+    else:
+        old_enlist_set = set()
+
+    new_enlist = list(set(result_inner['ts_code'])-old_enlist_set)
 
     # 新老数据合并
     concat_df = pd.concat([result_inner, old_df], axis=0, ignore_index=True)

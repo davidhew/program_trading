@@ -20,18 +20,17 @@ logger = logging.getLogger()
 
 
 def print_hi(name):
-    logger.info("run in docker! it's great!")
    # fileds_to_use=['col_1','col_2']
     #print(type(fileds_to_use))
-    sd.init_data()
+    #sd.init_data()
     #sd.daily_update()
     #ll_start.compute_low_level_start()
     #gdtr.init_dragon_tiger_ranklist()
-   #for i in range(31,-1,-1):
-   # date_str = str(du.days_befor('20260128',0))
-   # momentum.compute(date_str)
-   # one_year_highest.compute(date_str)
-   # jf.compute(date_str)
+    for i in range(31,-1,-1):
+        date_str = str(du.days_befor('20260204',0))
+        momentum.compute(date_str)
+        one_year_highest.compute(date_str)
+        jf.compute(date_str)
         #cross_MA120.compute(date_str)
         #ll_start.compute(date_str)
     #print(date_str)

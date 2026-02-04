@@ -63,8 +63,6 @@ def save_daily_data(df):
         #新老数据合并
         concat_df = pd.concat([df,old_df],axis=0,ignore_index=True)
         #只保留有用的列数据
-        print("DataFrame 列名:", concat_df.columns.tolist())
-        print("尝试选取的列:", config.CHINA_STOCK_DATA_COLUMN)
         concat_df=concat_df[config.CHINA_STOCK_DATA_COLUMN]
         #数据提供方的原因，不同历史时期的数据，trade_date这一列的数据类型有可能是不一致的
         concat_df['trade_date']= concat_df['trade_date'].astype(int)

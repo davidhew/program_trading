@@ -12,6 +12,7 @@ services:
     restart: always
     volumes:
       - .:/app              # 将当前代码目录映射到容器
+      - /opt/stock_datas:/app/stock_datas
       - /opt/secret_config/secret_config.json:/app/secret_config.json:ro #敏感信息配置文件映射
     working_dir: /app
     command: python main.py

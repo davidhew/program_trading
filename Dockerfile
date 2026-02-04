@@ -18,7 +18,7 @@ RUN pip install --no-cache-dir \
     --no-index \
     --only-binary=:all: \
     --find-links=/app/packages \
-    -r requirements.txt \
+    -r requirements.txt
 
 # 6. 复制当前目录下的所有代码到镜像中
 COPY . .

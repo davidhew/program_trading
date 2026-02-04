@@ -16,7 +16,7 @@ COPY requirements.txt .
 # 这种写法会优先寻找本地目录，找不到再去联网
 RUN pip install --no-cache-dir \
     --no-index \
-    --only-binary \
+    --only-binary=:all: \
     --find-links=/app/packages \
     -r requirements.txt \
 

@@ -2,7 +2,7 @@
 获取粉单市场的列表
 '''
 
-import akshare as ak
+#import akshare as ak
 import sys
 import os.path
 import config
@@ -18,7 +18,9 @@ file_name = 'usa_stock_pink_list.csv'
 @lru_cache(maxsize=1)
 def get_pink_spot():
     if (need_refresh()):
-        stock_us_pink_spot_em_df = ak.stock_us_pink_spot_em()
+   #     stock_us_pink_spot_em_df = ak.stock_us_pink_spot_em()
+        #为了不引入akshare，先规避复杂的包依赖问题
+        stock_us_pink_spot_em_df = pd.DataFrame()
         stock_us_pink_spot_em_df = stock_us_pink_spot_em_df['代码']
         stock_us_pink_spot_em_df.rename(columns={'代码': 'ts_code'}, inplace=True)
         ##把"153."前缀去除掉

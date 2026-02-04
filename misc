@@ -1,0 +1,23 @@
+# 允许 docker 网桥流量转发
+iptables -I FORWARD -i docker0 -j ACCEPT
+iptables -I FORWARD -o docker0 -j ACCEPT
+
+# 强制对 docker 网段进行 NAT 伪装
+# 注意：如果你的 docker 网段不是 172.17.0.0，请修改
+iptables -t nat -I POSTROUTING -s 172.17.0.0/16 -j MASQUERADE
+
+#停止并删除容器
+docker stop stock_analyzer
+docker rm stock_analyzer
+
+#构建&运行容器
+# 1. 强制重新构建镜像（这步会下载依赖，但只执行一次）
+docker-compose build
+
+# 2. 启动容器
+docker-compose up -d
+
+#排查问题相关
+
+#查看实时日志
+docker logs -f stock_analyzer

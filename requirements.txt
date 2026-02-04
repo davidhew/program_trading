@@ -1,5 +1,4 @@
+python-dotenv
 pandas == 2.3.3
 tushare == 1.4.24
 numpy == 2.2.6
-
-python-dotenv

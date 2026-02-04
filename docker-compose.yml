@@ -9,7 +9,7 @@ services:
       - TZ=Asia/Shanghai
       - http_proxy= 
       - https_proxy= 
-    restart: always
+    restart: "no"
     volumes:
       - .:/app              # 将当前代码目录映射到容器
       - /opt/stock_datas:/app/stock_datas

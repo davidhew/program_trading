@@ -11,7 +11,12 @@ ENV TZ=Asia/Shanghai
 COPY requirements.txt .
 
 # 5. 执行安装：使用国内源并信任，--no-cache-dir 缩小镜像体积
-RUN pip install --no-cache-dir -r requirements.txt
+# 这种写法会优先寻找本地目录，找不到再去联网
+RUN pip install --no-cache-dir \
+    --find-links=/app/packages \
+    -r requirements.txt \
+    -i http://mirrors.aliyun.com/simple/ \
+    --trusted-host mirrors.aliyun.com
 
 # 6. 复制当前目录下的所有代码到镜像中
 COPY . .

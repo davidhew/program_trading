@@ -2,6 +2,7 @@
 提供一些股票常用的计算功能，供其他模块使用
 '''
 from get_stock_data import get_all_stock_data as gd
+import config
 import logging
 logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
 logger = logging.getLogger()

@@ -46,6 +46,7 @@ def compute(date_str:str =None):
 
     # 新老数据合并
     concat_df = pd.concat([result_inner, old_df], axis=0, ignore_index=True)
+    print(f"DEBUG: concat_df columns:{concat_df.columns.tolist()}")
     concat_df = concat_df[config.JIANFANG_STOCK_POOL_DATA_COLUMN]
 
     # 数据提供方的原因，不同历史时期的数据，trade_date这一列的数据类型有可能是不一致的

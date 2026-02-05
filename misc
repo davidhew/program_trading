@@ -17,6 +17,15 @@ docker-compose build
 # 2. 启动容器
 docker-compose up -d
 
+#在mac端为python项目下载基于x86架构依赖的所有python包到本地
+pip download -r requirements.txt \
+    -d ./packages \
+    --platform manylinux2014_x86_64 \
+    --only-binary=:all: \
+    --python-version 312
+
+
+
 #排查问题相关
 
 #查看实时日志

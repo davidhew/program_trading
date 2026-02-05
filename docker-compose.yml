@@ -9,10 +9,15 @@ services:
       - TZ=Asia/Shanghai
       - http_proxy= 
       - https_proxy= 
-    restart: "no"
+    restart: always
+    logging:
+      driver: "json-file"       # 官方默认驱动
+      options:
+        max-size: "10m"         # 单个日志文件最大 10MB
+        max-file: "3"           # 最多保留 3 个旧日志文件（旧的会被自动覆盖）
     volumes:
       - .:/app              # 将当前代码目录映射到容器
       - /opt/stock_datas:/app/stock_datas
       - /opt/secret_config/secret_config.json:/app/secret_config.json:ro #敏感信息配置文件映射
     working_dir: /app
-    command: python main.py
+    command: python jobStarter.py

@@ -54,7 +54,7 @@ DAY_NUMBER=1000
 #龙虎榜历史数据存放的最长天数
 DRAGON_TIGER_RANK_LIST_DAY_NUMBER=1000
 
-SECRET_CONFIG_PATH="secret_config.json"
+SECRET_CONFIG_PATH=os.getenv("SECRET_CONFIG_PATH")
 #是否发送telegram，0表示不发送--调试场景；1表示发送--生产场景
 SEND_TELEGRAM=os.getenv('SEND_TELEGRAM')
 

@@ -20,7 +20,7 @@ def get_stock_data_batches(batch_size=10):
         sys.exit(1)
 
     # 获取所有符合条件的 csv 文件列表
-    file_list = [f for f in stock_data_folder.iterdir() if f.is_file() and f.suffix == '.csv']
+    file_list = [f for f in stock_data_folder.iterdir() if f.is_file()]
 
     if not file_list:
         logging.warning(f"目录中没有 CSV 文件: {stock_data_folder.resolve()}")

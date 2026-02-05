@@ -26,7 +26,7 @@ def compute(date_str:str =None):
         date_str = datetime.now().strftime('%Y%m%d')
     momentum_stock_df=pd.read_csv(config.STOCK_STRATEGY_RESULT_DIR + 'momentum-stock-list-20-' + date_str + '.csv')
     one_year_highest_df=pd.read_csv(config.STOCK_STRATEGY_RESULT_DIR +'one-year-highest-list-' + date_str + '.csv')
-    result_inner = pd.merge(one_year_highest_df, momentum_stock_df, on=['ts_code'], how='inner')
+    result_inner = pd.merge(one_year_highest_df, momentum_stock_df, on=['ts_code','name'], how='inner')
 
 
     result_inner['trade_date'] = int(date_str)

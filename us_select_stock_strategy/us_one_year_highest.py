@@ -20,19 +20,20 @@ today = datetime.now()
 today_str=today.strftime('%Y-%m-%d')
 def compute_one_year_highest():
     stock_list = list()
-    stock_datas = usa_gd.get_all_stock_data()
-    for stock in stock_datas:
-        #一年认为是252个交易日，然后再用最后一个交易日去和这252个交易日价格相比，所以总共需要253个
-        if(len(stock)<253):
-            logger.info("get_one_year_highest, %s's data less than one year!",stock.iloc[0]['ts_code'])
-            continue
-        else:
-            one_year_high = stock.iloc[1:253]['high'].max()
-            #平均每天成交额要大于1亿美金--股票盘子不能太小
-            amount_ok = stock['amount'].tail(20).sum()/20 > 100000000
-            #上一个交易日的盘中最高价，大于最近一年的最高价，证实其就是近一年的最高价
-            if(stock.iloc[0]['high'] > one_year_high and amount_ok):
-                stock_list.append(stock.iloc[0]['ts_code'])
+    for batch in usa_gd.get_stock_data_batches():
+
+        for stock in batch:
+            #一年认为是252个交易日，然后再用最后一个交易日去和这252个交易日价格相比，所以总共需要253个
+            if(len(stock)<253):
+                logger.info("get_one_year_highest, %s's data less than one year!",stock.iloc[0]['ts_code'])
+                continue
+            else:
+                one_year_high = stock.iloc[1:253]['high'].max()
+                #平均每天成交额要大于1亿美金--股票盘子不能太小
+                amount_ok = stock['amount'].tail(20).sum()/20 > 100000000
+                #上一个交易日的盘中最高价，大于最近一年的最高价，证实其就是近一年的最高价
+                if(stock.iloc[0]['high'] > one_year_high and amount_ok):
+                    stock_list.append(stock.iloc[0]['ts_code'])
     dict={'ts_code':stock_list}
     df = pd.DataFrame(dict)
     df.to_csv(config.USA_STOCK_STRATEGY_RESULT_DIR+'one-year-highest-list-'+today_str+'.csv',index=False)

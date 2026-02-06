@@ -12,6 +12,9 @@ from select_stock_strategy import momentum as momentum
 from us_get_stock_data import us_get_stock_base_info as usa_get_stock_base_info
 from us_get_stock_data import us_save_daily_data as usa_save_daily_data
 from select_stock_strategy import jianfang_final as jf
+from us_select_stock_strategy import us_one_year_highest as us_one_year_highest
+from us_select_stock_strategy import us_momentum as us_momentum
+
 from select_stock_strategy import new_dragon_tiger_stock as new_dt_stock
 from us_select_stock_strategy import us_one_year_highest as usa_one_year_highest
 from select_stock_strategy import low_level_start as ll_start
@@ -22,13 +25,21 @@ import logging
 logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
 logger = logging.getLogger()
 
-def scheduled_job():
+def scheduled_china_stock_job():
     sd.daily_update()
     momentum.compute()
     one_year_highest.compute()
     jf.compute()
 
-schedule.every().day.at("19:30").do(scheduled_job)
+def scheduled_us_stock_job():
+    usa_save_daily_data.daily_update()
+    us_momentum.compute()
+    us_momentum.compute(None,3)
+    one_year_highest.compute()
+
+
+schedule.every().day.at("17:05").do(scheduled_china_stock_job)
+schedule.every().day.at("07:30").do(scheduled_us_stock_job)
 
 while True:
     schedule.run_pending()

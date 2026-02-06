@@ -26,7 +26,9 @@ def print_hi(name):
     #sd.daily_update()
     #ll_start.compute_low_level_start()
     #gdtr.init_dragon_tiger_ranklist()
+    usa_save_daily_data.init_data()
 
+'''
     for i in range(31,-1,-1):
         date_str = str(du.days_befor('20260204',i))
         momentum.compute(date_str)
@@ -35,7 +37,7 @@ def print_hi(name):
         #cross_MA120.compute(date_str)
         #ll_start.compute(date_str)
     #print(date_str)
-
+'''
 
    #momentum.compute_momentum()
    ##one_year_highest.compute_one_year_highest()

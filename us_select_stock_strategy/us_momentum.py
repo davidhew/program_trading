@@ -19,46 +19,47 @@ logger = logging.getLogger()
 today = datetime.now()
 today_str=today.strftime('%Y-%m-%d')
 
-def compute(date_str:str =None):
+def compute(date_str:str =None,day_num:int =20):
     # 如果用户没有指定日期，则取系统当前时间
     if date_str == None:
         date_str = datetime.now().strftime('%Y%m%d')
 
     df = pd.DataFrame(columns=['ts_code','price_up_ratio'])
-    stock_datas = usa_gd.get_all_stock_data()
-    for stock in stock_datas:
-        # 至少已经上市一年了，新近上市的剔除掉影响
-        if (len(stock) < 253):
-            logger.info("compute_momentum, %s's data less than one year!", stock.iloc[0]['ts_code'])
-            continue
-        else:
-            matched_indices = stock.index[stock['trade_date'] == int(date_str)].tolist()
-            if len(matched_indices) == 0:
+    for batch in usa_gd.get_stock_data_batches():
+
+        for stock in batch:
+            # 至少已经上市一年了，新近上市的剔除掉影响
+            if (len(stock) < 253):
+                logger.info("compute_momentum, %s's data less than one year!", stock.iloc[0]['ts_code'])
                 continue
-            row_idx = matched_indices[0]
-            if row_idx - 20 >= 0 and stock.iloc[row_idx]['trade_date'] == int(date_str):
-                price_up_ratio = stock.iloc[row_idx]['close'] / stock.iloc[row_idx - 20]['close']
-                ts_code = stock.iloc[row_idx]['ts_code']
-                new_row_values = [ts_code, price_up_ratio]
-                #近20日的收盘价，平均价要高于5美金（价格太低的股票可能风险较大）
-                close_price_ok = stock.iloc[row_idx-20:row_idx]['close'].mean() >=5
-                if(not close_price_ok):
+            else:
+                matched_indices = stock.index[stock['trade_date'] == int(date_str)].tolist()
+                if len(matched_indices) == 0:
                     continue
-                # 最近20个交易日，每个交易日平均交易金额要大于10个亿
-                is_average_amount_enough = (
-                            stock.iloc[row_idx - 20:row_idx]['amount'].sum()  >= 20 * 10 * 10000 * 10000)
-                if (is_average_amount_enough):
-                    df.loc[len(df)] = new_row_values
+                row_idx = matched_indices[0]
+                if row_idx - day_num >= 0 and stock.iloc[row_idx]['trade_date'] == int(date_str):
+                    price_up_ratio = stock.iloc[row_idx]['close'] / stock.iloc[row_idx - day_num]['close']
+                    ts_code = stock.iloc[row_idx]['ts_code']
+                    new_row_values = [ts_code, price_up_ratio]
+                    #近20日的收盘价，平均价要高于5美金（价格太低的股票可能风险较大）
+                    close_price_ok = stock.iloc[row_idx-day_num:row_idx]['close'].mean() >=5
+                    if(not close_price_ok):
+                        continue
+                    # 最近n个交易日，每个交易日平均交易金额要大于1个亿
+                    is_average_amount_enough = (
+                                stock.iloc[row_idx - day_num:row_idx]['amount'].sum()  >= day_num  * 10000 * 10000)
+                    if (is_average_amount_enough):
+                        df.loc[len(df)] = new_row_values
     df = df.sort_values(by=['price_up_ratio'], ascending=[False], ignore_index=True)
     # 挑选最前面的200只个股，进入动量股池
     strong_df = df.head(int(config.USA_STOCK_MOMENTUM_TOP_NUMBER))
 
-    strong_df.to_csv(config.USA_STOCK_STRATEGY_RESULT_DIR + 'momentum-stock-list-strong-' + today_str + '.csv',
+    strong_df.to_csv(config.USA_STOCK_STRATEGY_RESULT_DIR + 'momentum-stock-list-strong-' +str(day_num)+'-'+ today_str + '.csv',
                        index=False)
 
     df = df.sort_values(by=['price_up_ratio'], ascending=[True], ignore_index=True)
     weak_df = df.head(int(config.USA_STOCK_MOMENTUM_TOP_NUMBER))
-    weak_df.to_csv(config.USA_STOCK_STRATEGY_RESULT_DIR + 'momentum-stock-list-weak-' + today_str + '.csv',
+    weak_df.to_csv(config.USA_STOCK_STRATEGY_RESULT_DIR + 'momentum-stock-list-weak-' +str(day_num)+'-' +today_str + '.csv',
                      index=False)
 
     '''

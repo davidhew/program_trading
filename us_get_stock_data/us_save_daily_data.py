@@ -63,7 +63,7 @@ def daily_update():
     today = datetime.now()
     pink_df = gs_pink_spot.get_pink_spot()
     #从1开始，因为中美时区的差异
-    for i in range(6,0,-1):
+    for i in range(2,0,-1):
         start_date = today - timedelta(days=i)
         date_str = start_date.strftime('%Y%m%d')
         #df = pro.us_daily(trade_date=date_str)

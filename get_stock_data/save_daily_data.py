@@ -31,10 +31,10 @@ def init_data():
         print(stock)
         update_stock_datas(stock, start_date_str, end_date_str)
 
-#每日运行的任务，理论上正常情况下，只要取当天的日线数据补到历史数据即可;为了提高容错性，取最近5天的数据
+#每日运行的任务，理论上正常情况下，只要取当天的日线数据补到历史数据即可;为了提高容错性，取最近2天的数据
 def daily_update():
     today = datetime.now()
-    for i in range(0, 7):
+    for i in range(0, 2):
         start_date = today - timedelta(days=i)
         date_str = start_date.strftime('%Y%m%d')
         df = pro.daily(trade_date=date_str)

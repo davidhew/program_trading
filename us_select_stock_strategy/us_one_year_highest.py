@@ -16,9 +16,12 @@ logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
 logger = logging.getLogger()
 
 
-today = datetime.now()
-today_str=today.strftime('%Y-%m-%d')
-def compute_one_year_highest():
+
+def compute_one_year_highest(date_str:str=None):
+    # 如果用户没有指定日期，则取系统当前时间
+    if date_str == None:
+        date_str = datetime.now().strftime('%Y%m%d')
+
     stock_list = list()
     for batch in usa_gd.get_stock_data_batches():
 
@@ -28,15 +31,20 @@ def compute_one_year_highest():
                 logger.info("get_one_year_highest, %s's data less than one year!",stock.iloc[0]['ts_code'])
                 continue
             else:
-                one_year_high = stock.iloc[1:253]['high'].max()
-                #平均每天成交额要大于1亿美金--股票盘子不能太小
-                amount_ok = stock['amount'].tail(20).sum()/20 > 100000000
-                #上一个交易日的盘中最高价，大于最近一年的最高价，证实其就是近一年的最高价
-                if(stock.iloc[0]['high'] > one_year_high and amount_ok):
-                    stock_list.append(stock.iloc[0]['ts_code'])
+                matched_indices = stock.index[stock['trade_date'] == int(date_str)].tolist()
+                if len(matched_indices) == 0:
+                    continue
+                row_idx = matched_indices[0]
+                if row_idx - 253 >= 0 and stock.iloc[row_idx]['trade_date'] == int(date_str):
+                    one_year_high = stock.iloc[row_idx-253:row_idx]['close'].max()
+                    #平均每天成交额要大于1亿美金--股票盘子不能太小
+                    amount_ok = stock['amount'].tail(20).sum()/20 > 100000000
+                    #上一个交易日的盘中最高价，大于最近一年的最高价，证实其就是近一年的最高价
+                    if(stock.iloc[row_idx]['high'] > one_year_high and amount_ok):
+                        stock_list.append(stock.iloc[0]['ts_code'])
     dict={'ts_code':stock_list}
     df = pd.DataFrame(dict)
-    df.to_csv(config.USA_STOCK_STRATEGY_RESULT_DIR+'one-year-highest-list-'+today_str+'.csv',index=False)
+    df.to_csv(config.USA_STOCK_STRATEGY_RESULT_DIR+'one-year-highest-list-'+date_str+'.csv',index=False)
 
     #近一年新高的统计其行业分布情况
     #df2 = gd_base_info.get_china_stock_base_info()

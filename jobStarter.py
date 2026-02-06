@@ -4,6 +4,11 @@
 import schedule
 import time
 import config
+import datetime
+import sys
+import os.path
+from datetime import timedelta
+from datetime import datetime
 # 按 ⌃R 执行或将其替换为您的代码。
 # 按 双击 ⇧ 在所有地方搜索类、文件、工具窗口、操作和设置。
 from get_stock_data import save_daily_data as sd
@@ -32,10 +37,15 @@ def scheduled_china_stock_job():
     jf.compute()
 
 def scheduled_us_stock_job():
+    ##处理美股和中国的时差
+    today = datetime.now()
+    start_date = today - timedelta(1)
+    date_str = start_date.strftime('%Y%m%d')
+
     usa_save_daily_data.daily_update()
-    us_momentum.compute()
-    us_momentum.compute(None,3)
-    one_year_highest.compute()
+    us_momentum.compute(date_str)
+    us_momentum.compute(date_str,3)
+    one_year_highest.compute(date_str)
 
 
 schedule.every().day.at("17:05").do(scheduled_china_stock_job)

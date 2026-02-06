@@ -48,7 +48,7 @@ def scheduled_us_stock_job():
     one_year_highest.compute(date_str)
 
 
-schedule.every().day.at("17:05").do(scheduled_china_stock_job)
+schedule.every().day.at("18:25").do(scheduled_china_stock_job)
 schedule.every().day.at("07:30").do(scheduled_us_stock_job)
 
 while True:

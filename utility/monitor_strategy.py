@@ -6,7 +6,7 @@ import logging
 import traceback
 import functools
 import config
-import telegram_messenger
+from . import telegram_messenger
 from datetime import datetime
 
 # 配置日志记录

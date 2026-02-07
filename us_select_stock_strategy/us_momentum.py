@@ -38,6 +38,7 @@ def compute(date_str:str =None,day_num:int =20):
                     continue
                 row_idx = matched_indices[0]
                 if row_idx - day_num >= 0 and stock.iloc[row_idx]['trade_date'] == int(date_str):
+                    ts_code = stock.iloc[row_idx]['ts_code']
                     # 获取分母（n天前的价格）
                     denominator = stock.iloc[row_idx - day_num]['close']
 
@@ -45,10 +46,10 @@ def compute(date_str:str =None,day_num:int =20):
                     if denominator > 0:
                         price_up_ratio = stock.iloc[row_idx]['close'] / denominator
                     else:
-                        logger.info("股票:%s, 由于其:%d天前的收盘价格不合格，故在计算momentum时，对其忽略")
+                        logger.info("股票:%s, 由于其:%d天前的收盘价格不合格，故在计算momentum时，对其忽略",ts_code,day_num)
                         continue
                     price_up_ratio = stock.iloc[row_idx]['close'] / stock.iloc[row_idx - day_num]['close']
-                    ts_code = stock.iloc[row_idx]['ts_code']
+
                     new_row_values = [ts_code, price_up_ratio]
                     #近20日的收盘价，平均价要高于5美金（价格太低的股票可能风险较大）
                     close_price_ok = stock.iloc[row_idx-day_num:row_idx]['close'].mean() >=5

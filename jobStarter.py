@@ -47,7 +47,7 @@ def scheduled_us_stock_job():
     us_momentum.compute(date_str,3)
     one_year_highest.compute(date_str)
 
-schedule.every().day.at("10:17").do(scheduled_us_stock_job)
+schedule.every().day.at("10:23").do(scheduled_us_stock_job)
 schedule.every().day.at("16:05").do(scheduled_china_stock_job)
 
 

@@ -21,7 +21,7 @@ from us_select_stock_strategy import us_one_year_highest as us_one_year_highest
 from us_select_stock_strategy import us_momentum as us_momentum
 
 from select_stock_strategy import new_dragon_tiger_stock as new_dt_stock
-from us_select_stock_strategy import us_one_year_highest as usa_one_year_highest
+from us_select_stock_strategy import us_one_year_highest as us_one_year_highest
 from select_stock_strategy import low_level_start as ll_start
 from select_stock_strategy import cross_MA120
 from get_stock_data import get_dragon_tiger_ranklist as gdtr
@@ -45,9 +45,9 @@ def scheduled_us_stock_job():
     #usa_save_daily_data.daily_update()
     us_momentum.compute(date_str)
     us_momentum.compute(date_str,3)
-    one_year_highest.compute(date_str)
+    us_one_year_highest.compute(date_str)
 
-schedule.every().day.at("10:23").do(scheduled_us_stock_job)
+schedule.every().day.at("07:30").do(scheduled_us_stock_job)
 schedule.every().day.at("16:05").do(scheduled_china_stock_job)
 
 

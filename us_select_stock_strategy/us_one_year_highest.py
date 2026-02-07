@@ -17,7 +17,7 @@ logger = logging.getLogger()
 
 
 
-def compute_one_year_highest(date_str:str=None):
+def compute(date_str:str=None):
     # 如果用户没有指定日期，则取系统当前时间
     if date_str == None:
         date_str = datetime.now().strftime('%Y%m%d')

@@ -10,7 +10,7 @@ from datetime import datetime
 from get_stock_data import get_stock_base_info as gd_base_info
 from get_stock_data import get_all_stock_data as gd
 import logging
-from utility import monitor_strategy
+from utility.monitor_strategy import monitor_strategy
 
 import config
 

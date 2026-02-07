@@ -14,7 +14,7 @@ from get_stock_data import get_dragon_tiger_ranklist as dragon_tiger
 from stock_compute import stock_compute_utility as scu
 from utility import telegram_messenger as tm
 import logging
-from utility import monitor_strategy
+from utility.monitor_strategy import monitor_strategy
 
 import config
 

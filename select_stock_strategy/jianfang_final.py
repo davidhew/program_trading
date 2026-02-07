@@ -11,7 +11,7 @@ from get_stock_data import get_stock_base_info as gd_base_info
 from get_stock_data import get_all_stock_data as gd
 from utility import date_utility as du
 from utility import util as ut
-from utility import monitor_strategy
+from utility.monitor_strategy import monitor_strategy
 from utility import telegram_messenger as telegram_messenger
 import logging
 

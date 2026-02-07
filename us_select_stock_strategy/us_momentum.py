@@ -9,7 +9,7 @@ import pandas_ta as ta
 from datetime import datetime
 from us_get_stock_data import us_get_stock_base_info as usa_gd_base_info
 from us_get_stock_data import us_get_all_stock_data as usa_gd
-from utility import monitor_strategy
+from utility.monitor_strategy import monitor_strategy
 from utility import telegram_messenger as telegram_messenger
 import logging
 

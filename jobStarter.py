@@ -42,12 +42,12 @@ def scheduled_us_stock_job():
     start_date = today - timedelta(1)
     date_str = start_date.strftime('%Y%m%d')
 
-    usa_save_daily_data.daily_update()
+    #usa_save_daily_data.daily_update()
     us_momentum.compute(date_str)
     us_momentum.compute(date_str,3)
     one_year_highest.compute(date_str)
 
-schedule.every().day.at("09:30").do(scheduled_us_stock_job)
+schedule.every().day.at("09:55").do(scheduled_us_stock_job)
 schedule.every().day.at("16:05").do(scheduled_china_stock_job)
 
 

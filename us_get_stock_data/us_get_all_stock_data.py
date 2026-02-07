@@ -14,7 +14,7 @@ logger = logging.getLogger()
 
 def get_stock_data_batches(batch_size=10):
 
-    stock_data_folder = Path(config.config.USA_STOCK_DATA_DIR)
+    stock_data_folder = Path(config.USA_STOCK_DATA_DIR)
     if not (stock_data_folder.exists() and stock_data_folder.is_dir()):
         logging.error(f"路径不存在或非目录: {stock_data_folder.resolve()}")
         sys.exit(1)

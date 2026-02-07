@@ -11,8 +11,8 @@ secrest = secrets_config.load_external_config()
 
 import config
 proxies = {
-    'http': 'socks5h://127.0.0.1:7890',
-    'https': 'socks5h://127.0.0.1:7890'
+    'http': config.HTTP_PROXY,
+    'https': config.HTTPS_PROXY
 }
 
 def send_telegram_message(message):
@@ -41,3 +41,6 @@ def send_telegram_message(message):
     except Exception as e:
         print(f"发送出错：{e}")
 
+if __name__ == "__main__":
+    #test_data_integrity()
+    send_telegram_message('测试发送telegram信息')

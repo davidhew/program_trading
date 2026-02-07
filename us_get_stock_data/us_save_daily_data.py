@@ -14,8 +14,9 @@ import logging
 import time
 import tushare as ts
 import numpy as np
+from utility import monitor_strategy
 from us_get_stock_data import us_get_stock_base_info as gs
-from us_get_stock_data import us_get_pink_spot  as gs_pink_spot
+from us_get_stock_data import us_get_common_stock_list  as us_get_common
 from utility import secrets_config as secrets_config
 
 logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
@@ -30,6 +31,7 @@ def is_valid_stock_code(x):
     return x == x and x is not None and str(x).strip() != ""
 
 #项目刚启动的时候，初始化股票历史日线数据，目前是获取最近1000天的数据
+@monitor_strategy
 def init_data():
     stocks = gs.get_usa_stock_base_info()['ts_code'].unique()
     mask = np.vectorize(is_valid_stock_code)(stocks)
@@ -58,10 +60,11 @@ def init_data_for_stock(ts_code):
         logger.error("Error occurs when init data for stock:%s, error info:%s", ts_code, e)
 
 
+@monitor_strategy
 #每日运行的任务，理论上正常情况下，只要取当天的日线数据补到历史数据即可;为了提高容错性，取最近5天的数据
 def daily_update():
     today = datetime.now()
-    pink_df = gs_pink_spot.get_pink_spot()
+    common_stock_df = us_get_common.do_get_stock_list()
     #从1开始，因为中美时区的差异
     for i in range(2,0,-1):
         start_date = today - timedelta(days=i)
@@ -99,7 +102,7 @@ def daily_update():
         #去除脏数据
 
         all_df = all_df[all_df['ts_code'].notna() & (all_df['ts_code'].str.strip() != "")]
-        pink_removed = all_df[~all_df['ts_code'].isin(pink_df['ts_code'])]
+        pink_removed = all_df[all_df['ts_code'].isin(common_stock_df['ts_code'])]
         grouped = pink_removed.groupby('ts_code')
         for group in grouped.groups:
             save_daily_data(grouped.get_group(group))

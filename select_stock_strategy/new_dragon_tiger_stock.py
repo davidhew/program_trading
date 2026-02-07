@@ -14,6 +14,7 @@ from get_stock_data import get_dragon_tiger_ranklist as dragon_tiger
 from stock_compute import stock_compute_utility as scu
 from utility import telegram_messenger as tm
 import logging
+from utility import monitor_strategy
 
 import config
 
@@ -22,6 +23,7 @@ logger = logging.getLogger()
 
 from get_stock_data import get_all_stock_data as gd
 
+@monitor_strategy
 def compute(date_str:str =None):
 
     #如果用户没有指定日期，则取系统当前时间

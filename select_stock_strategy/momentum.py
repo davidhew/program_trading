@@ -10,13 +10,14 @@ from datetime import datetime
 from get_stock_data import get_stock_base_info as gd_base_info
 from get_stock_data import get_all_stock_data as gd
 import logging
+from utility import monitor_strategy
 
 import config
 
 logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
 logger = logging.getLogger()
 
-
+@monitor_strategy
 def compute(date_str:str =None,day_num:int =20):
     # 如果用户没有指定日期，则取系统当前时间
     if date_str == None:

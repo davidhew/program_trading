@@ -9,9 +9,11 @@ import config
 import sys
 import pandas as pd
 import logging
+from utility import monitor_strategy
 logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
 logger = logging.getLogger()
 
+@monitor_strategy
 def get_stock_data_batches(batch_size=10):
 
     stock_data_folder = Path(config.USA_STOCK_DATA_DIR)

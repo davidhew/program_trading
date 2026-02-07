@@ -11,6 +11,8 @@ from get_stock_data import get_stock_base_info as gd_base_info
 from get_stock_data import get_all_stock_data as gd
 from utility import date_utility as du
 from utility import util as ut
+from utility import monitor_strategy
+from utility import telegram_messenger as telegram_messenger
 import logging
 
 import config
@@ -20,6 +22,7 @@ logger = logging.getLogger()
 
 today = datetime.now()
 
+@monitor_strategy
 def compute(date_str:str =None):
     # 如果用户没有指定日期，则取系统当前时间
     if date_str == None:
@@ -60,6 +63,11 @@ def compute(date_str:str =None):
     expired_date = du.days_befor(date_str, config.JIANFANG_POOL_EXPIRE_DAYS)
 
     expired_df = concat_df[concat_df['trade_date'] <= expired_date]
+
+    content_str = expired_df.to_string(index=False, justify='center')
+    message = f"<b>{date_str}:A股动量筛选结果-过期剔除列表</b>\n<pre>{content_str}</pre>"
+    telegram_messenger.send_telegram_message(message)
+
     logger.info("jianfang_final compute: remove expired_stocks:"+expired_df['name'].to_string(index=False))
 
     alive_df = concat_df[concat_df['trade_date'] > expired_date].reset_index(drop=True)
@@ -75,6 +83,10 @@ def compute(date_str:str =None):
     stock_list_df = pd.DataFrame(alive_df['ts_code'].tolist(),columns=['ts_code'])
 
     new_enlist_df = pd.DataFrame(new_enlist, columns=['ts_code'])
+
+    content_str = new_enlist_df.to_string(index=False, justify='center')
+    message = f"<b>{date_str}:A股动量筛选结果-新增列表</b>\n<pre>{content_str}</pre>"
+    telegram_messenger.send_telegram_message(message)
 
     stock_list_df_ths.to_csv(config.STOCK_STRATEGY_RESULT_DIR +'jianfang-final-list-ths-' + date_str + '.EBK', index=False, header=False)
     stock_list_df.to_csv(config.STOCK_STRATEGY_RESULT_DIR +'jianfang-final-list-' + date_str + '.txt', index=False, header=True)

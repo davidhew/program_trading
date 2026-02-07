@@ -8,6 +8,7 @@ import pandas_ta as ta
 from datetime import datetime
 from get_stock_data import get_stock_base_info as gd_base_info
 import logging
+from utility import monitor_strategy
 
 import config
 
@@ -17,6 +18,7 @@ logger = logging.getLogger()
 from get_stock_data import get_all_stock_data as gd
 today = datetime.now()
 
+@monitor_strategy
 def compute(date_str:str =None):
     # 如果用户没有指定日期，则取系统当前时间
     if date_str == None:

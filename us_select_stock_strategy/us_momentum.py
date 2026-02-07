@@ -9,6 +9,8 @@ import pandas_ta as ta
 from datetime import datetime
 from us_get_stock_data import us_get_stock_base_info as usa_gd_base_info
 from us_get_stock_data import us_get_all_stock_data as usa_gd
+from utility import monitor_strategy
+from utility import telegram_messenger as telegram_messenger
 import logging
 
 import config
@@ -19,6 +21,7 @@ logger = logging.getLogger()
 today = datetime.now()
 today_str=today.strftime('%Y-%m-%d')
 
+@monitor_strategy
 def compute(date_str:str =None,day_num:int =20):
     # 如果用户没有指定日期，则取系统当前时间
     if date_str == None:
@@ -63,6 +66,11 @@ def compute(date_str:str =None,day_num:int =20):
     df = df.sort_values(by=['price_up_ratio'], ascending=[False], ignore_index=True)
     # 挑选最前面的200只个股，进入动量股池
     strong_df = df.head(int(config.USA_STOCK_MOMENTUM_TOP_NUMBER))
+
+    content_str=strong_df.to_string(index=False,justify='center')
+    message = f"<b>{day_num}日动量筛选结果</b>\n<pre>{content_str}</pre>"
+    telegram_messenger.send_telegram_message(message)
+
 
     strong_df.to_csv(config.USA_STOCK_STRATEGY_RESULT_DIR + 'momentum-stock-list-strong-' +str(day_num)+'-'+ today_str + '.csv',
                        index=False)

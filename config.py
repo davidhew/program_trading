@@ -1,11 +1,18 @@
 import os
 from dotenv import load_dotenv
+from pathlib import Path
 
 # 1. 确定当前环境（通过系统变量 APP_ENV 确定，默认 dev）
 env = os.getenv("APP_ENV", "dev")
 
-# 2. 根据环境加载对应的 .env 文件
-env_file = f".env.{env}"
+
+# 2. 获取当前文件所在的文件夹的绝对路径
+# __file__ 是当前脚本的路径，.resolve() 获取绝对路径，.parent 获取父目录
+BASE_DIR = Path(__file__).resolve().parent
+
+# 3. 拼接完整的绝对路径
+env_file = BASE_DIR / f".env.{env}"
+
 if os.path.exists(env_file):
     load_dotenv(env_file)
     print(f"--- 已从 {env_file} 加载配置 ---")
@@ -64,3 +71,7 @@ JIANFANG_POOL_EXPIRE_DAYS=31
 
 #日志文件路径
 LOG_FILE_PATH='program_trading.log'
+
+HTTP_PROXY=os.getenv("HTTP_PROXY")
+
+HTTPS_PROXY=os.getenv("HTTPS_PROXY")

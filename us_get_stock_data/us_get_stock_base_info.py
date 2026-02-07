@@ -11,6 +11,7 @@ import time
 import pandas as pd
 import logging
 import tushare as ts
+from utility import monitor_strategy
 logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
 logger = logging.getLogger()
 file_name = 'usa_stock_list.csv'
@@ -18,6 +19,7 @@ file_name = 'usa_stock_list.csv'
 from utility import secrets_config as secrets_config
 
 pro = ts.pro_api()
+@monitor_strategy
 def get_usa_stock_base_info():
 
     if(need_refresh()):

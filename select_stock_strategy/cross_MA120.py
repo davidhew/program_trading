@@ -11,6 +11,7 @@ from get_stock_data import get_stock_base_info as gd_base_info
 from get_stock_data import get_all_stock_data as gd
 from utility import date_utility as du
 from utility import util as ut
+from utility.monitor_strategy import monitor_strategy
 import logging
 
 import config
@@ -18,7 +19,7 @@ import config
 logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
 logger = logging.getLogger()
 
-
+@monitor_strategy
 def compute(date_str:str =None):
     # 如果用户没有指定日期，则取系统当前时间
     if date_str == None:

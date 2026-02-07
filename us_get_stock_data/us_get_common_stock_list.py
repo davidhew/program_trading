@@ -17,7 +17,7 @@ import pandas as pd
 import requests
 import logging
 from utility import secrets_config as secrets_config
-from utility import monitor_strategy
+from utility.monitor_strategy import monitor_strategy
 
 logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
 logger = logging.getLogger()

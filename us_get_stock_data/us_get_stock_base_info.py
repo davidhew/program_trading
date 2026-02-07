@@ -11,7 +11,7 @@ import time
 import pandas as pd
 import logging
 import tushare as ts
-from utility import monitor_strategy
+from utility.monitor_strategy import monitor_strategy
 logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
 logger = logging.getLogger()
 file_name = 'usa_stock_list.csv'

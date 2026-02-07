@@ -15,6 +15,7 @@ from datetime import datetime
 from datetime import timedelta
 import logging
 import os
+from utility.monitor_strategy import monitor_strategy
 
 import config
 
@@ -23,6 +24,7 @@ logger = logging.getLogger()
 
 from get_stock_data import get_all_stock_data as gd
 
+@monitor_strategy
 def compute(date_str:str =None):
     # 如果用户没有指定日期，则取系统当前时间
     if date_str == None:

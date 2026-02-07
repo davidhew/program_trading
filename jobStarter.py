@@ -49,7 +49,7 @@ def scheduled_us_stock_job():
 
 
 schedule.every().day.at("16:05").do(scheduled_china_stock_job)
-schedule.every().day.at("07:30").do(scheduled_us_stock_job)
+schedule.every().day.at("09:20").do(scheduled_us_stock_job)
 
 while True:
     schedule.run_pending()

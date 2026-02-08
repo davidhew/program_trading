@@ -13,6 +13,7 @@ from select_stock_strategy import low_level_start as ll_start
 from select_stock_strategy import cross_MA120
 from get_stock_data import get_dragon_tiger_ranklist as gdtr
 from utility import date_utility as du
+from utility.telegram_messenger import send_telegram_message as telegram_messenger
 from utility.logger_config import setup_logging
 setup_logging()
 
@@ -24,7 +25,8 @@ def print_hi(name):
     #sd.daily_update()
     #ll_start.compute_low_level_start()
     #gdtr.init_dragon_tiger_ranklist()
-    usa_save_daily_data.init_data()
+   # usa_save_daily_data.init_data()
+   telegram_messenger("测试在docker里发送信息")
 
 '''
     for i in range(31,-1,-1):

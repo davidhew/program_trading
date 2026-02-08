@@ -2,21 +2,15 @@
 装饰器模式，用来拦截各个函数，破获其异常，发送报警
 
 '''
-import logging
 import traceback
 import functools
 import config
 from . import telegram_messenger
 from datetime import datetime
 
-# 配置日志记录
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
+import logging
 
-logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
-logger = logging.getLogger()
+logger = logging.getLogger(__name__)
 
 def monitor_strategy(func):
     """

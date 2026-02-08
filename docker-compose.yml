@@ -20,4 +20,4 @@ services:
       - /opt/stock_datas:/app/stock_datas
       - /opt/secret_config/secret_config.json:/app/secret_config.json:ro #敏感信息配置文件映射
     working_dir: /app
-    command: python jobStarter.py
+    command: python main.py

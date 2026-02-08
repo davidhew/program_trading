@@ -10,8 +10,9 @@ import sys
 import pandas as pd
 import logging
 from utility.monitor_strategy import monitor_strategy
-logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
-logger = logging.getLogger()
+
+import logging
+logger = logging.getLogger(__name__)
 
 @monitor_strategy
 def get_stock_data_batches(batch_size=10):

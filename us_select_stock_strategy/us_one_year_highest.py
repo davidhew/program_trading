@@ -10,12 +10,9 @@ from get_stock_data import get_stock_base_info as gd_base_info
 from us_get_stock_data import us_get_all_stock_data as usa_gd
 from utility.monitor_strategy import monitor_strategy
 from utility import telegram_messenger
-import logging
-
 import config
-
-logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
-logger = logging.getLogger()
+import logging
+logger = logging.getLogger(__name__) # 使用 __name__ 可以知道是哪个文件打印的日志
 
 
 

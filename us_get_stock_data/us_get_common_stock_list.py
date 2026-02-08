@@ -19,10 +19,11 @@ import logging
 from utility import secrets_config as secrets_config
 from utility.monitor_strategy import monitor_strategy
 
-logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
-logger = logging.getLogger()
 file_name = 'usa_common_stock_list.csv'
 secrets = secrets_config.load_external_config()
+
+import logging
+logger = logging.getLogger(__name__) # 使用 __name__ 可以知道是哪个文件打印的日志
 @lru_cache(maxsize=1)
 @monitor_strategy
 def get_common_stock_list():

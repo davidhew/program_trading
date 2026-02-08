@@ -5,7 +5,6 @@ import config
 from get_stock_data import save_daily_data as sd
 from select_stock_strategy import one_year_highest as one_year_highest
 from select_stock_strategy import momentum as momentum
-from us_get_stock_data import us_get_stock_base_info as usa_get_stock_base_info
 from us_get_stock_data import us_save_daily_data as usa_save_daily_data
 from select_stock_strategy import jianfang_final as jf
 from select_stock_strategy import new_dragon_tiger_stock as new_dt_stock
@@ -14,9 +13,8 @@ from select_stock_strategy import low_level_start as ll_start
 from select_stock_strategy import cross_MA120
 from get_stock_data import get_dragon_tiger_ranklist as gdtr
 from utility import date_utility as du
-import logging
-logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
-logger = logging.getLogger()
+from utility.logger_config import setup_logging
+setup_logging()
 
 
 def print_hi(name):

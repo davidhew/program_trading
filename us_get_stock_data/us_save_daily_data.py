@@ -10,7 +10,6 @@ from datetime import datetime
 import config
 
 import pandas as pd
-import logging
 import time
 import tushare as ts
 import numpy as np
@@ -19,11 +18,12 @@ from us_get_stock_data import us_get_stock_base_info as gs
 from us_get_stock_data import us_get_common_stock_list  as us_get_common
 from utility import secrets_config as secrets_config
 
-logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
-logger = logging.getLogger()
 secrest = secrets_config.load_external_config()
 ts.set_token(secrest.get('TUSHARE_TOKEN'))
 pro = ts.pro_api()
+
+import logging
+logger = logging.getLogger(__name__) # 使用 __name__ 可以知道是哪个文件打印的日志
 
 #由于有脏数据，需要过滤剩下正常的股票代码
 def is_valid_stock_code(x):
@@ -33,7 +33,7 @@ def is_valid_stock_code(x):
 #项目刚启动的时候，初始化股票历史日线数据，目前是获取最近1000天的数据
 @monitor_strategy
 def init_data():
-    stocks = gs.get_usa_stock_base_info()['ts_code'].unique()
+    stocks = us_get_common.get_common_stock_list['ts_code'].unique()
     mask = np.vectorize(is_valid_stock_code)(stocks)
     stocks = stocks[mask]
     i=0

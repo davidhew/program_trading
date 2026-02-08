@@ -12,6 +12,7 @@ from us_get_stock_data import us_get_all_stock_data as usa_gd
 from utility.monitor_strategy import monitor_strategy
 from utility import telegram_messenger as telegram_messenger
 import logging
+logger = logging.getLogger(__name__) # 使用 __name__ 可以知道是哪个文件打印的日志
 
 import config
 

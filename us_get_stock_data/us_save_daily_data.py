@@ -14,7 +14,6 @@ import time
 import tushare as ts
 import numpy as np
 from utility.monitor_strategy import monitor_strategy
-from us_get_stock_data import us_get_stock_base_info as gs
 from us_get_stock_data import us_get_common_stock_list  as us_get_common
 from utility import secrets_config as secrets_config
 

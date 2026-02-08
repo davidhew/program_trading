@@ -3,6 +3,16 @@
 import logging
 import config
 
+from logging.handlers import RotatingFileHandler
+
+# 替换上面的 FileHandler
+# 每个文件最大 5MB，保留最后 3 个文件
+file_handler = RotatingFileHandler(
+    config.LOG_FILE_PATH,
+    maxBytes=5*1024*1024,
+    backupCount=3
+)
+
 def setup_logging():
     # 获取根日志记录器
     logger = logging.getLogger()

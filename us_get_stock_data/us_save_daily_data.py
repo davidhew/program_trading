@@ -137,7 +137,7 @@ def save_daily_data(df):
         concat_df=concat_df.drop_duplicates(subset=['trade_date'],ignore_index=True,inplace=False)
         concat_df=concat_df.tail(int(config.DAY_NUMBER)).reset_index(drop=True)
         concat_df.to_csv(config.USA_STOCK_DATA_DIR+ts_codes_array[0],index=True)
-        logger.info('save_us_daily_data for stock:%s success!', ts_codes_array[0])
+        print('save_us_daily_data for stock:%s success!', ts_codes_array[0])
 
 
 if __name__ == "__main__":

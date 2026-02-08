@@ -31,7 +31,7 @@ def compute(date_str:str =None):
 
             #一年认为是252个交易日，然后再用最后一个交易日去和这252个交易日价格相比，所以总共需要253个
             if(len(stock)<253):
-                logger.info("one_year_highest, %s's data less than one year!",stock.iloc[0]['ts_code'])
+                print("one_year_highest, %s's data less than one year!",stock.iloc[0]['ts_code'])
                 continue
             else:
                 matched_indices = stock.index[stock['trade_date'] == int(date_str)].tolist()

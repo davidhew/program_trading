@@ -29,7 +29,7 @@ def compute(date_str:str =None,day_num:int =20):
         for stock in batch:
             # 至少已经上市一年了，新近上市的剔除掉影响
             if (len(stock) < 253):
-                logger.info("compute_momentum, %s's data less than one year!", stock.iloc[0]['ts_code'])
+                print("compute_momentum, %s's data less than one year!", stock.iloc[0]['ts_code'])
                 continue
             else:
                 matched_indices = stock.index[stock['trade_date'] == int(date_str)].tolist()

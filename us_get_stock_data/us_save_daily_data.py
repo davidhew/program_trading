@@ -101,8 +101,8 @@ def daily_update():
         #去除脏数据
 
         all_df = all_df[all_df['ts_code'].notna() & (all_df['ts_code'].str.strip() != "")]
-        pink_removed = all_df[all_df['ts_code'].isin(common_stock_df['ts_code'])]
-        grouped = pink_removed.groupby('ts_code')
+        common_stocks = all_df[all_df['ts_code'].isin(common_stock_df['ts_code'])]
+        grouped = common_stocks.groupby('ts_code')
         for group in grouped.groups:
             save_daily_data(grouped.get_group(group))
 

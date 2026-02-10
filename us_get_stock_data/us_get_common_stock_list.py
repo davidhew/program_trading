@@ -15,7 +15,6 @@ from functools import lru_cache
 
 import pandas as pd
 import requests
-import logging
 from utility import secrets_config as secrets_config
 from utility.monitor_strategy import monitor_strategy
 

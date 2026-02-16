@@ -141,5 +141,11 @@ def save_daily_data(df):
 
 
 if __name__ == "__main__":
+    pro = ts.pro_api()
+
+    # 获取单一股票行情
+    df = pro.us_daily(ts_code='AAPL', start_date='20260209', end_date='20260210')
+
+    print(df)
     #test_data_integrity()
     daily_update()

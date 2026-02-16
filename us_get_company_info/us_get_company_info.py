@@ -124,4 +124,4 @@ def do_get_company_info(ts_code:str):
         time.sleep(random.uniform(0.5, 1.5))
 
 if __name__ == "__main__":
-    get_company_info()
+    batch_refresh_company_info()

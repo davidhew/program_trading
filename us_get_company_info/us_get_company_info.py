@@ -48,7 +48,7 @@ def get_session_with_retries():
     session.mount('https://', adapter)
     return session
 
-def batch_refresh_company_info():
+def get_company_info():
     sucess_count=0
     df_old =  pd.DataFrame(columns=['ts_code','marketCap','industry','sector','date'])
     if(os.path.isfile(config.USA_STOCK_DIR+"/"+out_file_name)):
@@ -124,4 +124,4 @@ def do_get_company_info(ts_code:str):
         time.sleep(random.uniform(0.5, 1.5))
 
 if __name__ == "__main__":
-    batch_refresh_company_info()
+    get_company_info()

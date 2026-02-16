@@ -1,3 +1,16 @@
+1.pandas需要的一些计算库，最多只支持python 3.12；不能支持3.14
+
+#扫描项目代码，安装依赖包
+pip install pipreqs
+pipreqs ./ --encoding=utf8 --force --ignore .venv
+
+#会将最全面的依赖库信息写入到requirements.txt里
+pip freeze > requirements.txt
+pip install --upgrade pip  # 先升级 pip 自身，确保支持 3.12 的最新特性
+pip install -r requirements.txt
+
+
+
 # 允许 docker 网桥流量转发
 iptables -I FORWARD -i docker0 -j ACCEPT
 iptables -I FORWARD -o docker0 -j ACCEPT

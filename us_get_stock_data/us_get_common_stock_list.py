@@ -18,9 +18,6 @@ import requests
 from utility import secrets_config as secrets_config
 from utility.monitor_strategy import monitor_strategy
 
-from alpaca.trading.client import TradingClient
-from alpaca.trading.requests import GetAssetsRequest
-
 file_name = 'usa_common_stock_list.csv'
 secrets = secrets_config.load_external_config()
 
@@ -83,10 +80,3 @@ def do_get_stock_list():
     else:
         print(f"Error: {response.status_code}")
         return None
-
-
-if __name__ == "__main__":
-    trading_client = TradingClient(secrets.get('ALPACA_KEY'), secrets.get('ALPACA_SECRET'))
-    asset = trading_client.get_asset('AAPL')
-    print(asset)
-    do_get_stock_list()

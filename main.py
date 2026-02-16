@@ -19,27 +19,27 @@ setup_logging()
 
 
 def print_hi(name):
-   # fileds_to_use=['col_1','col_2']
+    #fileds_to_use=['col_1','col_2']
     #print(type(fileds_to_use))
     #sd.init_data()
     #sd.daily_update()
     #ll_start.compute_low_level_start()
     #gdtr.init_dragon_tiger_ranklist()
-   # usa_save_daily_data.init_data()
-   telegram_messenger("测试在docker里发送信息")
+    # usa_save_daily_data.init_data()
+    # telegram_messenger("测试在docker里发送信息")
 
-'''
-    for i in range(31,-1,-1):
-        date_str = str(du.days_befor('20260204',i))
-        momentum.compute(date_str)
-        one_year_highest.compute(date_str)
-        jf.compute(date_str)
-        #cross_MA120.compute(date_str)
-        #ll_start.compute(date_str)
-    #print(date_str)
-'''
+    '''
+        for i in range(31,-1,-1):
+            date_str = str(du.days_befor('20260204',i))
+            momentum.compute(date_str)
+            one_year_highest.compute(date_str)c
+            jf.compute(date_str)
+            #cross_MA120.compute(date_str)
+            #ll_start.compute(date_str)
+        #print(date_str)
+    '''
 
-   #momentum.compute_momentum()
+    momentum.compute()
    ##one_year_highest.compute_one_year_highest()
    #jf.compute('20260123')
     #usa_get_stock_base_info.get_usa_stock_base_info()

@@ -42,9 +42,10 @@ def scheduled_us_stock_job():
 def scheduled_us_stock_refresh_job():
     us_get_company_info.batch_refresh_company_info()
 
+print("jobStarter")
 schedule.every().day.at("07:30").do(scheduled_us_stock_job)
 schedule.every().day.at("16:05").do(scheduled_china_stock_job)
-schedule.every().day.at("00:11").do(scheduled_us_stock_refresh_job())
+schedule.every().day.at("00:15").do(scheduled_us_stock_refresh_job())
 
 while True:
     schedule.run_pending()

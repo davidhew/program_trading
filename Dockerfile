@@ -24,4 +24,4 @@ RUN pip install --no-cache-dir \
 COPY . .
 
 # 7. 容器启动时默认执行的命令
-CMD ["python", "main.py"]
+CMD ["python", "jobStarter.py"]

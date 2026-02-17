@@ -21,7 +21,7 @@ from urllib3.util.retry import Retry
 
 logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
 logger = logging.getLogger()
-secrest = secrets_config.load_external_config()
+secrets = secrets_config.load_external_config()
 
 file_name = 'usa_common_stock_list.csv'
 out_file_name = 'us_company_info.csv'
@@ -30,7 +30,7 @@ headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
     "Accept": "application/json",
     "Content-Type": "application/json",
-    "apikey": secrest.get('PMF_KEY')
+    "apikey": secrets.get('PMF_KEY')
 }
 
 def get_session_with_retries():
@@ -50,10 +50,10 @@ def get_session_with_retries():
 
 def batch_refresh_company_info():
     sucess_count=0
-    df_old =  pd.DataFrame(columns=['ts_code','marketCap','industry','sector','date'])
+    old_df =  pd.DataFrame(columns=['ts_code','marketCap','industry','sector','date'])
     if(os.path.isfile(config.USA_STOCK_DIR+"/"+out_file_name)):
-        df_old  = pd.read_csv(config.USA_STOCK_DIR+"/"+out_file_name)
-    df_old.set_index("ts_code")
+        old_df  = pd.read_csv(config.USA_STOCK_DIR+"/"+out_file_name)
+    old_df.set_index("ts_code")
 
 
     df_stocks = us_get_common_stock_list.get_common_stock_list()
@@ -69,27 +69,32 @@ def batch_refresh_company_info():
         if(len(info)>0):
             results.append(info)
             sucess_count=sucess_count+1
-        if(sucess_count%50==0):
+        if(sucess_count%100==0):
             print("sucess_count:",sucess_count)
+            save_company_info(results,old_df)
+    if(len(results)>0):
+        save_company_info(results,old_df)
 
-
-
-    df_new = pd.DataFrame(results).set_index("ts_code")
-    #加上更新日期列，便于后续排查数据的及时性
+def save_company_info(new_infos:list,old_df:pd.DataFrame):
+    df_new = pd.DataFrame(new_infos).set_index("ts_code")
+    # 加上更新日期列，便于后续排查数据的及时性
     today = datetime.now()
     date_str = today.strftime('%Y%m%d')
     df_new['date'] = date_str
     # 步骤 B: 使用 update 更新已存在的行
     # 这会直接修改 df_old 中 index 匹配的行，用 df_new 的值覆盖它
-    df_old.update(df_new)
+    old_df.update(df_new)
 
     # 步骤 C: 使用 concat 插入不存在的行
     # 找出在 df_new 中但不在 df_old 中的索引 (即 NVDA)
-    new_indices = df_new.index.difference(df_old.index)
+    new_indices = df_new.index.difference(old_df.index)
 
     if not new_indices.empty:
         df_to_insert = df_new.loc[new_indices]
-        df_old = pd.concat([df_old, df_to_insert])
+        old_df = pd.concat([old_df, df_to_insert])
+    old_df.to_csv(config.USA_STOCK_DIR + "/" + out_file_name, index=False)
+    #已经处理的信息丢弃掉
+    new_infos.clear()
 
 @monitor_strategy
 def do_get_company_info(ts_code:str):

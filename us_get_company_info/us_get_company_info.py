@@ -80,7 +80,7 @@ def batch_refresh_company_info():
 
 def save_company_info(new_infos:list,old_df:pd.DataFrame):
     if(len(new_infos)==0):
-        return
+        return old_df
     df_new = pd.DataFrame(new_infos).set_index("ts_code")
     # 加上更新日期列，便于后续排查数据的及时性
 

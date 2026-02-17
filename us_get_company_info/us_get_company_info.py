@@ -63,24 +63,30 @@ def batch_refresh_company_info():
 
     print(f"开始获取数据，共计 {len(symbol_list)} 个股票...")
 
+    today = datetime.now()
+    date_str = today.strftime('%Y%m%d')
+
     for i in range(0, len(symbol_list)):
-        info = do_get_company_info(symbol_list[i])
+        info = do_get_company_info(symbol_list[i],date_str)
         #从文件里获取的一些股票代码，其可能是etf，不是公司，获取不到相关数据，这种情况直接忽略即可
         if(len(info)>0):
             results.append(info)
             sucess_count=sucess_count+1
-        if(sucess_count%100==0):
+        if(sucess_count%10==0):
             print("sucess_count:",sucess_count)
-            save_company_info(results,old_df)
+            old_df=save_company_info(results,old_df)
     if(len(results)>0):
-        save_company_info(results,old_df)
+        old_df=save_company_info(results,old_df)
 
 def save_company_info(new_infos:list,old_df:pd.DataFrame):
+    if(len(new_infos)==0):
+        return
     df_new = pd.DataFrame(new_infos).set_index("ts_code")
     # 加上更新日期列，便于后续排查数据的及时性
-    today = datetime.now()
-    date_str = today.strftime('%Y%m%d')
-    df_new['date'] = date_str
+
+    # 确保 old_df 也有索引，否则 update 会失败
+    if old_df.index.name != "ts_code":
+        old_df = old_df.set_index("ts_code")
     # 步骤 B: 使用 update 更新已存在的行
     # 这会直接修改 df_old 中 index 匹配的行，用 df_new 的值覆盖它
     old_df.update(df_new)
@@ -92,12 +98,18 @@ def save_company_info(new_infos:list,old_df:pd.DataFrame):
     if not new_indices.empty:
         df_to_insert = df_new.loc[new_indices]
         old_df = pd.concat([old_df, df_to_insert])
-    old_df.to_csv(config.USA_STOCK_DIR + "/" + out_file_name, index=False)
+
+    # 在保存前 reset_index()，把 ts_code 从索引变回普通列
+    # 这样 to_csv(index=False) 就能正确保存 ts_code 数据了
+    save_df = old_df.reset_index()
+
+    save_df.to_csv(config.USA_STOCK_DIR + "/" + out_file_name, index=False)
     #已经处理的信息丢弃掉
     new_infos.clear()
+    return old_df
 
 @monitor_strategy
-def do_get_company_info(ts_code:str):
+def do_get_company_info(ts_code:str,date_str:str):
 
         # 2. 调用 FMP 接口 (Company Profile)
         url = f"https://financialmodelingprep.com/stable/profile?symbol={ts_code}"
@@ -111,10 +123,11 @@ def do_get_company_info(ts_code:str):
                     result = data[0]
                     # 3. 提取指定字段
                     return{
-                            "ts_code": result.get("symbol"),
+                            "ts_code": ts_code,
                             "marketCap": result.get("marketCap"),
                             "industry": result.get("industry"),
-                            "sector": result.get("sector")
+                            "sector": result.get("sector"),
+                            "date":date_str
                         }
                 else:
                     return{}

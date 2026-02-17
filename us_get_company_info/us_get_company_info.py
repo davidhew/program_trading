@@ -72,7 +72,7 @@ def batch_refresh_company_info():
         if(len(info)>0):
             results.append(info)
             sucess_count=sucess_count+1
-        if(sucess_count%10==0):
+        if(sucess_count%100==0):
             print("sucess_count:",sucess_count)
             old_df=save_company_info(results,old_df)
     if(len(results)>0):

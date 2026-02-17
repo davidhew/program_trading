@@ -37,7 +37,8 @@ pip download -r requirements.txt \
     --only-binary=:all: \
     --python-version 312
 
-
+#查看docker实例的日志路径
+docker inspect --format='{{.LogPath}}' <容器ID或容器名>
 
 #排查问题相关
 

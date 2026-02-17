@@ -45,7 +45,7 @@ def scheduled_us_stock_refresh_job():
 print("jobStarter")
 schedule.every().day.at("07:30").do(scheduled_us_stock_job)
 schedule.every().day.at("16:05").do(scheduled_china_stock_job)
-schedule.every().day.at("11:03").do(scheduled_us_stock_refresh_job)
+schedule.every().day.at("11:19").do(scheduled_us_stock_refresh_job)
 
 while True:
     schedule.run_pending()

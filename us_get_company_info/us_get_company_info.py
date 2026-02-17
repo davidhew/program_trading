@@ -52,7 +52,7 @@ def batch_refresh_company_info():
     sucess_count=0
     old_df =  pd.DataFrame(columns=['ts_code','marketCap','industry','sector','date'])
     if(os.path.isfile(config.USA_STOCK_DIR+"/"+out_file_name)):
-        old_df  = pd.read_csv(config.USA_STOCK_DIR+"/"+out_file_name)
+        old_df  = pd.read_csv(config.USA_STOCK_DIR+"/"+out_file_name,dtype={'date': str, 'ts_code': str})
     old_df.set_index("ts_code")
 
 
@@ -81,7 +81,14 @@ def batch_refresh_company_info():
 def save_company_info(new_infos:list,old_df:pd.DataFrame):
     if(len(new_infos)==0):
         return old_df
+
+    # 强制将旧数据的 date 列转为字符串，确保与新数据匹配
+    if 'date' in old_df.columns:
+        old_df['date'] = old_df['date'].astype(str)
+
     df_new = pd.DataFrame(new_infos).set_index("ts_code")
+    #强制指定date列为str类型
+    df_new['date'] = df_new['date'].astype(str)
     # 加上更新日期列，便于后续排查数据的及时性
 
     # 确保 old_df 也有索引，否则 update 会失败

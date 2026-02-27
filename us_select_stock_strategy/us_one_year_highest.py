@@ -46,20 +46,20 @@ def compute(date_str:str=None):
     df = pd.DataFrame(dict)
 
     content_str = df.to_string(index=False, justify='center')
-    message = f"<b>历史新高的股票</b>\n<pre>{content_str}</pre>"
+    message = f"<b>历史新高的股票-{date_str}</b>\n<pre>{content_str}</pre>"
     telegram_messenger.send_telegram_message(message)
 
     base_info_df=us_get_company_info.get_us_stock_base_info()
 
     result_inner = pd.merge(df, base_info_df, on='ts_code', how='inner')
     counts_size = result_inner.groupby('sector').size().reset_index(name='counts')
-    count_size_filtered = counts_size[['sector'],['counts']]
+    count_size_filtered = counts_size[['sector','counts']]
     count_size_filtered = count_size_filtered.sort_values(by=['counts'], ascending=False, inplace=False)
     count_size_filtered_1 = count_size_filtered[count_size_filtered['counts']>0]
     count_size_filtered_2 = count_size_filtered[count_size_filtered['counts']>1]
 
     content_str=count_size_filtered_2.to_string(index=False, justify='center')
-    message = f"<b>历史新高股票的板块分布情况</b>\n<pre>{content_str}</pre>"
+    message = f"<b>历史新高股票板块情况-{date_str}</b>\n<pre>{content_str}</pre>"
     telegram_messenger.send_telegram_message(message)
 
 

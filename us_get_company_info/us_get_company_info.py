@@ -18,13 +18,13 @@ from utility.monitor_strategy import monitor_strategy
 from us_get_stock_data import us_get_common_stock_list as us_get_common_stock_list
 from datetime import datetime
 from urllib3.util.retry import Retry
+from functools import lru_cache
 
 logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
 logger = logging.getLogger()
 secrets = secrets_config.load_external_config()
 
-file_name = 'usa_common_stock_list.csv'
-out_file_name = 'us_company_info.csv'
+file_name = 'us_company_info.csv'
 
 headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
@@ -32,6 +32,10 @@ headers = {
     "Content-Type": "application/json",
     "apikey": secrets.get('PMF_KEY')
 }
+
+@lru_cache(maxsize=1)
+def get_us_stock_base_info():
+    return pd.read_csv(config.USA_STOCK_DIR+"/"+file_name)
 
 def get_session_with_retries():
     session = requests.Session()
@@ -51,8 +55,8 @@ def get_session_with_retries():
 def batch_refresh_company_info():
     sucess_count=0
     old_df =  pd.DataFrame(columns=['ts_code','marketCap','industry','sector','date'])
-    if(os.path.isfile(config.USA_STOCK_DIR+"/"+out_file_name)):
-        old_df  = pd.read_csv(config.USA_STOCK_DIR+"/"+out_file_name,dtype={'date': str, 'ts_code': str})
+    if(os.path.isfile(config.USA_STOCK_DIR +"/" + file_name)):
+        old_df  = pd.read_csv(config.USA_STOCK_DIR +"/" + file_name, dtype={'date': str, 'ts_code': str})
     old_df.set_index("ts_code")
 
 
@@ -110,7 +114,7 @@ def save_company_info(new_infos:list,old_df:pd.DataFrame):
     # 这样 to_csv(index=False) 就能正确保存 ts_code 数据了
     save_df = old_df.reset_index()
 
-    save_df.to_csv(config.USA_STOCK_DIR + "/" + out_file_name, index=False)
+    save_df.to_csv(config.USA_STOCK_DIR + "/" + file_name, index=False)
     #已经处理的信息丢弃掉
     new_infos.clear()
     return old_df

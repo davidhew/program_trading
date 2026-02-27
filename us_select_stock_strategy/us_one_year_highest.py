@@ -1,12 +1,12 @@
 '''
 选股策略
 最近一个交易日的股价高点是最近一年的股价高点
-注意：使用的是盘中最高价作为比较依据，而非收盘价
+注意：使用收盘价作为比较依据
 '''
 import pandas as pd
 import pandas_ta as ta
 from datetime import datetime
-from get_stock_data import get_stock_base_info as gd_base_info
+from us_get_company_info import us_get_company_info
 from us_get_stock_data import us_get_all_stock_data as usa_gd
 from utility.monitor_strategy import monitor_strategy
 from utility import telegram_messenger
@@ -39,8 +39,8 @@ def compute(date_str:str=None):
                     one_year_high = stock.iloc[row_idx-253:row_idx]['close'].max()
                     #平均每天成交额要大于1亿美金--股票盘子不能太小
                     amount_ok = stock['amount'].tail(20).sum()/20 > 100000000
-                    #上一个交易日的盘中最高价，大于最近一年的最高价，证实其就是近一年的最高价
-                    if(stock.iloc[row_idx]['high'] > one_year_high and amount_ok):
+                    #上一个交易日的收盘价，大于最近一年的最高价，证实其就是近一年的最高价
+                    if(stock.iloc[row_idx]['close'] > one_year_high and amount_ok):
                         stock_list.append(stock.iloc[0]['ts_code'])
     dict={'ts_code':stock_list}
     df = pd.DataFrame(dict)
@@ -49,7 +49,25 @@ def compute(date_str:str=None):
     message = f"<b>历史新高的股票</b>\n<pre>{content_str}</pre>"
     telegram_messenger.send_telegram_message(message)
 
+    base_info_df=us_get_company_info.get_us_stock_base_info()
+
+    result_inner = pd.merge(df, base_info_df, on='ts_code', how='inner')
+    counts_size = result_inner.groupby('sector').size().reset_index(name='counts')
+    count_size_filtered = counts_size[['sector'],['counts']]
+    count_size_filtered = count_size_filtered.sort_values(by=['counts'], ascending=False, inplace=False)
+    count_size_filtered_1 = count_size_filtered[count_size_filtered['counts']>0]
+    count_size_filtered_2 = count_size_filtered[count_size_filtered['counts']>1]
+
+    content_str=count_size_filtered_2.to_string(index=False, justify='center')
+    message = f"<b>历史新高股票的板块分布情况</b>\n<pre>{content_str}</pre>"
+    telegram_messenger.send_telegram_message(message)
+
+
+
+
     df.to_csv(config.USA_STOCK_STRATEGY_RESULT_DIR+'one-year-highest-list-'+date_str+'.csv',index=False)
+    count_size_filtered_1.to_csv(config.USA_STOCK_STRATEGY_RESULT_DIR+'one-year-highest-sector-'+date_str+'.csv',index=False)
+
 
 
 

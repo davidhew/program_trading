@@ -5,6 +5,7 @@ import config
 from get_stock_data import save_daily_data as sd
 from select_stock_strategy import one_year_highest as one_year_highest
 from select_stock_strategy import momentum as momentum
+from us_select_stock_strategy import us_one_year_highest as us_one_year_highest
 from us_get_stock_data import us_save_daily_data as usa_save_daily_data
 from select_stock_strategy import jianfang_final as jf
 from select_stock_strategy import new_dragon_tiger_stock as new_dt_stock
@@ -39,7 +40,8 @@ def print_hi(name):
         #print(date_str)
     '''
 
-    momentum.compute()
+    #momentum.compute()
+    us_one_year_highest.compute('20260226')
    ##one_year_highest.compute_one_year_highest()
    #jf.compute('20260123')
     #usa_get_stock_base_info.get_usa_stock_base_info()

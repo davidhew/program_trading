@@ -22,6 +22,3 @@ RUN pip install --no-cache-dir \
 
 # 6. 复制当前目录下的所有代码到镜像中
 COPY . .
-
-# 7. 容器启动时默认执行的命令
-CMD ["python", "jobStarter.py"]

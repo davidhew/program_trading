@@ -20,5 +20,5 @@ services:
       - /opt/stock_datas:/app/stock_datas
       - /opt/secret_config/secret_config.json:/app/secret_config.json:ro #敏感信息配置文件映射
     working_dir: /app
+    # 使用变量替换，格式为 ${变量名:-默认值}
     command: python jobStarter.py
-    #command: python main.py

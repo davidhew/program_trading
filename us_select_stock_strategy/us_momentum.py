@@ -5,23 +5,20 @@
 '''
 
 import pandas as pd
-import pandas_ta as ta
 from datetime import datetime
 from us_get_stock_data import us_get_all_stock_data as usa_gd
 from utility.monitor_strategy import monitor_strategy
+from us_get_company_info import us_get_company_info
 from utility import telegram_messenger as telegram_messenger
 import logging
 logger = logging.getLogger(__name__) # 使用 __name__ 可以知道是哪个文件打印的日志
 
 import config
 
-today = datetime.now()
-today_str=today.strftime('%Y-%m-%d')
-
 @monitor_strategy
 def compute(date_str:str =None,day_num:int =20):
     # 如果用户没有指定日期，则取系统当前时间
-    if date_str == None:
+    if date_str is None:
         date_str = datetime.now().strftime('%Y%m%d')
 
     df = pd.DataFrame(columns=['ts_code','price_up_ratio'])
@@ -64,36 +61,45 @@ def compute(date_str:str =None,day_num:int =20):
     # 挑选最前面的200只个股，进入动量股池
     strong_df = df.head(int(config.USA_STOCK_MOMENTUM_TOP_NUMBER))
 
-    content_str=strong_df.to_string(index=False,justify='center')
-    message = f"<b>{day_num}日动量筛选结果</b>\n<pre>{content_str}</pre>"
+    base_info_df = us_get_company_info.get_us_stock_base_info()
+
+    result_inner = pd.merge(strong_df, base_info_df, on='ts_code', how='inner')
+
+    content_str=result_inner.to_string(index=False,justify='center')
+    message = f"<b>{day_num}日动量筛选结果-{date_str}</b>\n<pre>{content_str}</pre>"
     telegram_messenger.send_telegram_message(message)
 
 
-    strong_df.to_csv(config.USA_STOCK_STRATEGY_RESULT_DIR + 'momentum-stock-list-strong-' +str(day_num)+'-'+ today_str + '.csv',
+    strong_df.to_csv(config.USA_STOCK_STRATEGY_RESULT_DIR + 'momentum-stock-list-strong-' +str(day_num)+'-'+ date_str + '.csv',
                        index=False)
 
     df = df.sort_values(by=['price_up_ratio'], ascending=[True], ignore_index=True)
     weak_df = df.head(int(config.USA_STOCK_MOMENTUM_TOP_NUMBER))
-    weak_df.to_csv(config.USA_STOCK_STRATEGY_RESULT_DIR + 'momentum-stock-list-weak-' +str(day_num)+'-' +today_str + '.csv',
+    weak_df.to_csv(config.USA_STOCK_STRATEGY_RESULT_DIR + 'momentum-stock-list-weak-' +str(day_num)+'-' +date_str + '.csv',
                      index=False)
 
-    '''
+
+    result_inner = pd.merge(df, base_info_df, on='ts_code', how='inner')
+    result_inner = result_inner.sort_values(by=['marketCap'], ascending=False, inplace=False)
+
+
     #获取各行业总的上市公司数量
-    df2 = gd_base_info.get_china_stock_base_info()
-    industry_total_company_count = df2.groupby('industry').size().reset_index(name='total_counts')
+    industry_total_company_count = base_info_df.groupby('sector').size().reset_index(name='total_counts')
 
     # 筛选出的动量名单里的公司，统计其行业分布情况
-    df3 = gd_base_info.get_china_stock_base_info()
-    result_inner = pd.merge(df, df3, on='ts_code', how='inner')
-    counts_size = result_inner.groupby('industry').size().reset_index(name='momentum_counts')
+    counts_size = result_inner.groupby('sector').size().reset_index(name='momentum_counts')
 
     #计算每个行业中的动量分只；计算公式为 momentum_value=该行业动量公司的数量*（该行业动量公司数量/该行业公司总数）
-    df4=pd.merge(industry_total_company_count, counts_size, on='industry',how='inner')
+    df4=pd.merge(industry_total_company_count, counts_size, on='sector',how='inner')
     df4['momentum_value']=df4['momentum_counts']*df4['momentum_counts']/df4['total_counts']
     df4 = df4.sort_values(by='momentum_value', ascending=False)
+    #把没有动量的板块过滤掉
+    df4 = df4[df4['momentum_value']>0]
     
-    df4.to_csv(config.STOCK_STRATEGY_RESULT_DIR + 'momentum-20' + today_str + '.csv', index=False)
-    '''
+    df4.to_csv(config.STOCK_STRATEGY_RESULT_DIR + 'momentum-'+str(day_num) + '-' + date_str + '.csv', index=False)
+    content_str = df4.to_string(index=False, justify='center')
+    message = f"<b>{day_num}日动量板块rank结果-{date_str}</b>\n<pre>{content_str}</pre>"
+    telegram_messenger.send_telegram_message(message)
 
 if __name__ == "__main__":
     # test_data_integrity()

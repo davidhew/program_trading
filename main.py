@@ -10,6 +10,7 @@ from us_get_stock_data import us_save_daily_data as usa_save_daily_data
 from select_stock_strategy import jianfang_final as jf
 from select_stock_strategy import new_dragon_tiger_stock as new_dt_stock
 from us_select_stock_strategy import us_one_year_highest as usa_one_year_highest
+from us_select_stock_strategy import us_momentum as us_momentum
 from select_stock_strategy import low_level_start as ll_start
 from select_stock_strategy import cross_MA120
 from get_stock_data import get_dragon_tiger_ranklist as gdtr
@@ -41,7 +42,9 @@ def print_hi(name):
     '''
 
     #momentum.compute()
-    us_one_year_highest.compute('20260226')
+    us_momentum.compute('20260227')
+    us_one_year_highest.compute('20260227')
+
    ##one_year_highest.compute_one_year_highest()
    #jf.compute('20260123')
     #usa_get_stock_base_info.get_usa_stock_base_info()

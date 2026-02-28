@@ -45,13 +45,17 @@ def compute(date_str:str=None):
     dict={'ts_code':stock_list}
     df = pd.DataFrame(dict)
 
-    content_str = df.to_string(index=False, justify='center')
+    base_info_df = us_get_company_info.get_us_stock_base_info()
+    result_inner = pd.merge(df, base_info_df, on='ts_code', how='inner')
+    result_inner = result_inner.sort_values(by=['marketCap'],ascending=False,inplace=False)
+
+    #带上板块信息
+    result_inner_filtered = result_inner[['ts_code','sector']]
+    content_str = result_inner_filtered.to_string(index=False, justify='center')
     message = f"<b>历史新高的股票-{date_str}</b>\n<pre>{content_str}</pre>"
     telegram_messenger.send_telegram_message(message)
 
-    base_info_df=us_get_company_info.get_us_stock_base_info()
 
-    result_inner = pd.merge(df, base_info_df, on='ts_code', how='inner')
     counts_size = result_inner.groupby('sector').size().reset_index(name='counts')
     count_size_filtered = counts_size[['sector','counts']]
     count_size_filtered = count_size_filtered.sort_values(by=['counts'], ascending=False, inplace=False)
@@ -61,8 +65,6 @@ def compute(date_str:str=None):
     content_str=count_size_filtered_2.to_string(index=False, justify='center')
     message = f"<b>历史新高股票板块情况-{date_str}</b>\n<pre>{content_str}</pre>"
     telegram_messenger.send_telegram_message(message)
-
-
 
 
     df.to_csv(config.USA_STOCK_STRATEGY_RESULT_DIR+'one-year-highest-list-'+date_str+'.csv',index=False)

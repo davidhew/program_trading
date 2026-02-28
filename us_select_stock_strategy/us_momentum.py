@@ -64,6 +64,7 @@ def compute(date_str:str =None,day_num:int =20):
     base_info_df = us_get_company_info.get_us_stock_base_info()
 
     result_inner = pd.merge(strong_df, base_info_df, on='ts_code', how='inner')
+    result_inner = result_inner[['ts_code','price_up_ratio','industry','sector']]
 
     content_str=result_inner.to_string(index=False,justify='center')
     message = f"<b>{day_num}日动量筛选结果-{date_str}</b>\n<pre>{content_str}</pre>"

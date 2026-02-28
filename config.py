@@ -43,7 +43,7 @@ USA_STOCK_STRATEGY_RESULT_DIR=os.getenv('USA_STOCK_STRATEGY_RESULT_DIR')
 CHINA_STOCK_MOMENTUM_TOP_NUMBER=820
 
 #动量策略时，按照涨幅排序后，挑取前面的多少家公司进行后续的分析处理
-USA_STOCK_MOMENTUM_TOP_NUMBER=100
+USA_STOCK_MOMENTUM_TOP_NUMBER=50
 
 #A股日线数据存放时保留的列
 CHINA_STOCK_DATA_COLUMN=['ts_code','trade_date','open','high','low','close','pre_close','change','pct_chg','vol','amount']

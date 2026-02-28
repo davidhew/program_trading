@@ -43,7 +43,7 @@ def compute(date_str:str =None,day_num:int =20):
                     if denominator > 0:
                         price_up_ratio = stock.iloc[row_idx]['close'] / denominator
                     else:
-                        logger.info("股票:%s, 由于其:%d天前的收盘价格不合格，故在计算momentum时，对其忽略",ts_code,day_num)
+                        #logger.info("股票:%s, 由于其:%d天前的收盘价格不合格，故在计算momentum时，对其忽略",ts_code,day_num)
                         continue
                     price_up_ratio = stock.iloc[row_idx]['close'] / stock.iloc[row_idx - day_num]['close']
 

@@ -43,6 +43,7 @@ def print_hi(name):
 
     #momentum.compute()
     us_momentum.compute('20260227')
+    us_momentum.compute('20260227',3)
     us_one_year_highest.compute('20260227')
 
    ##one_year_highest.compute_one_year_highest()

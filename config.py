@@ -17,6 +17,7 @@ if os.path.exists(env_file):
     load_dotenv(env_file)
     print(f"--- 已从 {env_file} 加载配置 ---")
 else:
+    print("env filepath:"+ str(env_file))
     # 如果文件不存在，可能直接读取系统环境变量（如 Docker 注入的）
     print("--- 未发现 .env 文件，直接从系统环境读取 ---")
 ##全局配置文件

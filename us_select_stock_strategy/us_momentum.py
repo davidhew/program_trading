@@ -67,7 +67,7 @@ def compute(date_str:str =None,day_num:int =20):
 
     content_str=result_inner.to_string(index=False,justify='center')
     message = f"<b>{day_num}日动量筛选结果-{date_str}</b>\n<pre>{content_str}</pre>"
-    telegram_messenger.send_telegram_message(message)
+    telegram_messenger.send_message(message)
 
 
     strong_df.to_csv(config.USA_STOCK_STRATEGY_RESULT_DIR + 'momentum-stock-list-strong-' +str(day_num)+'-'+ date_str + '.csv',

@@ -87,7 +87,7 @@ def compute(date_str:str =None):
     df3 = gd_base_info.get_china_stock_base_info()
     new_enlist_df = pd.merge(new_enlist_df, df3, on='ts_code', how='inner')
 
-    new_enlist_df = new_enlist_df['ts_code','name']
+    new_enlist_df = new_enlist_df[['ts_code','name']]
 
 
     content_str = new_enlist_df.to_string(index=False, justify='center')

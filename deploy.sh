@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # 1. 拉取最新代码
 git pull

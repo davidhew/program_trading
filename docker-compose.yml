@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
     container_name: stock_analyzer
     environment:
-      - APP_ENV=prod
+      - APP_ENV=${APP_ENV:-prod}
       - TZ=Asia/Shanghai
       - http_proxy= 
       - https_proxy= 
@@ -19,6 +19,7 @@ services:
       - .:/app              # 将当前代码目录映射到容器
       - /opt/stock_datas:/app/stock_datas
       - /opt/secret_config/secret_config.json:/app/secret_config.json:ro #敏感信息配置文件映射
+      - /opt/secret_config/secret_config_test.json:/app/secret_config_test.json:ro #敏感信息配置文件映射
     working_dir: /app
     # 使用变量替换，格式为 ${变量名:-默认值}
     command: python jobStarter.py

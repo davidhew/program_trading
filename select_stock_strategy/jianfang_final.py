@@ -63,7 +63,7 @@ def compute(date_str:str =None):
     expired_date = du.days_befor(date_str, config.JIANFANG_POOL_EXPIRE_DAYS)
 
     expired_df = concat_df[concat_df['trade_date'] <= expired_date]
-
+    expired_df = expired_df[['ts_code','name','price_up_ratio']]
     content_str = expired_df.to_string(index=False, justify='center')
     message = f"<b>{date_str}:A股动量筛选结果-过期剔除列表</b>\n<pre>{content_str}</pre>"
     telegram_messenger.send_telegram_message(message)
@@ -83,6 +83,12 @@ def compute(date_str:str =None):
     stock_list_df = pd.DataFrame(alive_df['ts_code'].tolist(),columns=['ts_code'])
 
     new_enlist_df = pd.DataFrame(new_enlist, columns=['ts_code'])
+    # 筛选出的动量名单里的公司，统计其行业分布情况
+    df3 = gd_base_info.get_china_stock_base_info()
+    new_enlist_df = pd.merge(new_enlist_df, df3, on='ts_code', how='inner')
+
+    new_enlist_df = new_enlist_df['ts_code','name']
+
 
     content_str = new_enlist_df.to_string(index=False, justify='center')
     message = f"<b>{date_str}:A股动量筛选结果-新增列表</b>\n<pre>{content_str}</pre>"

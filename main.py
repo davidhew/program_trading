@@ -42,12 +42,12 @@ def print_hi(name):
     '''
 
     #momentum.compute()
-    us_momentum.compute('20260227')
-    us_momentum.compute('20260227',3)
-    us_one_year_highest.compute('20260227')
+    #us_momentum.compute('20260227')
+    #us_momentum.compute('20260227',3)
+    #us_one_year_highest.compute('20260227')
 
    ##one_year_highest.compute_one_year_highest()
-   #jf.compute('20260123')
+    jf.compute('20260227')
     #usa_get_stock_base_info.get_usa_stock_base_info()
     #usa_save_daily_data.init_data()
     #usa_save_daily_data.daily_update()

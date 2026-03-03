@@ -26,6 +26,9 @@ CHINA_STOCK_DATA_DIR=os.getenv('CHINA_STOCK_DATA_DIR')
 #A股股票基础信息存放目录
 CHINA_STOCK_DIR=os.getenv('CHINA_STOCK_DIR')
 
+#存放股票财务相关数据
+CHINA_STOCK_FINANCE_DATA_DIR=os.getenv('CHINA_STOCK_FINANCE_DATA_DIR')
+
 #美股日线数据的存放目录
 USA_STOCK_DATA_DIR=os.getenv('USA_STOCK_DATA_DIR')
 #美股股票基础信息存放目录

@@ -4,6 +4,7 @@
 import datetime
 from datetime import timedelta
 from datetime import datetime
+import time
 
 import config
 
@@ -33,6 +34,8 @@ def update_data():
     for stock in stocks:
         print(stock)
         update_stock_profit_data(stock)
+        # 适当休眠避免触发 API 频率限制 (根据你的账户等级调整)
+        time.sleep(random.uniform(0.5, 1.5))
 
 def update_stock_profit_data(ts_code:str):
 

@@ -38,7 +38,7 @@ def update_stock_profit_data(ts_code:str):
 
     df = pro.income(ts_code=ts_code)
 
-    save_profit_data(df)
+    save_profit_data(ts_code,df)
 
 def save_profit_data(ts_code:str,df:pd.DataFrame):
 

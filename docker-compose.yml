@@ -8,7 +8,9 @@ services:
       - APP_ENV=${APP_ENV:-prod}
       - TZ=Asia/Shanghai
       - http_proxy= 
-      - https_proxy= 
+      - https_proxy=
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     restart: always
     logging:
       driver: "json-file"       # 官方默认驱动

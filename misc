@@ -33,7 +33,16 @@ docker-compose up -d
 #在mac端为python项目下载基于x86架构依赖的所有python包到本地
 pip download -r requirements.txt \
     -d ./packages \
-    --platform manylinux2014_x86_64 \
+    --platform manylinux_2_27 \
+    --only-binary=:all: \
+    --python-version 312
+
+##在mac端为python项目下载基于Mac Mini 上的 Docker 运行 Linux 容器的所有python包到本地
+pip download -r requirements-mac-mini-docker.txt \
+    -d ./packages_mac_m1 \
+    --platform manylinux2014_aarch64 \
+    --platform manylinux_2_17_aarch64 \
+    --platform manylinux_2_28_aarch64 \
     --only-binary=:all: \
     --python-version 312
 

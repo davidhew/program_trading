@@ -1,0 +1,102 @@
+
+强制让系统rest：
+
+cd /overlay
+
+# 2. 删除该目录下所有内容（这就是你的所有配置和后装插件）
+# 注意：这不会删除 /rom 里的系统，也不会删除 /opt 里的数据
+rm -rf *
+
+# 3. 强制重启
+reboot -f
+
+
+
+
+root@ImmortalWrt:~# ifconfig
+br-711087455e05 Link encap:Ethernet  HWaddr 02:42:F5:9C:00:AB
+          inet addr:172.18.0.1  Bcast:172.18.255.255  Mask:255.255.0.0
+          inet6 addr: fe80::42:f5ff:fe9c:ab/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:2072905 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:2203387 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0
+          RX bytes:404177999 (385.4 MiB)  TX bytes:1320705997 (1.2 GiB)
+
+br-lan    Link encap:Ethernet  HWaddr 00:F1:F3:20:21:AA
+          inet addr:192.168.5.1  Bcast:192.168.5.255  Mask:255.255.255.0
+          inet6 addr: fd57:7f43:f3a5::1/60 Scope:Global
+          inet6 addr: fe80::2f1:f3ff:fe20:21aa/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:225169893 errors:0 dropped:477757 overruns:0 frame:0
+          TX packets:457088338 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:110395916437 (102.8 GiB)  TX bytes:496412105562 (462.3 GiB)
+
+docker0   Link encap:Ethernet  HWaddr 02:42:B8:C2:4F:55
+          inet addr:172.17.0.1  Bcast:172.17.255.255  Mask:255.255.0.0
+          inet6 addr: fe80::42:b8ff:fec2:4f55/64 Scope:Link
+          UP BROADCAST MULTICAST  MTU:1500  Metric:1
+          RX packets:18934 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:54684 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0
+          RX bytes:1125840 (1.0 MiB)  TX bytes:81088931 (77.3 MiB)
+
+eth0      Link encap:Ethernet  HWaddr 00:F1:F3:20:21:AA
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:239130469 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:457133099 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:114349333248 (106.4 GiB)  TX bytes:496413800079 (462.3 GiB)
+          Memory:a1b00000-a1bfffff
+
+eth1      Link encap:Ethernet  HWaddr 00:F1:F3:20:21:AB
+          inet addr:192.168.1.2  Bcast:192.168.1.255  Mask:255.255.255.0
+          inet6 addr: 2409:8a28:6e9:37d0:2f1:f3ff:fe20:21ab/64 Scope:Global
+          inet6 addr: fe80::2f1:f3ff:fe20:21ab/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:469227292 errors:480554 dropped:9632520 overruns:161 frame:305090
+          TX packets:234572241 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:498650260973 (464.4 GiB)  TX bytes:113863701002 (106.0 GiB)
+          Memory:a1800000-a18fffff
+
+lo        Link encap:Local Loopback
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:3475510 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:3475510 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:480480891 (458.2 MiB)  TX bytes:480480891 (458.2 MiB)
+
+tailscale0 Link encap:UNSPEC  HWaddr 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00
+          inet6 addr: fe80::23a8:7cae:a966:98b2/64 Scope:Link
+          UP POINTOPOINT RUNNING NOARP MULTICAST  MTU:1280  Metric:1
+          RX packets:116735 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:72812 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:500
+          RX bytes:112875005 (107.6 MiB)  TX bytes:27498531 (26.2 MiB)
+
+vethecd54f7 Link encap:Ethernet  HWaddr F6:D7:4C:C5:8F:BC
+          inet6 addr: fe80::f4d7:4cff:fec5:8fbc/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:215187 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:225126 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0
+          RX bytes:49695709 (47.3 MiB)  TX bytes:122958876 (117.2 MiB)
+
+root@ImmortalWrt:~# df -h
+Filesystem                Size      Used Available Use% Mounted on
+/dev/root               290.4M    197.6M     86.8M  69% /rom
+tmpfs                     7.7G      2.0M      7.7G   0% /tmp
+/dev/sda3                19.5G    330.9M     18.2G   2% /overlay
+overlayfs:/overlay       19.5G    330.9M     18.2G   2% /
+/dev/sda1                31.9M      8.3M     23.6M  26% /boot
+/dev/sda1                31.9M      8.3M     23.6M  26% /boot
+tmpfs                   512.0K         0    512.0K   0% /dev
+/dev/sda4               213.7G      4.1G    198.6G   2% /opt
+/dev/sda1                31.9M      8.3M     23.6M  26% /mnt/sda1
+/dev/sda4               213.7G      4.1G    198.6G   2% /opt/docker
+overlay                 213.7G      4.1G    198.6G   2% /opt/docker/overlay2/6864a8017b4028e3276e75c85242c8b53acc385047e306c79f0b826f4dcad8b9/merged
+

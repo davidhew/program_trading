@@ -3,18 +3,13 @@
 '''
 
 
-import pandas as pd
-import pandas_ta as ta
-import os.path
+import logging
 from datetime import datetime
-from get_stock_data import get_stock_base_info as gd_base_info
+import pandas as pd
+import config
 from get_stock_data import get_all_stock_data as gd
-from utility import date_utility as du
 from utility import util as ut
 from utility.monitor_strategy import monitor_strategy
-import logging
-
-import config
 
 logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
 logger = logging.getLogger()

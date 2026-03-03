@@ -7,6 +7,7 @@ from select_stock_strategy import one_year_highest as one_year_highest
 from select_stock_strategy import momentum as momentum
 from us_select_stock_strategy import us_one_year_highest as us_one_year_highest
 from us_get_stock_data import us_save_daily_data as usa_save_daily_data
+from get_finance_data import save_profit_data as profit_data
 from select_stock_strategy import jianfang_final as jf
 from select_stock_strategy import new_dragon_tiger_stock as new_dt_stock
 from us_select_stock_strategy import us_one_year_highest as usa_one_year_highest
@@ -29,25 +30,13 @@ def print_hi(name):
     #gdtr.init_dragon_tiger_ranklist()
     # usa_save_daily_data.init_data()
     # telegram_messenger("测试在docker里发送信息")
-
-    '''
-        for i in range(31,-1,-1):
-            date_str = str(du.days_befor('20260204',i))
-            momentum.compute(date_str)
-            one_year_highest.compute(date_str)c
-            jf.compute(date_str)
-            #cross_MA120.compute(date_str)
-            #ll_start.compute(date_str)
-        #print(date_str)
-    '''
-
     #momentum.compute()
     #us_momentum.compute('20260227')
     #us_momentum.compute('20260227',3)
     #us_one_year_highest.compute('20260227')
 
    ##one_year_highest.compute_one_year_highest()
-    jf.compute('20260227')
+    profit_data.update_data()
     #usa_get_stock_base_info.get_usa_stock_base_info()
     #usa_save_daily_data.init_data()
     #usa_save_daily_data.daily_update()

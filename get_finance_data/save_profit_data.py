@@ -32,7 +32,7 @@ def update_data():
     end_date_str=today.strftime('%Y%m%d')
     for stock in stocks:
         print(stock)
-        update_stock_profit_data(stock, start_date_str, end_date_str)
+        update_stock_profit_data(stock)
 
 def update_stock_profit_data(ts_code:str):
 

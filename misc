@@ -72,3 +72,21 @@ tailscale status
 tailscale up
 
 tailscale down
+
+
+###mac mini设置成服务器模式（尽量不主动进入休眠状态）
+Bash
+# 1. 无论是否关闭显示器，禁止系统进入睡眠
+sudo pmset -a sleep 0
+
+# 2. 禁止硬盘进入待机睡眠模式
+sudo pmset -a disksleep 0
+
+# 3. 启用“唤醒以进行网络访问”（确保 SSH 随时能连上）
+sudo pmset -a womp 1
+
+# 4. 启用“断电后自动重新启动”（服务器必备：停电后来电会自动开机）
+sudo pmset -a autorestart 1
+
+# 5. 禁用掉电后的自动关机功能（如果是笔记本或带 UPS 的 Mac）
+sudo pmset -a proximitywake 1

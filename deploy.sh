@@ -4,7 +4,7 @@
 git pull
 
 # 2. 停止并移除旧容器（确保配置更新生效）
-docker-compose stop stock_analyzer
+docker-compose stop quant_bot
 
 # 3. 参数解析：判断是否为 test 模式
 # 使用 $1 获取脚本后的第一个参数

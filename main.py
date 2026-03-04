@@ -36,7 +36,11 @@ def print_hi(name):
     #us_one_year_highest.compute('20260227')
 
    ##one_year_highest.compute_one_year_highest()
-    profit_data.update_data()
+    date_str='20260303'
+    usa_save_daily_data.daily_update()
+    us_momentum.compute(date_str)
+    us_momentum.compute(date_str, 3)
+    us_one_year_highest.compute(date_str)
     #usa_get_stock_base_info.get_usa_stock_base_info()
     #usa_save_daily_data.init_data()
     #usa_save_daily_data.daily_update()

@@ -17,6 +17,7 @@ import config
 
 @monitor_strategy
 def compute(date_str:str =None,day_num:int =20):
+    print("us_momentum compute!"+date_str)
     # 如果用户没有指定日期，则取系统当前时间
     if date_str is None:
         date_str = datetime.now().strftime('%Y%m%d')

@@ -105,7 +105,7 @@ def daily_update():
         grouped = common_stocks.groupby('ts_code')
         for group in grouped.groups:
             save_daily_data(grouped.get_group(group))
-        print("finished update_stock_datas")
+        print("daily update finished")
 
 def update_stock_datas(ts_codes, start_date, end_date):
 

@@ -105,6 +105,7 @@ def daily_update():
         grouped = common_stocks.groupby('ts_code')
         for group in grouped.groups:
             save_daily_data(grouped.get_group(group))
+        print("finished update_stock_datas")
 
 def update_stock_datas(ts_codes, start_date, end_date):
 
@@ -116,6 +117,7 @@ def update_stock_datas(ts_codes, start_date, end_date):
 
 def save_daily_data(df):
     ts_codes_array = df['ts_code'].unique()
+    print('start:save_us_daily_data for stock:%s', str(ts_codes_array))
     #应该只针对单一的股票数据进行处理
     if len(ts_codes_array) != 1:
         logger.critical('There are more than one ts_code want to save, ts_codes are : %s', ts_codes_array.array_str())

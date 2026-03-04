@@ -112,6 +112,7 @@ def update_stock_datas(ts_codes, start_date, end_date):
     grouped = df.groupby('ts_code')
     for group in grouped.groups:
         save_daily_data(grouped.get_group(group))
+    print("finished update_stock_datas")
 
 def save_daily_data(df):
     ts_codes_array = df['ts_code'].unique()

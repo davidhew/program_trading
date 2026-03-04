@@ -74,7 +74,7 @@ SEND_TELEGRAM=os.getenv('SEND_TELEGRAM')
 JIANFANG_POOL_EXPIRE_DAYS=31
 
 #日志文件路径
-LOG_FILE_PATH='program_trading.log'
+LOG_FILE_PATH=os.getenv("LOG_FILE_PATH")
 
 HTTP_PROXY=os.getenv("HTTP_PROXY")
 

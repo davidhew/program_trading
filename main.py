@@ -20,27 +20,25 @@ from utility.telegram_messenger import send_telegram_message as telegram_messeng
 from utility.logger_config import setup_logging
 setup_logging()
 
-
 def print_hi(name):
-    #fileds_to_use=['col_1','col_2']
     #print(type(fileds_to_use))
     #sd.init_data()
     #sd.daily_update()
     #ll_start.compute_low_level_start()
     #gdtr.init_dragon_tiger_ranklist()
     # usa_save_daily_data.init_data()
-    # telegram_messenger("测试在docker里发送信息")
+    telegram_messenger("测试在docker里发送信息")
     #momentum.compute()
     #us_momentum.compute('20260227')
     #us_momentum.compute('20260227',3)
     #us_one_year_highest.compute('20260227')
 
-   ##one_year_highest.compute_one_year_highest()
-    date_str='20260303'
-    usa_save_daily_data.daily_update()
-    us_momentum.compute(date_str)
-    us_momentum.compute(date_str, 3)
-    us_one_year_highest.compute(date_str)
+    ##one_year_highest.compute_one_year_highest()
+    #date_str='20260303'
+    #usa_save_daily_data.daily_update()
+    #us_momentum.compute(date_str)
+    #us_momentum.compute(date_str, 3)
+    #us_one_year_highest.compute(date_str)
     #usa_get_stock_base_info.get_usa_stock_base_info()
     #usa_save_daily_data.init_data()
     #usa_save_daily_data.daily_update()
@@ -57,4 +55,3 @@ def print_hi(name):
 if __name__ == '__main__':
     print_hi('PyCharm')
 
-# 访问 https://www.jetbrains.com/help/pycharm/ 获取 PyCharm 帮助

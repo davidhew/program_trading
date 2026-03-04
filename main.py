@@ -27,7 +27,12 @@ def print_hi(name):
     #ll_start.compute_low_level_start()
     #gdtr.init_dragon_tiger_ranklist()
     # usa_save_daily_data.init_data()
-    telegram_messenger("测试在docker里发送信息")
+    #telegram_messenger("测试在docker里发送信息")
+    date_str = '20260303'
+    sd.daily_update()
+    momentum.compute(date_str)
+    one_year_highest.compute(date_str)
+    jf.compute(date_str)
     #momentum.compute()
     #us_momentum.compute('20260227')
     #us_momentum.compute('20260227',3)

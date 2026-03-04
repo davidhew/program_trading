@@ -27,6 +27,10 @@ docker rm stock_analyzer
 # 1. 强制重新构建镜像（这步会下载依赖，但只执行一次）
 docker-compose build
 
+docker-compose build --build-arg http_proxy=http://host.docker.internal:7890 \
+             --build-arg https_proxy=http://host.docker.internal:7890 \
+             -t stock_app-quant_bot .
+
 # 2. 启动容器
 docker-compose up -d
 

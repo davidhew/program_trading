@@ -19,6 +19,7 @@ else
 
     # 4. 以守护进程模式启动
     # 这里会自动使用你在 docker-compose.yml 中定义的默认 command (jobStarter.py)
+    docker-compose build --pull=false
     docker-compose up -d
 
     # 5. 查看日志

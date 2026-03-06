@@ -43,7 +43,7 @@ def scheduled_us_stock_refresh_job():
     us_get_company_info.batch_refresh_company_info()
 
 print("jobStarter")
-schedule.every().day.at("07:02").do(scheduled_us_stock_job)
+schedule.every().day.at("09:42").do(scheduled_us_stock_job)
 schedule.every().day.at("16:05").do(scheduled_china_stock_job)
 schedule.every().day.at("11:19").do(scheduled_us_stock_refresh_job)
 

@@ -81,7 +81,7 @@ def compute(date_str:str =None,day_num:int =20):
     weak_df=weak_df[weak_df['price_up_ratio']<0.85]
     weak_df.to_csv(config.USA_STOCK_STRATEGY_RESULT_DIR + 'momentum-stock-list-weak-' +str(day_num)+'-' +date_str + '.csv',
                      index=False)
-    result_inner = pd.merge(strong_df, base_info_df, on='ts_code', how='inner')
+    result_inner = pd.merge(weak_df, base_info_df, on='ts_code', how='inner')
     result_inner = result_inner[['ts_code', 'price_up_ratio', 'industry', 'sector']]
     content_str = result_inner.to_string(index=False, justify='center')
     message = f"<b>{day_num}日-负向动量筛选结果-{date_str}</b>\n<pre>{content_str}</pre>"

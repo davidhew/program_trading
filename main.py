@@ -28,21 +28,21 @@ def print_hi(name):
     #gdtr.init_dragon_tiger_ranklist()
     # usa_save_daily_data.init_data()
     #telegram_messenger("测试在docker里发送信息")
-    date_str = '20260303'
-    sd.daily_update()
-    momentum.compute(date_str)
-    one_year_highest.compute(date_str)
-    jf.compute(date_str)
+    #date_str = '20260303'
+    #sd.daily_update()
+    #momentum.compute(date_str)
+    #one_year_highest.compute(date_str)
+    #jf.compute(date_str)
     #momentum.compute()
     #us_momentum.compute('20260227')
     #us_momentum.compute('20260227',3)
     #us_one_year_highest.compute('20260227')
 
     ##one_year_highest.compute_one_year_highest()
-    #date_str='20260303'
+    date_str='20260305'
     #usa_save_daily_data.daily_update()
-    #us_momentum.compute(date_str)
-    #us_momentum.compute(date_str, 3)
+    us_momentum.compute(date_str)
+    us_momentum.compute(date_str, 3)
     #us_one_year_highest.compute(date_str)
     #usa_get_stock_base_info.get_usa_stock_base_info()
     #usa_save_daily_data.init_data()

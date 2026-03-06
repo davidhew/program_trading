@@ -63,6 +63,8 @@ def compute(date_str:str =None,day_num:int =20):
     strong_df = df.head(int(config.USA_STOCK_MOMENTUM_TOP_NUMBER))
 
     base_info_df = us_get_company_info.get_us_stock_base_info()
+    #公司市值必须大于10亿美金
+    base_info_df = base_info_df[base_info_df['marketCap']>10*10000*10000]
 
     result_inner = pd.merge(strong_df, base_info_df, on='ts_code', how='inner')
     result_inner = result_inner[['ts_code','price_up_ratio','industry','sector']]

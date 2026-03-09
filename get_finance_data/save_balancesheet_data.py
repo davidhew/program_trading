@@ -1,5 +1,5 @@
 '''
-从数据提供方远程获取股票财报信息-利润表数据
+从数据提供方远程获取股票财报信息-资产负债表数据
 '''
 import datetime
 from datetime import timedelta
@@ -34,19 +34,19 @@ def update_data():
     end_date_str=today.strftime('%Y%m%d')
     for stock in stocks:
         print(stock)
-        update_stock_profit_data(stock)
+        update_stock_cashflow_data(stock)
         # 适当休眠避免触发 API 频率限制 (根据你的账户等级调整)
         time.sleep(random.uniform(0.5, 1.5))
 
-def update_stock_profit_data(ts_code:str):
+def update_stock_cashflow_data(ts_code:str):
 
-    df = pro.income(ts_code=ts_code)
+    df = pro.balancesheet(ts_code=ts_code)
 
-    save_profit_data(ts_code,df)
+    save_cashflow_data(ts_code,df)
 
-def save_profit_data(ts_code:str,df:pd.DataFrame):
+def save_cashflow_data(ts_code:str,df:pd.DataFrame):
 
-        df.to_csv(config.CHINA_STOCK_FINANCE_DATA_DIR+ts_code+"_profit",index=True)
+        df.to_csv(config.CHINA_STOCK_FINANCE_DATA_DIR+ts_code+"_balancesheet",index=True)
 
 
 if __name__ == "__main__":

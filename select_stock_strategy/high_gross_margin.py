@@ -23,7 +23,7 @@ def compute():
 
     stocks = gd_base_info.get_china_stock_base_info()['ts_code'].tolist()
 
-    result = pd.DataFrame(columns=['ts_code','name'])
+    result = pd.DataFrame(columns=['ts_code','name','revenue','oper_cost'])
 
     for ts_code in stocks:
 
@@ -32,10 +32,12 @@ def compute():
            print(ts_code+":警告：该标的财务数据为空，无法计算毛利率。")
            continue
 
-       gross_profit_percent = profit_data.iloc[0]['revenue']- profit_data.iloc[0]['oper_cost']/profit_data.iloc[0]['revenue']
+       revenue = profit_data.iloc[0]['revenue']
+       oper_cost = profit_data.iloc[0]['oper_cost']
+       gross_profit_percent = revenue- oper_cost/revenue
        if (gross_profit_percent>=0.7):
            name = gd_base_info.get_name_from_code(ts_code)
-           new_row_values = [ts_code, name]
+           new_row_values = [ts_code, name,revenue,oper_cost]
            result.loc[len(result)] = new_row_values
 
     print(result.to_string(index=False))

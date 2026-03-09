@@ -34,7 +34,7 @@ def compute():
 
        revenue = profit_data.iloc[0]['revenue']
        oper_cost = profit_data.iloc[0]['oper_cost']
-       gross_profit_percent = revenue- oper_cost/revenue
+       gross_profit_percent = (revenue- oper_cost)/revenue
        if (gross_profit_percent>=0.7):
            name = gd_base_info.get_name_from_code(ts_code)
            new_row_values = [ts_code, name,revenue,oper_cost]

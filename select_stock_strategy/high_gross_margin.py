@@ -28,6 +28,10 @@ def compute():
     for ts_code in stocks:
 
        profit_data = get_profit_data.get_profit_data(ts_code)
+       if profit_data.empty:
+           print(ts_code+":警告：该标的财务数据为空，无法计算毛利率。")
+           continue
+
        gross_profit_percent = profit_data.iloc[0]['revenue']- profit_data.iloc[0]['oper_cost']/profit_data.iloc[0]['revenue']
        if (gross_profit_percent>=0.7):
            name = gd_base_info.get_name_from_code(ts_code)

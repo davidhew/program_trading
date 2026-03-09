@@ -4,6 +4,7 @@
 import datetime
 from datetime import timedelta
 from datetime import datetime
+from pathlib import Path
 import time
 import random
 
@@ -33,10 +34,11 @@ def update_data():
     start_date_str=ten_years_ago_jan_1st.strftime('%Y%m%d')
     end_date_str=today.strftime('%Y%m%d')
     for stock in stocks:
-        print(stock)
-        update_stock_cashflow_data(stock)
-        # 适当休眠避免触发 API 频率限制 (根据你的账户等级调整)
-        time.sleep(random.uniform(0.5, 1.5))
+        if(should_update_data(stock)):
+            print(stock)
+            update_stock_cashflow_data(stock)
+            # 适当休眠避免触发 API 频率限制 (根据你的账户等级调整)
+            time.sleep(random.uniform(0.5, 1.5))
 
 def update_stock_cashflow_data(ts_code:str):
 
@@ -48,6 +50,24 @@ def save_cashflow_data(ts_code:str,df:pd.DataFrame):
 
         df.to_csv(config.CHINA_STOCK_FINANCE_DATA_DIR+ts_code+"_balancesheet",index=True)
 
+def should_update_data(ts_code:str):
+
+    if("1"==config.FORCE_GET_CHINA_STOCK_FINANCE_DATA):
+        return True
+
+    path = Path(config.CHINA_STOCK_FINANCE_DATA_DIR + ts_code + "_balancesheet")
+    if (not path.exists() or not path.is_file()):
+        return True
+    mtime = path.stat().st_mtime
+    last_modified_time = datetime.fromtimestamp(mtime)
+    now = datetime.now()
+
+    # 3. 判断是否超过 3 个月 (按 90 天计算更为精确)
+    if now - last_modified_time > timedelta(days=90):
+        return True
+    else:
+        return False
+    return True
 
 if __name__ == "__main__":
     # test_data_integrity()

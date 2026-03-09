@@ -29,6 +29,9 @@ CHINA_STOCK_DIR=os.getenv('CHINA_STOCK_DIR')
 #存放股票财务相关数据
 CHINA_STOCK_FINANCE_DATA_DIR=os.getenv('CHINA_STOCK_FINANCE_DATA_DIR')
 
+#是不是强制要求去获取最新的财务数据,默认为0，陆续披露最新财报的季节，可以强制设置为1
+FORCE_GET_CHINA_STOCK_FINANCE_DATA=os.getenv('FORCE_GET_CHINA_STOCK_FINANCE_DATA')
+
 #美股日线数据的存放目录
 USA_STOCK_DATA_DIR=os.getenv('USA_STOCK_DATA_DIR')
 #美股股票基础信息存放目录

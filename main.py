@@ -17,6 +17,9 @@ from select_stock_strategy import cross_MA120
 from get_stock_data import get_dragon_tiger_ranklist as gdtr
 from utility import date_utility as du
 from utility.telegram_messenger import send_telegram_message as telegram_messenger
+from get_finance_data import save_cashflow_data as cf_data
+from get_finance_data import save_profit_data as profit_data
+from get_finance_data import save_balancesheet_data as bs_data
 from utility.logger_config import setup_logging
 setup_logging()
 
@@ -38,11 +41,14 @@ def print_hi(name):
     #us_momentum.compute('20260227',3)
     #us_one_year_highest.compute('20260227')
 
+    cf_data.update_data()
+    bs_data.update_data()
+    profit_data.update_data()
     ##one_year_highest.compute_one_year_highest()
-    date_str='20260305'
+    #date_str='20260305'
     #usa_save_daily_data.daily_update()
-    us_momentum.compute(date_str)
-    us_momentum.compute(date_str, 3)
+    #us_momentum.compute(date_str)
+    #us_momentum.compute(date_str, 3)
     #us_one_year_highest.compute(date_str)
     #usa_get_stock_base_info.get_usa_stock_base_info()
     #usa_save_daily_data.init_data()

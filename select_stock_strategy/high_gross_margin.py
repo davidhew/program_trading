@@ -19,7 +19,7 @@ logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
 logger = logging.getLogger()
 
 @monitor_strategy
-def compute(date_str:str =None):
+def compute():
 
     stocks = gd_base_info.get_china_stock_base_info()['ts_code'].tolist()
 

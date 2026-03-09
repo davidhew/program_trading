@@ -20,10 +20,12 @@ from utility.telegram_messenger import send_telegram_message as telegram_messeng
 from get_finance_data import save_cashflow_data as cf_data
 from get_finance_data import save_profit_data as profit_data
 from get_finance_data import save_balancesheet_data as bs_data
+from select_stock_strategy import high_gross_margin as hg_margin
 from utility.logger_config import setup_logging
 setup_logging()
 
 def print_hi(name):
+    hg_margin.compute()
     #print(type(fileds_to_use))
     #sd.init_data()
     #sd.daily_update()
@@ -41,9 +43,9 @@ def print_hi(name):
     #us_momentum.compute('20260227',3)
     #us_one_year_highest.compute('20260227')
 
-    cf_data.update_data()
-    bs_data.update_data()
-    profit_data.update_data()
+    #cf_data.update_data()
+    #bs_data.update_data()
+    #profit_data.update_data()
     ##one_year_highest.compute_one_year_highest()
     #date_str='20260305'
     #usa_save_daily_data.daily_update()

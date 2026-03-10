@@ -45,17 +45,23 @@ def compute():
        admin_exp = profit_data.iloc[0]['admin_exp']
        rd_exp = profit_data.iloc[0]['rd_exp']
 
+       #净利润
+       n_income = profit_data.iloc[0]['n_income']
+
        total_exp = sell_exp + fin_exp + admin_exp + rd_exp
        gross_profit = revenue - oper_cost
 
-       #需要毛利润为正
-       if(gross_profit <=0):
+       #需要毛利润和净利润都为正
+       if(gross_profit <=0 or n_income <= 0):
            continue
        #费用占毛利润的比例
        exp_percent = total_exp/gross_profit
 
+       #净利润率
+       n_income_percent = n_income/revenue
+
        gross_profit_percent = (revenue- oper_cost)/revenue
-       if (gross_profit_percent>=0.7 and exp_percent<0.3):
+       if (gross_profit_percent>=0.7 and exp_percent<0.3 and n_income_percent>=0.1):
            name = gd_base_info.get_name_from_code(ts_code)
            new_row_values = [ts_code, name,revenue,oper_cost,sell_exp,fin_exp,admin_exp,rd_exp]
            result.loc[len(result)] = new_row_values

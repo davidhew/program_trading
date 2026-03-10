@@ -21,6 +21,7 @@ logger = logging.getLogger()
 secrets = secrets_config.load_external_config()
 ts.set_token(secrets.get('TUSHARE_TOKEN'))
 pro = ts.pro_api()
+balancesheet_suffix='_balancesheet'
 #项目刚启动的时候，初始化股票历史财报数据数据，目前是获取最近10年的数据
 def update_data():
     stocks = gs.get_china_stock_base_info()['ts_code'].unique()
@@ -48,14 +49,14 @@ def update_stock_cashflow_data(ts_code:str):
 
 def save_cashflow_data(ts_code:str,df:pd.DataFrame):
 
-        df.to_csv(config.CHINA_STOCK_FINANCE_DATA_DIR+ts_code+"_balancesheet",index=True)
+        df.to_csv(config.CHINA_STOCK_FINANCE_DATA_DIR+ts_code+balancesheet_suffix,index=True)
 
 def should_update_data(ts_code:str):
 
     if("1"==config.FORCE_GET_CHINA_STOCK_FINANCE_DATA):
         return True
 
-    path = Path(config.CHINA_STOCK_FINANCE_DATA_DIR + ts_code + "_balancesheet")
+    path = Path(config.CHINA_STOCK_FINANCE_DATA_DIR + ts_code + balancesheet_suffix)
     if (not path.exists() or not path.is_file()):
         return True
     mtime = path.stat().st_mtime
@@ -68,6 +69,12 @@ def should_update_data(ts_code:str):
     else:
         return False
     return True
+
+def get_balancesheet_data(ts_code):
+    path = Path(config.CHINA_STOCK_FINANCE_DATA_DIR+ts_code+balancesheet_suffix)
+    if not path.exists() or not path.is_file():
+        logger.error("%s stock data balance sheet file not exist! pls check reason",ts_code)
+    return pd.read_csv(path.resolve())
 
 if __name__ == "__main__":
     # test_data_integrity()

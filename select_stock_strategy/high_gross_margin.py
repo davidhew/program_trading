@@ -17,6 +17,7 @@ import config
 from get_stock_data import get_all_stock_data as gd
 from get_stock_data import get_stock_base_info as gd_base_info
 from get_finance_data import save_profit_data as get_profit_data
+from get_finance_data import save_cashflow_data as get_cashflow_data
 from utility import util as ut
 from utility.monitor_strategy import monitor_strategy
 
@@ -28,25 +29,28 @@ def compute():
 
     stocks = gd_base_info.get_china_stock_base_info()['ts_code'].tolist()
 
-    result = pd.DataFrame(columns=['ts_code','name','revenue','oper_cost','sell_exp','fin_exp','admin_exp','rd_exp'])
+    result = pd.DataFrame(columns=['ts_code','name','revenue','oper_cost','sell_exp','fin_exp','admin_exp','rd_exp','n_cashflow_profit_percent'])
 
     for ts_code in stocks:
 
-       profit_data = get_profit_data.get_profit_data(ts_code)
-       profit_data.fillna(0, inplace = True)
-       if profit_data.empty:
+       profit_data_df = get_profit_data.get_profit_data(ts_code)
+       cashflow_data_df = get_cashflow_data.get_cashflow_data(ts_code)
+       merge_df = pd.merge(profit_data_df,cashflow_data_df,on=['ts_code','end_date'])
+
+       merge_df.fillna(0, inplace = True)
+       if merge_df.empty:
            print(ts_code+":警告：该标的财务数据为空，无法计算毛利率。")
            continue
 
-       revenue = profit_data.iloc[0]['revenue']
-       oper_cost = profit_data.iloc[0]['oper_cost']
-       sell_exp = profit_data.iloc[0]['sell_exp']
-       fin_exp = profit_data.iloc[0]['fin_exp']
-       admin_exp = profit_data.iloc[0]['admin_exp']
-       rd_exp = profit_data.iloc[0]['rd_exp']
+       revenue = merge_df.iloc[0]['revenue']
+       oper_cost = merge_df.iloc[0]['oper_cost']
+       sell_exp = merge_df.iloc[0]['sell_exp']
+       fin_exp = merge_df.iloc[0]['fin_exp']
+       admin_exp = merge_df.iloc[0]['admin_exp']
+       rd_exp = merge_df.iloc[0]['rd_exp']
 
        #净利润
-       n_income = profit_data.iloc[0]['n_income']
+       n_income = merge_df.iloc[0]['n_income']
 
        total_exp = sell_exp + fin_exp + admin_exp + rd_exp
        gross_profit = revenue - oper_cost
@@ -60,10 +64,18 @@ def compute():
        #净利润率
        n_income_percent = n_income/revenue
 
+       #同期的经营活动现金流净额（非常有质量的财务数据）
+       n_cashflow_act = merge_df.iloc[0]['n_cashflow_act']
+
+       if(n_cashflow_act <= 0):
+           continue
+       #同期经营现金流净额占净利润比重，大于1表明业务质量非常健康
+       n_cashflow_profit_percent = n_cashflow_act/n_income
+
        gross_profit_percent = (revenue- oper_cost)/revenue
-       if (gross_profit_percent>=0.7 and exp_percent<0.3 and n_income_percent>=0.1):
+       if (gross_profit_percent>=0.7 and exp_percent<0.3 and n_income_percent>=0.1 and n_cashflow_profit_percent>=1):
            name = gd_base_info.get_name_from_code(ts_code)
-           new_row_values = [ts_code, name,revenue,oper_cost,sell_exp,fin_exp,admin_exp,rd_exp]
+           new_row_values = [ts_code, name,revenue,oper_cost,sell_exp,fin_exp,admin_exp,rd_exp,n_cashflow_profit_percent]
            result.loc[len(result)] = new_row_values
 
     print(result.to_string(index=False))

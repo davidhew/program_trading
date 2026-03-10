@@ -33,6 +33,7 @@ def compute():
     for ts_code in stocks:
 
        profit_data = get_profit_data.get_profit_data(ts_code)
+       profit_data.fillna(0, inplace = True)
        if profit_data.empty:
            print(ts_code+":警告：该标的财务数据为空，无法计算毛利率。")
            continue
@@ -43,8 +44,14 @@ def compute():
        fin_exp = profit_data.iloc[0]['fin_exp']
        admin_exp = profit_data.iloc[0]['admin_exp']
        rd_exp = profit_data.iloc[0]['rd_exp']
+
+       total_exp = sell_exp + fin_exp + admin_exp + rd_exp
+       gross_profit = revenue - oper_cost
+       #费用占毛利润的比例
+       exp_percent = total_exp/gross_profit
+
        gross_profit_percent = (revenue- oper_cost)/revenue
-       if (gross_profit_percent>=0.7):
+       if (gross_profit_percent>=0.7 and exp_percent<0.3):
            name = gd_base_info.get_name_from_code(ts_code)
            new_row_values = [ts_code, name,revenue,oper_cost,sell_exp,fin_exp,admin_exp,rd_exp]
            result.loc[len(result)] = new_row_values

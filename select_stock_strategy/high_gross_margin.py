@@ -47,6 +47,10 @@ def compute():
 
        total_exp = sell_exp + fin_exp + admin_exp + rd_exp
        gross_profit = revenue - oper_cost
+
+       #需要毛利润为正
+       if(gross_profit <=0):
+           continue
        #费用占毛利润的比例
        exp_percent = total_exp/gross_profit
 

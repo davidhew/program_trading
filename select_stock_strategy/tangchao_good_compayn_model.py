@@ -18,6 +18,7 @@ import config
 from get_stock_data import get_stock_base_info as gd_base_info
 from get_finance_data import save_profit_data as get_profit_data
 from get_finance_data import save_cashflow_data as get_cashflow_data
+from get_finance_data import save_balancesheet_data as get_balancesheet_data
 from utility.monitor_strategy import monitor_strategy
 
 logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
@@ -34,7 +35,9 @@ def compute():
 
        profit_data_df = get_profit_data.get_profit_data(ts_code)
        cashflow_data_df = get_cashflow_data.get_cashflow_data(ts_code)
+       balancesheet_data_df = get_balancesheet_data.get_balancesheet_data(ts_code)
        merge_df = pd.merge(profit_data_df,cashflow_data_df,on=['ts_code','end_date'])
+       merge_df = pd.merge(merge_df,balancesheet_data_df,on=['ts_code','end_date'])
 
        merge_df.fillna(0, inplace = True)
        if merge_df.empty:

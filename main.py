@@ -21,11 +21,12 @@ from get_finance_data import save_cashflow_data as cf_data
 from get_finance_data import save_profit_data as profit_data
 from get_finance_data import save_balancesheet_data as bs_data
 from select_stock_strategy import high_gross_margin as hg_margin
+from select_stock_strategy import tangchao_good_compayn_model as tc_good_company
 from utility.logger_config import setup_logging
 setup_logging()
 
 def print_hi(name):
-    hg_margin.compute()
+    tc_good_company.compute()
     #print(type(fileds_to_use))
     #sd.init_data()
     #sd.daily_update()

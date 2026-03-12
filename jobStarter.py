@@ -3,7 +3,6 @@
 '''
 import schedule
 import time
-import config
 import datetime
 from datetime import timedelta
 from datetime import datetime
@@ -42,10 +41,31 @@ def scheduled_us_stock_job():
 def scheduled_us_stock_refresh_job():
     us_get_company_info.batch_refresh_company_info()
 
+china_stock_workdays = [
+    schedule.every().monday,
+    schedule.every().tuesday,
+    schedule.every().wednesday,
+    schedule.every().thursday,
+    schedule.every().friday
+]
+
+#有时差
+us_stock_workdays = [
+    schedule.every().tuesday,
+    schedule.every().wednesday,
+    schedule.every().thursday,
+    schedule.every().friday,
+    schedule.every().saturday
+
+]
 print("jobStarter")
-schedule.every().day.at("13:41").do(scheduled_us_stock_job)
-schedule.every().day.at("16:05").do(scheduled_china_stock_job)
-schedule.every().day.at("11:19").do(scheduled_us_stock_refresh_job)
+for day in china_stock_workdays:
+    day.at("16:05").do(scheduled_china_stock_job)
+
+for day in us_stock_workdays:
+    day.at("08:25").do(scheduled_us_stock_job)
+
+schedule.every().saturday.at("08:19").do(scheduled_us_stock_refresh_job)
 
 while True:
     schedule.run_pending()

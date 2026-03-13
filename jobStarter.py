@@ -8,17 +8,22 @@ from datetime import timedelta
 from datetime import datetime
 
 from us_get_company_info import us_get_company_info
-# 按 ⌃R 执行或将其替换为您的代码。
-# 按 双击 ⇧ 在所有地方搜索类、文件、工具窗口、操作和设置。
+
 from get_stock_data import save_daily_data as sd
 from select_stock_strategy import one_year_highest as one_year_highest
 from select_stock_strategy import momentum as momentum
-from us_get_stock_data import us_save_daily_data as usa_save_daily_data
+from us_get_stock_data import us_save_daily_data as usa_save_daily_data, us_save_daily_data
 from select_stock_strategy import jianfang_final as jf
 from us_select_stock_strategy import us_momentum as us_momentum
 
 from us_select_stock_strategy import us_one_year_highest as us_one_year_highest
 from utility.logger_config import setup_logging
+
+
+from us_get_finance_data import us_get_income
+from us_get_finance_data import us_get_cashflow
+from us_get_finance_data import us_get_balancesheet
+
 setup_logging()
 
 def scheduled_china_stock_job():
@@ -37,6 +42,11 @@ def scheduled_us_stock_job():
     us_momentum.compute(date_str)
     us_momentum.compute(date_str,3)
     us_one_year_highest.compute(date_str)
+
+def scheduled_us_stock_finance_refresh_job():
+    us_get_income.batch_get()
+    us_get_cashflow.batch_get()
+    us_get_balancesheet.batch_get()
 
 def scheduled_us_stock_refresh_job():
     us_get_company_info.batch_refresh_company_info()
@@ -65,7 +75,11 @@ for day in china_stock_workdays:
 for day in us_stock_workdays:
     day.at("08:25").do(scheduled_us_stock_job)
 
+#每个礼拜六，获取美股公司的最新市值
 schedule.every().saturday.at("08:19").do(scheduled_us_stock_refresh_job)
+
+#每个礼拜天，更新美股财报数据
+schedule.every().sunday.at("08:19").do(scheduled_us_stock_finance_refresh_job)
 
 while True:
     schedule.run_pending()

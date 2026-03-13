@@ -23,10 +23,15 @@ from get_finance_data import save_balancesheet_data as bs_data
 from select_stock_strategy import high_gross_margin as hg_margin
 from select_stock_strategy import tangchao_good_compayn_model as tc_good_company
 from utility.logger_config import setup_logging
+from us_get_finance_data import us_get_income
+from us_get_finance_data import us_get_cashflow
+from us_get_finance_data import us_get_balancesheet
 setup_logging()
 
 def print_hi(name):
-    tc_good_company.compute()
+    us_get_income.batch_get()
+    us_get_cashflow.batch_get()
+    us_get_balancesheet.batch_get()
     #print(type(fileds_to_use))
     #sd.init_data()
     #sd.daily_update()

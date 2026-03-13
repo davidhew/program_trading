@@ -30,9 +30,6 @@ def update_data():
     #2. 构造该年份的 1 月 1 日
     ten_years_ago_jan_1st = datetime(target_year, 1, 1)
 
-    start_date = today-timedelta(days=int(config.DAY_NUMBER))
-    start_date_str=ten_years_ago_jan_1st.strftime('%Y%m%d')
-    end_date_str=today.strftime('%Y%m%d')
     for stock in stocks:
         if(should_update_data(stock)):
             print(stock)
@@ -68,9 +65,6 @@ def should_update_data(ts_code:str):
     else:
         return False
     return True
-
-
-
 
 
 def get_profit_data(ts_code):

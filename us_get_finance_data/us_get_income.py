@@ -182,7 +182,7 @@ def batch_get():
 
 #年报和季报都获取，然后合并在一起
 def do_get_complete_income_statment(ts_code):
-    file_path=config.USA_STOCK_FINANCE_DATA_DIR+"/income/"+ts_code
+    file_path=config.USA_STOCK_FINANCE_DATA_DIR+"/income/"+str(ts_code)
     empty_df = pd.DataFrame()
     if(finance_util.should_update_data(file_path,90)):
         df = do_get_income_statment(ts_code)

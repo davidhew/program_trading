@@ -30,7 +30,8 @@ def get_common_stock_list():
     if (need_refresh()):
         stocks_pd = do_get_stock_list()
         stocks_pd.to_csv(config.USA_STOCK_DIR + "/" + file_name,index=False)
-    return pd.read_csv(config.USA_STOCK_DIR + "/" + file_name)
+    #强制指定ts_code是str类型
+    return pd.read_csv(config.USA_STOCK_DIR + "/" + file_name,dtype={'ts_code': str})
 
 def need_refresh():
     #不存在文件，则获取一次

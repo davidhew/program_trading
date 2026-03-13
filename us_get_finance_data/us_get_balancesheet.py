@@ -233,16 +233,19 @@ def batch_get():
 #年报和季报都获取，然后合并在一起
 def do_get_complete_balancesheet_statment(ts_code):
     file_path=config.USA_STOCK_FINANCE_DATA_DIR+"/balancesheet/"+ts_code
+    empty_df = pd.DataFrame()
     if(finance_util.should_update_data(file_path,90)):
 
         df = do_get_balancesheet_statment(ts_code)
         #可能标的刚上市还没有财报；或者标的是一个ETF没有财报
+        # 保存一个空白文件，这样可以避免后续重复去远端获取
         if (df is None or df.empty):
+            empty_df.to_csv(file_path, index=False)
             return
         quarter_df=do_get_balancesheet_statment(ts_code, "quarter")
-        if (quarter_df is None or df.empty):
-            return
-        df = pd.concat([quarter_df,df],axis=0,ignore_index=True)
+        if (quarter_df is not None and not quarter_df.empty):
+            df = pd.concat([quarter_df, df], axis=0, ignore_index=True)
+
         df = df.sort_values(by=['filingDate','period'], ascending=[True,False], inplace=False)
         df.to_csv(file_path,index=False)
         return df
@@ -259,7 +262,6 @@ def do_get_balancesheet_statment(ts_code:str, period:str= "annual"):
 
         try:
             session = get_session_with_retries()
-
             response = session.get(url,headers=headers,timeout=10)
             if response.status_code == 200:
                 data = response.json()

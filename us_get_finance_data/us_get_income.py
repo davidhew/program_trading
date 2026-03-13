@@ -16,7 +16,7 @@ from datetime import datetime
 import config
 import logging
 
-import finance_util
+from us_get_finance_data import finance_util
 
 from utility import secrets_config as secrets_config
 from utility.monitor_strategy import monitor_strategy

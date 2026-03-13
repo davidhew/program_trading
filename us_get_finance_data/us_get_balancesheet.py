@@ -12,7 +12,7 @@ from requests.adapters import HTTPAdapter
 import config
 import logging
 
-import finance_util
+from us_get_finance_data import finance_util
 from utility import secrets_config as secrets_config
 from utility.monitor_strategy import monitor_strategy
 from us_get_stock_data import us_get_common_stock_list as us_get_common_stock_list

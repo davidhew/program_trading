@@ -16,7 +16,7 @@ from utility import secrets_config as secrets_config
 from utility.monitor_strategy import monitor_strategy
 from us_get_stock_data import us_get_common_stock_list as us_get_common_stock_list
 from urllib3.util.retry import Retry
-import finance_util
+from us_get_finance_data import finance_util
 
 logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
 logger = logging.getLogger()

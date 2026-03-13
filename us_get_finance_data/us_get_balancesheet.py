@@ -234,8 +234,14 @@ def batch_get():
 def do_get_complete_balancesheet_statment(ts_code):
     file_path=config.USA_STOCK_FINANCE_DATA_DIR+"/balancesheet/"+ts_code
     if(finance_util.should_update_data(file_path,90)):
+
         df = do_get_balancesheet_statment(ts_code)
+        #可能标的刚上市还没有财报；或者标的是一个ETF没有财报
+        if (df is None or df.empty):
+            return
         quarter_df=do_get_balancesheet_statment(ts_code, "quarter")
+        if (quarter_df is None or df.empty):
+            return
         df = pd.concat([quarter_df,df],axis=0,ignore_index=True)
         df = df.sort_values(by=['filingDate','period'], ascending=[True,False], inplace=False)
         df.to_csv(file_path,index=False)

@@ -1,5 +1,5 @@
 '''
-获取公司的收入报表
+获取公司的利润报表
 '''
 import random
 
@@ -185,7 +185,11 @@ def do_get_complete_income_statment(ts_code):
     file_path=config.USA_STOCK_FINANCE_DATA_DIR+"/income/"+ts_code
     if(finance_util.should_update_data(file_path,90)):
         df = do_get_income_statment(ts_code)
+        if(df is None or df.empty):
+            return
         quarter_df=do_get_income_statment(ts_code,"quarter")
+        if (quarter_df is None or quarter_df.empty):
+            return
         df = pd.concat([quarter_df,df],axis=0,ignore_index=True)
         df = df.sort_values(by=['filingDate', 'period'], ascending=[True, False], inplace=False)
         df.to_csv(file_path,index=False)
@@ -248,4 +252,4 @@ def should_update_data(ts_code:str):
     return True
 
 if __name__ == "__main__":
-    do_get_complete_income_statment('AAPL')
+    do_get_complete_income_statment('MSSWF')

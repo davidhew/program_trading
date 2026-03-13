@@ -221,7 +221,11 @@ def do_get_complete_cashflow_statment(ts_code):
     file_path=config.USA_STOCK_FINANCE_DATA_DIR+"/cashflow/"+ts_code
     if(finance_util.should_update_data(file_path,0)):
         df = do_get_cashflow_statment(ts_code)
-        quarter_df=do_get_cashflow_statment(ts_code,"quarter")
+        if (df is None or df.empty):
+            return
+        quarter_df = do_get_cashflow_statment(ts_code, "quarter")
+        if (quarter_df is None or quarter_df.empty):
+            return
         df = pd.concat([quarter_df,df],axis=0,ignore_index=True)
         df = df.sort_values(by=['filingDate', 'period'], ascending=[True, False], inplace=False)
         df.to_csv(file_path,index=False)

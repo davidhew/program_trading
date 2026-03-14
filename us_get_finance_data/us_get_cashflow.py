@@ -267,7 +267,7 @@ def do_get_cashflow_statment(ts_code:str,period:str="annual"):
 
 
         # 适当休眠避免触发 API 频率限制 (根据你的账户等级调整)
-        time.sleep(random.uniform(0.5, 1))
+        time.sleep(random.uniform(0.1, 0.3))
 
 
 

@@ -77,3 +77,5 @@ def compute(date_str:str =None):
         content_str = result_inner_filtered.to_string(index=False, justify='center')
         message = f"<b>可能筑底的股票-{date_str}</b>\n<pre>{content_str}</pre>"
         telegram_messenger.send_telegram_message(message)
+    else:
+        print("no bottoming out stocks")

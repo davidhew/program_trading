@@ -27,6 +27,7 @@ from us_get_finance_data import us_get_income
 from us_get_finance_data import us_get_cashflow
 from us_get_finance_data import us_get_balancesheet
 from us_select_stock_strategy import us_bottoming_out
+from us_select_stock_strategy import us_price_below_MA200
 setup_logging()
 
 def print_hi(name):
@@ -38,7 +39,7 @@ def print_hi(name):
     #us_momentum.compute(date_str)
     #us_momentum.compute(date_str, 3)
     #us_one_year_highest.compute(date_str)
-    us_bottoming_out.compute(date_str)
+    us_price_below_MA200.compute(date_str)
 
 
     #print(type(fileds_to_use))

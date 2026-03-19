@@ -64,6 +64,6 @@ def compute(date_str:str =None):
         result_inner_filtered = result_inner[['ts_code', 'sector']]
         content_str = result_inner_filtered.to_string(index=False, justify='center')
         message = f"<b>股价在200均线以下股票-{date_str}</b>\n<pre>{content_str}</pre>"
-        telegram_messenger.send_telegram_message(message)
+        telegram_messenger.send_message(message)
     else:
         print("no price below MA200 stocks")

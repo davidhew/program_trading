@@ -22,7 +22,7 @@ token = secrets.get('TG_TOKEN')
 # 替换为你从 userinfobot 获取的 ID
 chat_id = secrets.get('CHAT_ID')
 
-def send_message(message):
+def send_message(message,filename="analysis.txt"):
     if(len(message)>4000):
         send_text_as_file(message)
     else:

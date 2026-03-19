@@ -15,6 +15,7 @@ from select_stock_strategy import momentum as momentum
 from us_get_stock_data import us_save_daily_data as usa_save_daily_data, us_save_daily_data
 from select_stock_strategy import jianfang_final as jf
 from us_select_stock_strategy import us_momentum as us_momentum
+from us_select_stock_strategy import us_price_below_MA200
 
 from us_select_stock_strategy import us_one_year_highest as us_one_year_highest
 from utility.logger_config import setup_logging
@@ -51,6 +52,13 @@ def scheduled_us_stock_finance_refresh_job():
 def scheduled_us_stock_refresh_job():
     us_get_company_info.batch_refresh_company_info()
 
+def scheduled_us_stock_price_below_MA200_job():
+    ##处理美股和中国的时差
+    today = datetime.now()
+    start_date = today - timedelta(1)
+    date_str = start_date.strftime('%Y%m%d')
+    us_price_below_MA200.compute(date_str)
+
 china_stock_workdays = [
     schedule.every().monday,
     schedule.every().tuesday,
@@ -78,8 +86,13 @@ for day in us_stock_workdays:
 #每个礼拜六，获取美股公司的最新市值
 schedule.every().saturday.at("08:19").do(scheduled_us_stock_refresh_job)
 
+#每个礼拜六，获取美股公司收盘价低于200均线的公司
+schedule.every().saturday.at("08:03").do(scheduled_us_stock_price_below_MA200_job)
+
 #每个礼拜天，更新美股财报数据
 schedule.every().sunday.at("08:19").do(scheduled_us_stock_finance_refresh_job)
+
+
 
 while True:
     schedule.run_pending()

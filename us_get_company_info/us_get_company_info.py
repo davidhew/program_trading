@@ -40,14 +40,14 @@ def get_us_stock_base_info():
 def get_market_cap(ts_code:str):
     df = get_us_stock_base_info()
     # 获取特定代码的市值 (返回的是一个 Series)
-    result = df.loc[df['ts_code'] == ts_code, 'market_cap']
+    result = df.loc[df['ts_code'] == ts_code, 'marketCap']
 
     # 如果你确定只有一个结果，想直接拿到数字：
     if not result.empty:
         cap_value = result.values[0]
         return cap_value
     else:
-        logger.error("can't get stock:%s's market_cap info",ts_code)
+        logger.error("can't get stock:%s's marketCap info",ts_code)
         return 0
 
 def get_session_with_retries():

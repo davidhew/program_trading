@@ -37,6 +37,19 @@ headers = {
 def get_us_stock_base_info():
     return pd.read_csv(config.USA_STOCK_DIR+"/"+file_name)
 
+def get_market_cap(ts_code:str):
+    df = get_us_stock_base_info()
+    # 获取特定代码的市值 (返回的是一个 Series)
+    result = df.loc[df['ts_code'] == ts_code, 'market_cap']
+
+    # 如果你确定只有一个结果，想直接拿到数字：
+    if not result.empty:
+        cap_value = result.values[0]
+        return cap_value
+    else:
+        logger.error("can't get stock:%s's market_cap info",ts_code)
+        return 0
+
 def get_session_with_retries():
     session = requests.Session()
     # 定义重试策略
@@ -150,7 +163,7 @@ def do_get_company_info(ts_code:str,date_str:str):
 
 
         # 适当休眠避免触发 API 频率限制 (根据你的账户等级调整)
-        time.sleep(random.uniform(0.5, 1.5))
+        time.sleep(random.uniform(0.5, 1))
 
 if __name__ == "__main__":
     batch_refresh_company_info()

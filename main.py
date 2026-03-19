@@ -26,17 +26,20 @@ from utility.logger_config import setup_logging
 from us_get_finance_data import us_get_income
 from us_get_finance_data import us_get_cashflow
 from us_get_finance_data import us_get_balancesheet
+from us_select_stock_strategy import us_bottoming_out
 setup_logging()
 
 def print_hi(name):
     #us_get_income.batch_get()
     #us_get_cashflow.batch_get()
     #us_get_balancesheet.batch_get()
-    date_str = '20260313'
-    usa_save_daily_data.daily_update()
-    us_momentum.compute(date_str)
-    us_momentum.compute(date_str, 3)
-    us_one_year_highest.compute(date_str)
+    date_str = '20260318'
+    #usa_save_daily_data.daily_update()
+    #us_momentum.compute(date_str)
+    #us_momentum.compute(date_str, 3)
+    #us_one_year_highest.compute(date_str)
+    us_bottoming_out.compute(date_str)
+
 
     #print(type(fileds_to_use))
     #sd.init_data()

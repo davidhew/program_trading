@@ -288,6 +288,7 @@ def do_get_balancesheet_statment(ts_code:str, period:str= "annual"):
 
 
 def get_balancesheet(ts_code:str):
+    print("get_balancesheet"+ts_code)
     file_path = config.USA_STOCK_FINANCE_DATA_DIR + "/balancesheet/" + str(ts_code)
     return pd.read_csv(file_path)
 

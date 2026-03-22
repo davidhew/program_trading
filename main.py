@@ -16,7 +16,6 @@ from select_stock_strategy import low_level_start as ll_start
 from select_stock_strategy import cross_MA120
 from get_stock_data import get_dragon_tiger_ranklist as gdtr
 from utility import date_utility as du
-from utility.telegram_messenger import send_telegram_message as telegram_messenger
 from get_finance_data import save_cashflow_data as cf_data
 from get_finance_data import save_profit_data as profit_data
 from get_finance_data import save_balancesheet_data as bs_data

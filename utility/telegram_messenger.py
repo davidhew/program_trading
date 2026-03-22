@@ -26,7 +26,7 @@ def send_message(message,filename="analysis.txt"):
     if(len(message)>4000):
         send_text_as_file(message)
     else:
-        send_telegram_message(message)
+        send_text_as_message(message)
 
 
 def send_text_as_file(message, filename="analysis.txt"):
@@ -59,7 +59,7 @@ def send_text_as_file(message, filename="analysis.txt"):
         print(f"发送出错：{e}")
 
 
-def send_telegram_message(message):
+def send_text_as_message(message):
 
     url = f"https://api.telegram.org/bot{token}/sendMessage"
 
@@ -81,4 +81,4 @@ def send_telegram_message(message):
 
 if __name__ == "__main__":
     #test_data_integrity()
-    send_telegram_message('测试发送telegram信息')
+    send_message('测试发送telegram信息')

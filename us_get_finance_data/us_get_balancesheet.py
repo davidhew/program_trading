@@ -290,7 +290,11 @@ def do_get_balancesheet_statment(ts_code:str, period:str= "annual"):
 def get_balancesheet(ts_code:str):
     print("get_balancesheet"+ts_code)
     file_path = config.USA_STOCK_FINANCE_DATA_DIR + "/balancesheet/" + str(ts_code)
-    return pd.read_csv(file_path)
+    try:
+        return pd.read_csv(file_path)
+    except Exception as e:
+        print(f"{ts_code} get_balancesheet失败: {e}")
+        return pd.DataFrame()
 
 
 if __name__ == "__main__":

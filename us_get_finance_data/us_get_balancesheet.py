@@ -286,5 +286,11 @@ def do_get_balancesheet_statment(ts_code:str, period:str= "annual"):
         # 适当休眠避免触发 API 频率限制 (根据你的账户等级调整)
         time.sleep(random.uniform(0.1, 0.3))
 
+
+def get_balancesheet(ts_code:str):
+    file_path = config.USA_STOCK_FINANCE_DATA_DIR + "/balancesheet/" + str(ts_code)
+    return pd.read_csv(file_path)
+
+
 if __name__ == "__main__":
     do_get_complete_balancesheet_statment('AAPL')

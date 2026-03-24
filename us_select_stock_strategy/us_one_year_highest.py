@@ -64,6 +64,7 @@ def compute(date_str:str=None):
 
     content_str=count_size_filtered_2.to_string(index=False, justify='center')
     message = f"<b>历史新高股票板块情况-{date_str}</b>\n<pre>{content_str}</pre>"
+    print("sending message:"+message)
     telegram_messenger.send_message(message)
 
 

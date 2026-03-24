@@ -7,7 +7,6 @@
 4.其实主要是包含:纳斯达克--NASDAQ，纽约交易所--NYSE,美国证券交易所--AMEX这3个交易所的股票
 '''
 
-import sys
 import os.path
 import config
 import time

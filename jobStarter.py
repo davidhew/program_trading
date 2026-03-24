@@ -12,7 +12,8 @@ from us_get_company_info import us_get_company_info
 from get_stock_data import save_daily_data as sd
 from select_stock_strategy import one_year_highest as one_year_highest
 from select_stock_strategy import momentum as momentum
-from us_get_stock_data import us_save_daily_data as usa_save_daily_data, us_save_daily_data
+from us_get_stock_data import us_save_daily_data as usa_save_daily_data
+from us_get_stock_data import us_get_common_stock_list as us_get_common_stock_list
 from select_stock_strategy import jianfang_final as jf
 from us_select_stock_strategy import us_momentum as us_momentum
 from us_select_stock_strategy import us_price_below_MA200
@@ -48,9 +49,15 @@ def scheduled_us_stock_finance_refresh_job():
     us_get_income.batch_get()
     us_get_cashflow.batch_get()
     us_get_balancesheet.batch_get()
-
-def scheduled_us_stock_refresh_job():
+'''
+每周更新一次的数据：
+1.美股公司的市值
+2.美股公司的股票列表（主要是去除OTC等交易所的列表，保留纳斯达克，纽交所等核心交易所的股票列表）
+'''
+def scheduled_us_stock_refresh_weekly():
     us_get_company_info.batch_refresh_company_info()
+    us_get_common_stock_list.do_get_stock_list()
+
 
 def scheduled_us_stock_price_below_MA200_job():
     ##处理美股和中国的时差
@@ -81,10 +88,10 @@ for day in china_stock_workdays:
     day.at("16:05").do(scheduled_china_stock_job)
 
 for day in us_stock_workdays:
-    day.at("08:25").do(scheduled_us_stock_job)
+    day.at("09:42").do(scheduled_us_stock_job)
 
 #每个礼拜六，获取美股公司的最新市值
-schedule.every().saturday.at("08:19").do(scheduled_us_stock_refresh_job)
+schedule.every().saturday.at("08:19").do(scheduled_us_stock_refresh_weekly)
 
 #每个礼拜六，获取美股公司收盘价低于200均线的公司
 schedule.every().saturday.at("08:03").do(scheduled_us_stock_price_below_MA200_job)

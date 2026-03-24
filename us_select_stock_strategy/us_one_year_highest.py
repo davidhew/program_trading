@@ -53,7 +53,7 @@ def compute(date_str:str=None):
     result_inner_filtered = result_inner[['ts_code','sector']]
     content_str = result_inner_filtered.to_string(index=False, justify='center')
     message = f"<b>历史新高的股票-{date_str}</b>\n<pre>{content_str}</pre>"
-    telegram_messenger.send_telegram_message(message)
+    telegram_messenger.send_message(message)
 
 
     counts_size = result_inner.groupby('sector').size().reset_index(name='counts')
@@ -64,7 +64,7 @@ def compute(date_str:str=None):
 
     content_str=count_size_filtered_2.to_string(index=False, justify='center')
     message = f"<b>历史新高股票板块情况-{date_str}</b>\n<pre>{content_str}</pre>"
-    telegram_messenger.send_telegram_message(message)
+    telegram_messenger.send_message(message)
 
 
     df.to_csv(config.USA_STOCK_STRATEGY_RESULT_DIR+'one-year-highest-list-'+date_str+'.csv',index=False)

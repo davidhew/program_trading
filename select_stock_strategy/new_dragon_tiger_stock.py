@@ -70,5 +70,5 @@ def compute(date_str:str =None):
             # 2. 构建符合 Telegram 规范的 HTML
             # <b> 加粗替代 <h3>, <pre> 保证表格对齐
             message = f"<b>股价合理-新进龙虎榜-{date_str}</b>\n<pre>{table_str}</pre>"
-            tm.send_telegram_message(message)
+            tm.send_message(message)
     logger.info("success:compute:new_dragon_tiger_ranklist:%s finished!",date_str)

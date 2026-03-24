@@ -114,7 +114,7 @@ def compute(date_str:str =None,day_num:int =20):
     df4.to_csv(config.STOCK_STRATEGY_RESULT_DIR + 'momentum-'+str(day_num) + '-' + date_str + '.csv', index=False)
     content_str = df4.to_string(index=False, justify='center')
     message = f"<b>{day_num}日动量板块rank结果-{date_str}</b>\n<pre>{content_str}</pre>"
-    telegram_messenger.send_telegram_message(message)
+    telegram_messenger.send_message(message)
 
 if __name__ == "__main__":
     # test_data_integrity()

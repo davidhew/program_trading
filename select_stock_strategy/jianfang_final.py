@@ -66,7 +66,7 @@ def compute(date_str:str =None):
     expired_df = expired_df[['ts_code','name','price_up_ratio']]
     content_str = expired_df.to_string(index=False, justify='center')
     message = f"<b>{date_str}:A股动量筛选结果-过期剔除列表</b>\n<pre>{content_str}</pre>"
-    telegram_messenger.send_telegram_message(message)
+    telegram_messenger.send_message(message)
 
     logger.info("jianfang_final compute: remove expired_stocks:"+expired_df['name'].to_string(index=False))
 
@@ -92,7 +92,7 @@ def compute(date_str:str =None):
 
     content_str = new_enlist_df.to_string(index=False, justify='center')
     message = f"<b>{date_str}:A股动量筛选结果-新增列表</b>\n<pre>{content_str}</pre>"
-    telegram_messenger.send_telegram_message(message)
+    telegram_messenger.send_message(message)
 
     stock_list_df_ths.to_csv(config.STOCK_STRATEGY_RESULT_DIR +'jianfang-final-list-ths-' + date_str + '.EBK', index=False, header=False)
     stock_list_df.to_csv(config.STOCK_STRATEGY_RESULT_DIR +'jianfang-final-list-' + date_str + '.txt', index=False, header=True)

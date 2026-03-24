@@ -63,7 +63,7 @@ def init_data_for_stock(ts_code):
 #每日运行的任务，理论上正常情况下，只要取当天的日线数据补到历史数据即可;为了提高容错性，取最近5天的数据
 def daily_update():
     today = datetime.now()
-    common_stock_df = us_get_common.do_get_stock_list()
+    common_stock_df = us_get_common.get_common_stock_list()
     #从1开始，因为中美时区的差异
     for i in range(2,0,-1):
         start_date = today - timedelta(days=i)

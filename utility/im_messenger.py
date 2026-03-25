@@ -5,8 +5,8 @@ import io
 
 import logging
 
-import dingtalk_messenger as dingtalk_messenger
-import telegram_messenger as telegram_messenger
+from utility import dingtalk_messenger as dingtalk_messenger
+from utility import telegram_messenger as telegram_messenger
 import util as util
 import config
 

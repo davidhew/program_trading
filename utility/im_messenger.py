@@ -7,7 +7,7 @@ import logging
 
 from utility import dingtalk_messenger as dingtalk_messenger
 from utility import telegram_messenger as telegram_messenger
-import util as util
+from utility import util as util
 import config
 
 logging.basicConfig(filename='../program_trading_log.log', level=logging.INFO)

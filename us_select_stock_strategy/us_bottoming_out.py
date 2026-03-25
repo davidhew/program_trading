@@ -8,7 +8,7 @@ import pandas as pd
 import config
 from us_get_stock_data import us_get_all_stock_data as usa_gd
 from us_get_company_info import us_get_company_info
-from utility import telegram_messenger
+from utility import im_messenger
 from utility.monitor_strategy import monitor_strategy
 
 logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
@@ -75,7 +75,7 @@ def compute(date_str:str =None):
         # 带上板块信息
         result_inner_filtered = result_inner[['ts_code', 'sector']]
         content_str = result_inner_filtered.to_string(index=False, justify='center')
-        message = f"<b>可能筑底的股票-{date_str}</b>\n<pre>{content_str}</pre>"
-        telegram_messenger.send_message(message)
+        title = f"可能筑底的股票-{date_str}"
+        im_messenger.send_message(title)
     else:
         print("no bottoming out stocks")

@@ -9,7 +9,7 @@ from datetime import datetime
 from us_get_stock_data import us_get_all_stock_data as usa_gd
 from utility.monitor_strategy import monitor_strategy
 from us_get_company_info import us_get_company_info
-from utility import telegram_messenger as telegram_messenger
+from utility import im_messenger as im_messenger
 import logging
 logger = logging.getLogger(__name__) # 使用 __name__ 可以知道是哪个文件打印的日志
 
@@ -70,8 +70,8 @@ def compute(date_str:str =None,day_num:int =20):
     result_inner = result_inner[['ts_code','price_up_ratio','industry','sector']]
 
     content_str=result_inner.to_string(index=False,justify='center')
-    message = f"<b>{day_num}日动量筛选结果-{date_str}</b>\n<pre>{content_str}</pre>"
-    telegram_messenger.send_message(message)
+    title = f"{day_num}日动量筛选结果-{date_str}"
+    im_messenger.send_message(title,content_str)
 
 
     strong_df.to_csv(config.USA_STOCK_STRATEGY_RESULT_DIR + 'momentum-stock-list-strong-' +str(day_num)+'-'+ date_str + '.csv',
@@ -91,7 +91,7 @@ def compute(date_str:str =None,day_num:int =20):
     result_inner = result_inner[result_inner['industry'] != 'Biotechnology']
     content_str = result_inner.to_string(index=False, justify='center')
     message = f"<b>{day_num}日-负向动量筛选结果-{date_str}</b>\n<pre>{content_str}</pre>"
-    telegram_messenger.send_message(message)
+    #telegram_messenger.send_message(message)
 
 
     result_inner = pd.merge(df, base_info_df, on='ts_code', how='inner')
@@ -113,8 +113,8 @@ def compute(date_str:str =None,day_num:int =20):
     
     df4.to_csv(config.STOCK_STRATEGY_RESULT_DIR + 'momentum-'+str(day_num) + '-' + date_str + '.csv', index=False)
     content_str = df4.to_string(index=False, justify='center')
-    message = f"<b>{day_num}日动量板块rank结果-{date_str}</b>\n<pre>{content_str}</pre>"
-    telegram_messenger.send_message(message)
+    title = f"{day_num}日动量板块rank结果-{date_str}"
+    im_messenger.send_message(title,content_str)
 
 if __name__ == "__main__":
     # test_data_integrity()

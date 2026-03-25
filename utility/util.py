@@ -3,8 +3,29 @@
 '''
 
 import logging
+import config
 logging.basicConfig(filename='../program_trading_log.log', level=logging.INFO)
 logger = logging.getLogger()
+
+def format_dd_message(title:str,content:str):
+    message_title = f"### {title}"
+    message_body = f"```\n{content}\n```"
+    message = f"{message_title}\n\n{message_body}"
+    return message
+
+
+def format_telegram_message(title:str,content:str):
+    message = f"<b>{title}</b>\n<pre>{content}</pre>"
+    return message
+def format_message(title:str,content:str):
+    if(config.USE_DD=="1"):
+        return format_dd_message(title,content)
+    else:
+        return format_telegram_message(title,content)
+
+
+
+
 def tonghuashun_format(stock_list:list)->list:
     result = list()
     for stock in stock_list:

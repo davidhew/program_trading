@@ -8,8 +8,8 @@ import pandas as pd
 import config
 from us_get_stock_data import us_get_all_stock_data as usa_gd
 from us_get_company_info import us_get_company_info
-from utility import telegram_messenger
 from utility.monitor_strategy import monitor_strategy
+from utility import im_messenger
 
 logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
 logger = logging.getLogger()
@@ -63,7 +63,7 @@ def compute(date_str:str =None):
         # 带上板块信息
         result_inner_filtered = result_inner[['ts_code', 'sector']]
         content_str = result_inner_filtered.to_string(index=False, justify='center')
-        message = f"<b>股价在200均线以下股票-{date_str}</b>\n<pre>{content_str}</pre>"
-        telegram_messenger.send_message(message,"PRICE_BELOW_MA200")
+        title = f"股价在200均线以下股票-{date_str}"
+        im_messenger.send_message(title,content_str)
     else:
         print("no price below MA200 stocks")

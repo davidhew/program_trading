@@ -9,7 +9,7 @@ from datetime import datetime
 from us_get_company_info import us_get_company_info
 from us_get_stock_data import us_get_all_stock_data as usa_gd
 from utility.monitor_strategy import monitor_strategy
-from utility import telegram_messenger
+from utility import im_messenger
 import config
 import logging
 logger = logging.getLogger(__name__) # 使用 __name__ 可以知道是哪个文件打印的日志
@@ -52,8 +52,9 @@ def compute(date_str:str=None):
     #带上板块信息
     result_inner_filtered = result_inner[['ts_code','sector']]
     content_str = result_inner_filtered.to_string(index=False, justify='center')
-    message = f"<b>历史新高的股票-{date_str}</b>\n<pre>{content_str}</pre>"
-    telegram_messenger.send_message(message)
+    title = f"历史新高的股票-{date_str}"
+
+    im_messenger.send_message(title,content_str)
 
 
     counts_size = result_inner.groupby('sector').size().reset_index(name='counts')
@@ -63,9 +64,8 @@ def compute(date_str:str=None):
     count_size_filtered_2 = count_size_filtered[count_size_filtered['counts']>1]
 
     content_str=count_size_filtered_2.to_string(index=False, justify='center')
-    message = f"<b>历史新高股票板块情况-{date_str}</b>\n<pre>{content_str}</pre>"
-    print("sending message:"+message)
-    telegram_messenger.send_message(message)
+    title = f"历史新高股票板块情况-{date_str}"
+    im_messenger.send_message(title,content_str)
 
 
     df.to_csv(config.USA_STOCK_STRATEGY_RESULT_DIR+'one-year-highest-list-'+date_str+'.csv',index=False)

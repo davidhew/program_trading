@@ -16,7 +16,7 @@ logger = logging.getLogger()
 
 
 def send_message(title:str,content:str):
-    if(config.USE_DINGTALK=="1"):
+    if(config.USE_DINGTALK==1):
         message = util.format_dd_message(title,content)
         return dingtalk_messenger.send_message(message)
     else:

@@ -34,12 +34,12 @@ def print_hi(name):
     #us_get_income.batch_get()
     #us_get_cashflow.batch_get()
     #us_get_balancesheet.batch_get()
-    date_str = '20260318'
+    date_str = '20260323'
     #usa_save_daily_data.daily_update()
-    #us_momentum.compute(date_str)
+    us_momentum.compute(date_str)
     #us_momentum.compute(date_str, 3)
     #us_one_year_highest.compute(date_str)
-    us_mc_lessthancash.compute()
+    #us_mc_lessthancash.compute()
 
 
     #print(type(fileds_to_use))

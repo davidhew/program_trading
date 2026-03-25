@@ -40,7 +40,7 @@ def scheduled_us_stock_job():
     start_date = today - timedelta(1)
     date_str = start_date.strftime('%Y%m%d')
 
-    usa_save_daily_data.daily_update()
+    #usa_save_daily_data.daily_update()
     us_momentum.compute(date_str)
     us_momentum.compute(date_str,3)
     us_one_year_highest.compute(date_str)

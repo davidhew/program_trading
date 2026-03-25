@@ -83,7 +83,7 @@ SEND_TELEGRAM=os.getenv('SEND_TELEGRAM')
 JIANFANG_POOL_EXPIRE_DAYS=31
 
 #是否适用钉钉发送信息(默认钉钉，还有可能是telegram)
-USE_DD=1
+USE_DINGTALK=1
 
 #日志文件路径
 LOG_FILE_PATH=os.getenv("LOG_FILE_PATH")

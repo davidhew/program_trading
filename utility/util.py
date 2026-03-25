@@ -18,7 +18,7 @@ def format_telegram_message(title:str,content:str):
     message = f"<b>{title}</b>\n<pre>{content}</pre>"
     return message
 def format_message(title:str,content:str):
-    if(config.USE_DD=="1"):
+    if(config.USE_DINGTALK=="1"):
         return format_dd_message(title,content)
     else:
         return format_telegram_message(title,content)

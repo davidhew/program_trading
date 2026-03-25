@@ -5,7 +5,7 @@
 import traceback
 import functools
 import config
-from . import telegram_messenger
+from utility import im_messenger
 from datetime import datetime
 
 import logging
@@ -34,7 +34,7 @@ def monitor_strategy(func):
             logger.error(f"函数 {func.__name__} 发生崩溃:\n{error_msg}")
 
             # 3. 发送钉钉告警
-            telegram_messenger.send_message(summary)
+            im_messenger.send_message("运行异常",summary)
 
             # 4. 根据需求：你可以选择继续抛出异常(raise)或者返回None
             # 在策略机器人中，通常建议抛出，由外部调度器处理

@@ -143,6 +143,7 @@ def save_daily_data(df):
         print('save_us_daily_data for stock:%s success!', ts_codes_array[0])
 
 
+
 if __name__ == "__main__":
     pro = ts.pro_api()
 

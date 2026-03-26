@@ -47,3 +47,6 @@ def get_stock_data_batches(batch_size=10):
         # 处理最后一组不满 batch_size 的数据
     if current_batch:
         yield current_batch
+
+def get_stock_df(stock_code: str):
+    return pd.read_csv(config.USA_STOCK_DATA_DIR + stock_code)

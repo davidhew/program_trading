@@ -90,7 +90,7 @@ for day in china_stock_workdays:
     day.at("16:05").do(scheduled_china_stock_job)
 
 for day in us_stock_workdays:
-    day.at("10:11").do(scheduled_us_stock_job)
+    day.at("10:16").do(scheduled_us_stock_job)
 
 #每个礼拜六，获取美股公司的最新市值
 schedule.every().saturday.at("08:19").do(scheduled_us_stock_refresh_weekly)

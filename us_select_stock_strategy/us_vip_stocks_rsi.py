@@ -62,7 +62,7 @@ def compute(date_str:str =None):
                 stock_df['RSI6'] = ta.rsi(stock_df['close'], length=6)
                 stock_df['RSI14'] = ta.rsi(stock_df['close'], length=14)
                 stock_df['RSI24'] = ta.rsi(stock_df['close'], length=24)
-                print("save file:"+config.USA_STOCK_DATA_DIR + ts_code)
+                logger.info("save file:"+config.USA_STOCK_DATA_DIR + ts_code)
                 stock_df.to_csv(config.USA_STOCK_DATA_DIR + ts_code, index=True)
                 
                 if(stock_df.iloc[row_idx]['RSI6']<=get_vip_stock_rsi_low_limit(ts_code)):

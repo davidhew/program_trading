@@ -59,9 +59,9 @@ def compute(date_str:str =None):
                     continue
                 row_idx = matched_indices[0]
 
-                stock_df['RSI6'] = ta.rsi(stock_df['close'], length=6)
-                stock_df['RSI14'] = ta.rsi(stock_df['close'], length=14)
-                stock_df['RSI24'] = ta.rsi(stock_df['close'], length=24)
+                stock_df['RSI6'] = ta.rsi(stock_df['close'], length=6).round(1)
+                stock_df['RSI14'] = ta.rsi(stock_df['close'], length=14).round(1)
+                stock_df['RSI24'] = ta.rsi(stock_df['close'], length=24).round(1)
                 logger.info("save file:"+config.USA_STOCK_DATA_DIR + ts_code)
                 stock_df.to_csv(config.USA_STOCK_DATA_DIR + ts_code, index=True)
                 

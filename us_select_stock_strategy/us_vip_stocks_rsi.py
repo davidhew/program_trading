@@ -67,7 +67,7 @@ def compute(date_str:str =None):
                 if(stock_df.iloc[row_idx]['RSI6']<=get_vip_stock_rsi_low_limit(ts_code)):
                     message_content+=ts_code+":进入超卖区间，考虑买入正股或者卖PUT！\n"
 
-                if (stock_df.iloc[row_idx]['RSI6'] >= get_vip_stock_rsi_low_limit(ts_code)):
+                if (stock_df.iloc[row_idx]['RSI6'] >= get_vip_stock_rsi_upper_limit(ts_code)):
                     message_content+=ts_code+":进入超买区间，考虑抛售正股或者卖Covered Call！\n"
 
 

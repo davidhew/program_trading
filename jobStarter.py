@@ -41,10 +41,10 @@ def scheduled_us_stock_job():
     start_date = today - timedelta(1)
     date_str = start_date.strftime('%Y%m%d')
 
-    usa_save_daily_data.daily_update()
-    us_momentum.compute(date_str)
-    us_momentum.compute(date_str,3)
-    us_one_year_highest.compute(date_str)
+    #usa_save_daily_data.daily_update()
+    #us_momentum.compute(date_str)
+    #us_momentum.compute(date_str,3)
+    #us_one_year_highest.compute(date_str)
     us_vip_stocks_rsi.compute(date_str)
 
 def scheduled_us_stock_finance_refresh_job():
@@ -90,7 +90,7 @@ for day in china_stock_workdays:
     day.at("16:05").do(scheduled_china_stock_job)
 
 for day in us_stock_workdays:
-    day.at("08:34").do(scheduled_us_stock_job)
+    day.at("09:57").do(scheduled_us_stock_job)
 
 #每个礼拜六，获取美股公司的最新市值
 schedule.every().saturday.at("08:19").do(scheduled_us_stock_refresh_weekly)

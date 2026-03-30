@@ -29,6 +29,7 @@ from us_get_finance_data import us_get_cashflow
 from us_get_finance_data import us_get_balancesheet
 from us_select_stock_strategy import us_bottoming_out
 from us_select_stock_strategy import us_price_below_MA200
+from us_macro_indexs import get_net_liquidity
 setup_logging()
 
 def print_hi(name):
@@ -41,7 +42,8 @@ def print_hi(name):
     #us_momentum.compute(date_str, 3)
     #us_one_year_highest.compute(date_str)
     #us_mc_lessthancash.compute()
-    us_vip_stocks_rsi.compute()
+    #us_vip_stocks_rsi.compute()
+    get_net_liquidity.get_data()
 
 
     #print(type(fileds_to_use))

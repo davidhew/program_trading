@@ -21,7 +21,7 @@ RUN pip install --no-cache-dir \
     -r requirements-mac-mini-docker.txt
 
 # 6. 复制当前目录下的所有代码到镜像中
-COPY . .
+COPY ./streamlit_code/dashboard/ .
 
 # 4. 暴露 Streamlit 默认端口
 EXPOSE 8501

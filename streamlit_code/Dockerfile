@@ -1,0 +1,30 @@
+# 1. 指定基础镜像
+FROM python:3.12-slim
+
+# 2. 设置工作目录
+WORKDIR /app
+
+# 3. 设置时区环境变量（构建时也会生效）
+ENV TZ=Asia/Shanghai
+
+# 1. 先把离线包和依赖清单拷进去
+COPY ./packages_mac_m1 /app/packages
+# 4. 先复制依赖文件（利用 Docker 缓存机制：只要 requirements 不变，就不会重新安装）
+COPY requirements-mac-mini-docker.txt .
+
+# 5. 执行安装：使用国内源并信任，--no-cache-dir 缩小镜像体积
+# 这种写法会优先寻找本地目录，找不到再去联网
+RUN pip install --no-cache-dir \
+    --no-index \
+    --only-binary=:all: \
+    --find-links=/app/packages \
+    -r requirements-mac-mini-docker.txt
+
+# 6. 复制当前目录下的所有代码到镜像中
+COPY . .
+
+# 4. 暴露 Streamlit 默认端口
+EXPOSE 8501
+
+# 5. 启动命令（关键：必须指定 address 为 0.0.0.0 才能在容器外访问）
+CMD ["streamlit", "run", "app.py", "--server.address=0.0.0.0", "--server.port=8501"]

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="e558b04b-4ca7-4c9b-9701-a713df403059" name="openwrt">
+        <fileTransfer accessType="SFTP" host="100.114.176.16" port="22" sshConfigId="070032a0-32ad-4fd7-b6c8-470ad22f297f" sshConfig="root@100.114.176.16:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

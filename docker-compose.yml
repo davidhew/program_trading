@@ -24,3 +24,21 @@ services:
     working_dir: /app
     # 使用变量替换，格式为 ${变量名:-默认值}
     command: python jobStarter.py
+
+  # 2. 图形化展示程序
+  dashboard:
+    build:
+      context: .
+      dockerfile: streamlit_code/Dockerfile
+    container_name: stock_dashboard
+    ports:
+      - "8501:8501"
+    environment:
+      - TZ=Asia/Shanghai
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+      - STREAMLIT_SERVER_CORS_CHECK=false  # 方便 iPad/MacPro 远程访问
+    volumes:
+      - /Users/weihe/stock/stock_datas:/app/stock_datas:ro  # ro表示只读挂载，保护数据安全
+    depends_on:
+      - quant_bot
+    restart: always

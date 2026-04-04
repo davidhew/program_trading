@@ -1,0 +1,425 @@
+
+INFO:us_get_stock_data.us_get_common_stock_list:us common stock list created:2.545613425925926 days before, do not need refresh
+ERROR:utility.monitor_strategy:函数 do_get_company_info 发生崩溃:
+Traceback (most recent call last):
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/connection.py", line 796, in connect
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/connection.py", line 975, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+               ^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/util/ssl_.py", line 483, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/util/ssl_.py", line 527, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/ssl.py", line 1041, in _create
+    self.do_handshake()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/ssl.py", line 1319, in do_handshake
+    self._sslobj.do_handshake()
+ConnectionResetError: [Errno 54] Connection reset by peer
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/requests/adapters.py", line 644, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/util/retry.py", line 490, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/util/util.py", line 38, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/connection.py", line 796, in connect
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/connection.py", line 975, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+               ^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/util/ssl_.py", line 483, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/util/ssl_.py", line 527, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/ssl.py", line 1041, in _create
+    self.do_handshake()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/ssl.py", line 1319, in do_handshake
+    self._sslobj.do_handshake()
+urllib3.exceptions.ProtocolError: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/hewei/PycharmProjects/program_trading/utility/monitor_strategy.py", line 24, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/get_company_info/us_get_company_info.py", line 78, in do_get_company_info
+    response = requests.get(url,headers=headers)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/requests/adapters.py", line 659, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+
+INFO:us_get_stock_data.us_get_common_stock_list:us common stock list created:2.562094907407407 days before, do not need refresh
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=EJH
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OMH
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=VS
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=BBB
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=GOVX
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=AVBH
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=FTXR
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=DSYWW
+INFO:us_get_stock_data.us_get_common_stock_list:us common stock list created:2.569710648148148 days before, do not need refresh
+INFO:us_get_stock_data.us_get_common_stock_list:us common stock list created:2.570173611111111 days before, do not need refresh
+INFO:us_get_stock_data.us_get_common_stock_list:us common stock list created:2.5714699074074074 days before, do not need refresh
+INFO:us_get_stock_data.us_get_common_stock_list:us common stock list created:2.5717592592592595 days before, do not need refresh
+INFO:us_get_stock_data.us_get_common_stock_list:us common stock list created:2.5735763888888887 days before, do not need refresh
+INFO:us_get_stock_data.us_get_common_stock_list:us common stock list created:2.5745717592592596 days before, do not need refresh
+INFO:us_get_stock_data.us_get_common_stock_list:us common stock list created:2.5751157407407406 days before, do not need refresh
+INFO:us_get_stock_data.us_get_common_stock_list:us common stock list created:2.5767939814814818 days before, do not need refresh
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=COPP
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=ENGNW
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=UP
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=AMODW
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=BANF
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=ASLE
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=ASTH
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=ALL.PRJ
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=BFAM
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=CCXI
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=BGS
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=AAUC
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=ATMU
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)'))': /stable/profile?symbol=UOKA
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=DIN
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=HIPO
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=HRI
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=TAX
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=SAZ
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=PFX
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=SPRC
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=LTH
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=MBBC
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=MS.PRI
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=LCDS
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=NOV
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=OCFC
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=SHMD
+WARNING:urllib3.connectionpool:Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=SHMD
+WARNING:urllib3.connectionpool:Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=SHMD
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=SHMD
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=SHMD
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OGI
+WARNING:urllib3.connectionpool:Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OGI
+WARNING:urllib3.connectionpool:Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OGI
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OGI
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OGI
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OGS
+WARNING:urllib3.connectionpool:Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OGS
+WARNING:urllib3.connectionpool:Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OGS
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OGS
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OGS
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OI
+WARNING:urllib3.connectionpool:Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OI
+WARNING:urllib3.connectionpool:Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OI
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OI
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OI
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OII
+WARNING:urllib3.connectionpool:Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OII
+WARNING:urllib3.connectionpool:Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OII
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OII
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OII
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OKUR
+WARNING:urllib3.connectionpool:Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OKUR
+WARNING:urllib3.connectionpool:Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OKUR
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OKUR
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OKUR
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OLED
+WARNING:urllib3.connectionpool:Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OLED
+WARNING:urllib3.connectionpool:Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OLED
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OLED
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=OLED
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=SHIM
+WARNING:urllib3.connectionpool:Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=SHIM
+WARNING:urllib3.connectionpool:Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=SHIM
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=SHIM
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=SHIM
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=SHFSW
+WARNING:urllib3.connectionpool:Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=SHFSW
+WARNING:urllib3.connectionpool:Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=SHFSW
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=SHFSW
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=SF.PRB
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=SBU
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=SBEV
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=SB.PRC
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=PDLB
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=RWT.PRA
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=RUSC
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=RSI
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=SANA
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=AUMI
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=ADAML
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=STRD
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=TBCH
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=REED
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=UG
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=QXO.PRB
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=PAGP
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=PRH
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=BDC
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=EQBK
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=PCT
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=NWAX
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=CR
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=NEE.PRU
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=KOID
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=GEW
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=IGOV
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=XWIN
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=CLDT.PRA
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=XBPEW
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/profile?symbol=BRR
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=IEUS
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("SOCKSHTTPSConnectionPool(host='financialmodelingprep.com', port=443): Read timed out. (read timeout=10)")': /stable/profile?symbol=NOAH
+INFO:us_get_stock_data.us_get_common_stock_list:us common stock list created:5.997256944444445 days before, do not need refresh
+ERROR:utility.monitor_strategy:函数 do_get_company_info 发生崩溃:
+Traceback (most recent call last):
+  File "/Users/hewei/PycharmProjects/program_trading/utility/monitor_strategy.py", line 24, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+TypeError: do_get_company_info() missing 1 required positional argument: 'date_str'
+
+INFO:us_get_stock_data.us_get_common_stock_list:us common stock list created:5.998043981481481 days before, do not need refresh
+INFO:us_get_stock_data.us_get_common_stock_list:us common stock list created:6.0031481481481475 days before, do not need refresh
+INFO:us_get_stock_data.us_get_common_stock_list:us common stock list created:6.009618055555555 days before, do not need refresh
+INFO:us_get_stock_data.us_get_common_stock_list:us common stock list created:6.0109606481481475 days before, do not need refresh
+INFO:us_get_stock_data.us_get_common_stock_list:us common stock list created:6.012569444444445 days before, do not need refresh
+INFO:us_get_stock_data.us_get_common_stock_list:us common stock list created:6.0130787037037035 days before, do not need refresh
+INFO:us_get_stock_data.us_get_common_stock_list:us common stock list created:6.0142592592592585 days before, do not need refresh
+INFO:us_get_stock_data.us_get_common_stock_list:us common stock list created:6.0178125 days before, do not need refresh
+INFO:us_get_stock_data.us_get_common_stock_list:us common stock list created:6.019953703703703 days before, do not need refresh
+INFO:us_get_stock_data.us_get_common_stock_list:us common stock list created:6.0211342592592585 days before, do not need refresh
+INFO:us_get_stock_data.us_get_common_stock_list:us common stock list created:6.024490740740741 days before, do not need refresh
+INFO:us_get_stock_data.us_get_common_stock_list:us common stock list created:6.025601851851852 days before, do not need refresh
+INFO:us_get_stock_data.us_get_common_stock_list:us common stock list created:6.036701388888889 days before, do not need refresh
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)'))': /stable/profile?symbol=AKAN
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)'))': /stable/profile?symbol=SMXWW
+WARNING:urllib3.connectionpool:Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)'))': /stable/profile?symbol=SMXWW
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)'))': /stable/profile?symbol=PAVS
+INFO:us_get_stock_data.us_get_common_stock_list:us common stock list created:6.052453703703703 days before, do not need refresh
+ERROR:utility.monitor_strategy:函数 daily_update 发生崩溃:
+Traceback (most recent call last):
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/contrib/socks.py", line 110, in _new_conn
+    conn = socks.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/socks.py", line 180, in create_connection
+    for r in socket.getaddrinfo(proxy_addr, proxy_port, 0, socket.SOCK_STREAM):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.12_2/Frameworks/Python.framework/Versions/3.12/lib/python3.12/socket.py", line 978, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/connection.py", line 759, in connect
+    self.sock = sock = self._new_conn()
+                       ^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/contrib/socks.py", line 150, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: SOCKSHTTPSConnection(host='paper-api.alpaca.markets', port=443): Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/requests/adapters.py", line 644, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/util/retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: SOCKSHTTPSConnectionPool(host='paper-api.alpaca.markets', port=443): Max retries exceeded with url: /v2/assets?status=active (Caused by NewConnectionError("SOCKSHTTPSConnection(host='paper-api.alpaca.markets', port=443): Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/hewei/PycharmProjects/program_trading/utility/monitor_strategy.py", line 24, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/us_get_stock_data/us_save_daily_data.py", line 66, in daily_update
+    common_stock_df = us_get_common.do_get_stock_list()
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/us_get_stock_data/us_get_common_stock_list.py", line 62, in do_get_stock_list
+    response = requests.get(url, headers=HEADERS)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/requests/adapters.py", line 677, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: SOCKSHTTPSConnectionPool(host='paper-api.alpaca.markets', port=443): Max retries exceeded with url: /v2/assets?status=active (Caused by NewConnectionError("SOCKSHTTPSConnection(host='paper-api.alpaca.markets', port=443): Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known"))
+
+2026-03-04 11:16:45,960 - utility.monitor_strategy - ERROR - 函数 daily_update 发生崩溃:
+Traceback (most recent call last):
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/contrib/socks.py", line 110, in _new_conn
+    conn = socks.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/socks.py", line 180, in create_connection
+    for r in socket.getaddrinfo(proxy_addr, proxy_port, 0, socket.SOCK_STREAM):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.12_2/Frameworks/Python.framework/Versions/3.12/lib/python3.12/socket.py", line 978, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/connection.py", line 759, in connect
+    self.sock = sock = self._new_conn()
+                       ^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/contrib/socks.py", line 150, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: SOCKSHTTPSConnection(host='paper-api.alpaca.markets', port=443): Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/requests/adapters.py", line 644, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/urllib3/util/retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: SOCKSHTTPSConnectionPool(host='paper-api.alpaca.markets', port=443): Max retries exceeded with url: /v2/assets?status=active (Caused by NewConnectionError("SOCKSHTTPSConnection(host='paper-api.alpaca.markets', port=443): Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/hewei/PycharmProjects/program_trading/utility/monitor_strategy.py", line 24, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/us_get_stock_data/us_save_daily_data.py", line 66, in daily_update
+    common_stock_df = us_get_common.do_get_stock_list()
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/us_get_stock_data/us_get_common_stock_list.py", line 62, in do_get_stock_list
+    response = requests.get(url, headers=HEADERS)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hewei/PycharmProjects/program_trading/.venv/lib/python3.12/site-packages/requests/adapters.py", line 677, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: SOCKSHTTPSConnectionPool(host='paper-api.alpaca.markets', port=443): Max retries exceeded with url: /v2/assets?status=active (Caused by NewConnectionError("SOCKSHTTPSConnection(host='paper-api.alpaca.markets', port=443): Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known"))
+
+ERROR:root:do_get_income_statment 失败，ts_code:AAPL，状态码: 200
+ERROR:root:do_get_income_statment 失败，ts_code:AAPL，状态码: 200
+ERROR:root:do_get_income_statment 失败，ts_code:AAPL，状态码: 200
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/income-statement?symbol=AAPL&limit=1000
+WARNING:urllib3.connectionpool:Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/income-statement?symbol=AAPL&limit=1000
+WARNING:urllib3.connectionpool:Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/income-statement?symbol=AAPL&limit=1000
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/income-statement?symbol=AAPL&limit=1000
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/income-statement?symbol=AAPL&limit=1000
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/income-statement?symbol=AAPL&limit=1000&period=quarter
+WARNING:urllib3.connectionpool:Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/income-statement?symbol=AAPL&limit=1000&period=quarter
+WARNING:urllib3.connectionpool:Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/income-statement?symbol=AAPL&limit=1000&period=quarter
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/income-statement?symbol=AAPL&limit=1000&period=quarter
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/income-statement?symbol=AAPL&limit=1000&period=quarter
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/income-statement?symbol=AAPL&limit=1000
+WARNING:urllib3.connectionpool:Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/income-statement?symbol=AAPL&limit=1000
+WARNING:urllib3.connectionpool:Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/income-statement?symbol=AAPL&limit=1000
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/income-statement?symbol=AAPL&limit=1000
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/income-statement?symbol=AAPL&limit=1000
+WARNING:urllib3.connectionpool:Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/income-statement?symbol=AAPL&limit=1000&period=quarter
+WARNING:urllib3.connectionpool:Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/income-statement?symbol=AAPL&limit=1000&period=quarter
+WARNING:urllib3.connectionpool:Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/income-statement?symbol=AAPL&limit=1000&period=quarter
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/income-statement?symbol=AAPL&limit=1000&period=quarter
+WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(54, 'Connection reset by peer')': /stable/income-statement?symbol=AAPL&limit=1000&period=quarter
+ERROR:root:do_get_income_statment 失败，ts_code:MSSWF，获取到的内容为空
+ERROR:root:do_get_income_statment 失败，ts_code:MSSWF，状态码: 200
+ERROR:root:do_get_income_statment 失败，ts_code:MSSWF，获取到的内容为空
+ERROR:root:do_get_income_statment 失败，ts_code:MSSWF，状态码: 200

@@ -2,9 +2,11 @@
 
 # 1. 拉取最新代码
 git pull
+# 强制覆盖本地修改，确保代码与仓库一致
+git reset --hard origin/main
 
 # 2. 停止并移除旧容器（确保配置更新生效）
-docker-compose stop
+docker-compose down
 
 # 3. 参数解析：判断是否为 test 模式
 # 使用 $1 获取脚本后的第一个参数
@@ -19,8 +21,13 @@ else
 
     # 4. 构建并启动
     # --pull=false 确保使用你本地 Mac Mini 上的离线包，不尝试从远程仓库拉取基础镜像
-    docker-compose build --pull=false
+    docker-compose build --pull=false dashboard quant_bot
+
+    # 启动所有服务
     docker-compose up -d
+
+    # 打印一下当前容器状态，确认是否两个都在跑
+    docker ps
 
     # 5. 查看日志
     docker logs -f stock_analyzer

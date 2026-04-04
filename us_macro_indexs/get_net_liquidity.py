@@ -68,12 +68,12 @@ from fredapi import Fred
 import pandas as pd
 import config
 import logging
-import certifi
-from urllib.request import urlopen
+import ssl
+
 
 from utility import secrets_config as secrets_config
-import os
-os.environ['SSL_CERT_FILE'] = certifi.where()
+
+ssl._create_default_https_context = ssl._create_unverified_context
 
 
 logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)

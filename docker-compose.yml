@@ -1,7 +1,7 @@
-version: '3.8' # 必须添加这一行，声明版本 这个version
-
 services:
   quant_bot:
+    networks:
+      - stock_net
     build:
       context: .
       dockerfile: Dockerfile
@@ -29,6 +29,8 @@ services:
 
   # 2. 图形化展示程序
   dashboard:
+    networks:
+      - stock_net
     build:
       context: .
       dockerfile: streamlit_code/Dockerfile
@@ -44,3 +46,9 @@ services:
     depends_on:
       - quant_bot
     restart: always
+
+networks:
+  stock_net:
+    driver: bridge
+    driver_opts:
+      com.docker.network.driver.mtu: 1400

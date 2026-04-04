@@ -5,8 +5,7 @@ echo "--- 1. 清理本地冲突并拉取代码 ---"
 rm -f *.log
 
 # 强行重置本地分支到远程最新状态
-git fetch --all
-git reset --hard origin/main
+git pull
 
 # 2. 停止并移除旧容器（确保配置更新生效）
 docker-compose down

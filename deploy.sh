@@ -1,8 +1,11 @@
 #!/bin/sh
 
-# 1. 拉取最新代码
-git pull
-# 强制覆盖本地修改，确保代码与仓库一致
+echo "--- 1. 清理本地冲突并拉取代码 ---"
+# 强行删除本地产生的 .log 文件，避免 Git 冲突
+rm -f *.log
+
+# 强行重置本地分支到远程最新状态
+git fetch --all
 git reset --hard origin/main
 
 # 2. 停止并移除旧容器（确保配置更新生效）

@@ -1,3 +1,5 @@
+version: '3.8' # 必须添加这一行，声明版本 这个version
+
 services:
   quant_bot:
     build:

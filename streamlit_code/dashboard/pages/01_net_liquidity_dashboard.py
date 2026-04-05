@@ -12,7 +12,7 @@ file_name="net_liquidity.csv"
 # 设置页面配置
 st.set_page_config(page_title="美联储净流动性监控", layout="wide")
 
-
+@st.cache_data
 def load_data():
     # 读取 CSV 文件
     df = pd.read_csv(config.USA_STOCK_MACRO_DATA_DIR + file_name)
@@ -30,7 +30,7 @@ def load_data():
     return df
 
 
-def main():
+def run_dashboard():
     st.title("📈 美联储净流动性指数 (Net Liquidity Indicator)")
     st.markdown("""
     该指标反映了美联储资产负债表扣除 TGA 账户和 逆回购(ON RRP) 后的实际市场流动性。
@@ -84,6 +84,13 @@ def main():
             st.dataframe(df_recent.sort_values('date', ascending=False), use_container_width=True)
 
     except FileNotFoundError:
+        print("找不到 net_liquidity.csv 文件，请确保文件与脚本在同一目录下。")
         logger.error("找不到 net_liquidity.csv 文件，请确保文件与脚本在同一目录下。")
     except Exception as e:
+        print(f"发生错误: {e}")
         logger.error(f"发生错误: {e}")
+
+
+# 最佳实践：确保脚本被直接运行时才执行
+if __name__ == "__main__":
+    run_dashboard()

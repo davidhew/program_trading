@@ -92,6 +92,7 @@ toml==0.10.2
 narwhals==2.18.1
 pyarrow==23.0.1
 watchdog==6.0.0
+plotly==6.6.0
 
 
 

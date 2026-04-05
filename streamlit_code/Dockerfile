@@ -24,6 +24,7 @@ RUN pip install --no-cache-dir \
 #在docker-compose.yml中，为了复用同一份packages里的内容，dashboard 容器把context设定为了顶层目录，所以这里要根据
 #顶层目录的位置，来指定具体的dashboard里的需要拷贝到容器里的相关文件
 COPY ./streamlit_code/dashboard/ .
+COPY config.py .
 
 # 4. 暴露 Streamlit 默认端口
 EXPOSE 8501

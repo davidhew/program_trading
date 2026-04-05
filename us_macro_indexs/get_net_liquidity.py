@@ -68,29 +68,10 @@ from fredapi import Fred
 import pandas as pd
 import config
 import logging
-import ssl
 
 
 
 from utility import secrets_config as secrets_config
-
-# 1. 强制使用 TLS 1.2（TLS 1.3 的握手包包含大量扩展信息，体积巨大）
-# TLS 1.2 足够安全，且兼容性极强
-context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
-context.minimum_version = ssl.TLSVersion.TLSv1_2
-context.maximum_version = ssl.TLSVersion.TLSv1_2
-
-# 2. 核心操作：大幅精简加密套件（Ciphers）
-# 我们只告诉服务器我们支持这 2 个最通用的算法，这样 ClientHello 长度会瞬间降到 400 字节左右
-context.set_ciphers('ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256')
-
-# 3. 禁用证书验证（为了排除证书链缺失的干扰，先通了再说）
-context.check_hostname = False
-context.verify_mode = ssl.CERT_NONE
-
-# 4. 覆盖全局上下文，确保 fredapi 底层的 urlopen 使用这个配置
-ssl._create_default_https_context = lambda: context
-
 
 logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
 logger = logging.getLogger()

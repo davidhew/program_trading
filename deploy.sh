@@ -24,7 +24,7 @@ else
 
     # 4. 构建并启动
     # --pull=false 确保使用你本地 Mac Mini 上的离线包，不尝试从远程仓库拉取基础镜像
-    docker-compose build --pull=false dashboard quant_bot
+    APP_ENV=prod docker-compose build --pull=false dashboard quant_bot
 
     # 启动所有服务
     docker-compose up -d

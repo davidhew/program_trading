@@ -27,7 +27,7 @@ else
     docker-compose build --pull=false dashboard quant_bot
 
     # 启动所有服务
-    APP_ENV=prod docker-compose up -d
+    docker-compose up -d
 
     # 打印一下当前容器状态，确认是否两个都在跑
     docker ps

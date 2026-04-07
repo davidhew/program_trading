@@ -25,7 +25,7 @@ RUN pip install --no-cache-dir \
 #顶层目录的位置，来指定具体的dashboard里的需要拷贝到容器里的相关文件
 COPY ./streamlit_code/dashboard/ .
 COPY config.py .
-COPY ./utility/ .
+COPY ./utility/ ./utility/
 
 # 4. 暴露 Streamlit 默认端口
 EXPOSE 8501

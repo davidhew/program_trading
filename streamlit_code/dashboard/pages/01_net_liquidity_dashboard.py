@@ -99,17 +99,6 @@ def run_dashboard():
 
         st.plotly_chart(fig, use_container_width=True)
 
-        # 优化图表样式
-        fig.update_traces(line_color='#007BFF', line_width=2)
-        fig.update_layout(
-            hovermode="x unified",
-            xaxis=dict(showgrid=True, gridcolor='LightGray'),
-            yaxis=dict(showgrid=True, gridcolor='LightGray'),
-        )
-
-        # 在 Streamlit 中显示图表
-        st.plotly_chart(fig, use_container_width=True)
-
         # --- 可选：显示原始数据表格 ---
         if st.checkbox("显示最近数据明细"):
             st.dataframe(df_recent.sort_values('date', ascending=False), use_container_width=True)

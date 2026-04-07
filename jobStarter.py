@@ -18,6 +18,7 @@ from select_stock_strategy import jianfang_final as jf
 from us_select_stock_strategy import us_momentum as us_momentum
 from us_select_stock_strategy import us_price_below_MA200
 from us_select_stock_strategy import us_vip_stocks_rsi as us_vip_stocks_rsi
+from us_macro_indexs import get_net_liquidity
 
 from us_select_stock_strategy import us_one_year_highest as us_one_year_highest
 from utility.logger_config import setup_logging
@@ -46,6 +47,8 @@ def scheduled_us_stock_job():
     us_momentum.compute(date_str,3)
     us_one_year_highest.compute(date_str)
     us_vip_stocks_rsi.compute(date_str)
+    #宏观数据，美联储的净流动性
+    get_net_liquidity.get_data()
 
 def scheduled_us_stock_finance_refresh_job():
     us_get_income.batch_get()

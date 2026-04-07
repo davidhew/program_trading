@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from pathlib import Path
 
 # 1. 确定当前环境（通过系统变量 APP_ENV 确定，默认 dev）
+print("The app_env is:"+os.getenv("APP_ENV"))
 env = os.getenv("APP_ENV", "dev")
 
 

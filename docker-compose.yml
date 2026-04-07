@@ -34,11 +34,13 @@ services:
     ports:
       - "8501:8501"
     environment:
+      - APP_ENV=${APP_ENV:-prod}
       - TZ=Asia/Shanghai
       - STREAMLIT_SERVER_ADDRESS=0.0.0.0
       - STREAMLIT_SERVER_CORS_CHECK=false  # 方便 iPad/MacPro 远程访问
     volumes:
       - /Users/weihe/stock/stock_datas:/app/stock_datas:ro  # ro表示只读挂载，保护数据安全
+      - /Users/weihe/stock/secret_config:/app/secret_config:ro #敏感信息配置文件映射
     depends_on:
       - quant_bot
     restart: always

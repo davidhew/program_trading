@@ -4,9 +4,12 @@ import plotly.express as px
 import config as config
 from datetime import datetime, timedelta
 import logging
+from utility.monitor_strategy import monitor_strategy
+
 
 logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
 logger = logging.getLogger()
+
 file_name="net_liquidity.csv"
 
 # 设置页面配置
@@ -29,7 +32,7 @@ def load_data():
 
     return df
 
-
+@monitor_strategy
 def run_dashboard():
     st.title("📈 美联储净流动性指数 (Net Liquidity Indicator)")
     st.markdown("""

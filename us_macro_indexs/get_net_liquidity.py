@@ -84,7 +84,7 @@ def get_data():
 
     # 1. 获取三项原始数据
     fed_assets = fred.get_series('WALCL')  # 单位：百万美元 (需除以1000转为十亿)
-    tga = fred.get_series('WDTGAL')  # 单位：十亿美元
+    tga = fred.get_series('WDTGAL')  # 单位：单位百万美元
     on_rrp = fred.get_series('RRPONTSYD')  # 单位：十亿美元
 
     # 2. 统一单位并合并成 DataFrame

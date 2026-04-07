@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import config as config
-from datetime import datetime, timedelta
 import logging
 from utility.monitor_strategy import monitor_strategy
 
@@ -61,15 +60,44 @@ def run_dashboard():
         col2.metric("统计开始日期", three_years_ago.strftime('%Y-%m-%d'))
         col3.metric("最后更新日期", latest_date.strftime('%Y-%m-%d'))
 
-        # --- 使用 Plotly 绘制交互式折线图 ---
+        # --- 1. 确保单位统一 (如果加载数据时没处理，在这里处理) ---
+
+
+        # --- 2. 使用 Plotly 绘制多线图 ---
         fig = px.line(
             df_recent,
             x='date',
-            y='net_liquidity',
-            title=f"最近三年流动性趋势 ({three_years_ago.year} - {latest_date.year})",
-            labels={'net_liquidity': '净流动性 (十亿美元)', 'date': '日期'},
+            # 将需要展示的所有列名放入列表
+            y=['net_liquidity', 'fed_assets', 'tga', 'on_rrp'],
+            title=f"最近三年美联储流动性构成趋势 ({three_years_ago.year} - {latest_date.year})",
+            labels={
+                'value': '金额 (十亿美元)',
+                'date': '日期',
+                'variable': '指标项目'
+            },
+            # 设置不同线条的颜色（可选，Plotly 有默认美观的配色）
+            color_discrete_map={
+                "net_liquidity": "#007BFF",  # 蓝色
+                "fed_assets": "#28A745",  # 绿色
+                "tga": "#DC3545",  # 红色
+                "on_rrp": "#FFC107"  # 橙色
+            },
             template="plotly_white"
         )
+
+        # --- 3. 优化交互体验 ---
+        fig.update_layout(
+            hovermode="x unified",  # 鼠标悬停时，同时显示四条线的所有数值
+            legend_title_text='指标',  # 图例标题
+            yaxis_title="十亿美元 (Billion $)"
+        )
+
+        # --- 4. (进阶) 让线条粗细有别 ---
+        # 让净流动性(net_liquidity)更显眼一点
+        fig.update_traces(patch={"line": {"width": 4}}, selector={"name": "net_liquidity"})
+        fig.update_traces(patch={"line": {"dash": "dot"}}, selector={"name": "tga"})  # TGA 用虚线
+
+        st.plotly_chart(fig, use_container_width=True)
 
         # 优化图表样式
         fig.update_traces(line_color='#007BFF', line_width=2)

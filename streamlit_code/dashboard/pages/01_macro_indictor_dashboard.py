@@ -76,7 +76,7 @@ def show_credit_spread():
         prev_val = df_recent['high_yield_spread'].iloc[-2]
         delta = current_val - prev_val
 
-        col1.metric("当前高收益债利差", f"${current_val:,.2f} B", f"{delta:+.2f} B (较上一期)")
+        col1.metric("当前高收益债利差", f"{current_val:,.2f}", f"{delta:+.2f} (较上一期)")
         col2.metric("统计开始日期", three_years_ago.strftime('%Y-%m-%d'))
         col3.metric("最后更新日期", latest_date.strftime('%Y-%m-%d'))
 

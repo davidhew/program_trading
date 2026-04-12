@@ -46,7 +46,7 @@ def compute():
                 cashflow_df = us_get_cashflow.get_cashflow_df(ts_code)
                 income_df = us_get_income.get_income(ts_code)
                 #确保两张表的时间周期是对齐的
-                if(cashflow_df.iloc[-1]['fiscalYear']==income_df.iloc[-1]['fiscalYear'] and cashflow_df.iloc[-1]['peroid']==income_df.iloc[-1]['peroid']):
+                if(cashflow_df.iloc[-1]['fiscalYear']==income_df.iloc[-1]['fiscalYear'] and cashflow_df.iloc[-1]['period']==income_df.iloc[-1]['period']):
                     if(cashflow_df.iloc[-1]['freeCashFlow']<=0):
                         continue
                     if(income_df.iloc[-1]['netIncome']<=0):

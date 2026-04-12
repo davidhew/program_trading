@@ -182,7 +182,7 @@ def batch_get():
 
 #年报和季报都获取，然后合并在一起
 def do_get_complete_income_statment(ts_code):
-    file_path=config.USA_STOCK_FINANCE_DATA_DIR+"/income/"+str(ts_code)
+    file_path=getFilePath(ts_code)
     empty_df = pd.DataFrame()
     if(finance_util.should_update_data(file_path,90)):
         df = do_get_income_statment(ts_code)
@@ -239,7 +239,7 @@ def should_update_data(ts_code:str):
     if("1"==config.FORCE_GET_CHINA_STOCK_FINANCE_DATA):
         return True
 
-    path = Path(config.USA_STOCK_FINANCE_DATA_DIR+"/income/"+ts_code)
+    path = getFilePath(ts_code)
     if (not path.exists() or not path.is_file()):
         return True
     mtime = path.stat().st_mtime
@@ -252,6 +252,18 @@ def should_update_data(ts_code:str):
     else:
         return False
     return True
+
+def getFilePath(ts_code:str):
+    return config.USA_STOCK_FINANCE_DATA_DIR + "/income/" + str(ts_code)
+
+def get_income(ts_code:str):
+    print("get_income:"+ts_code)
+    file_path = getFilePath(ts_code)
+    try:
+        return pd.read_csv(file_path)
+    except Exception as e:
+        print(f"{ts_code} get_income失败: {e}")
+        return pd.DataFrame()
 
 if __name__ == "__main__":
     do_get_complete_income_statment('MSSWF')

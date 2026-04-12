@@ -13,6 +13,7 @@ from select_stock_strategy import new_dragon_tiger_stock as new_dt_stock
 from us_select_stock_strategy import us_one_year_highest as usa_one_year_highest
 from us_select_stock_strategy import us_momentum as us_momentum
 from us_select_stock_strategy import us_vip_stocks_rsi as us_vip_stocks_rsi
+from us_select_stock_strategy import us_low_accrual_company as us_low_accrual_company
 from select_stock_strategy import low_level_start as ll_start
 from select_stock_strategy import cross_MA120
 from get_stock_data import get_dragon_tiger_ranklist as gdtr
@@ -44,7 +45,7 @@ def print_hi(name):
     #us_one_year_highest.compute(date_str)
     #us_mc_lessthancash.compute()
     #us_vip_stocks_rsi.compute()
-    get_credit_spread.get_data()
+    us_low_accrual_company.compute()
 
 
     #print(type(fileds_to_use))

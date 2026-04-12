@@ -38,7 +38,7 @@ def compute():
             else:
                 ts_code=stock.iloc[0]['ts_code']
 
-                market_cap = us_get_company_info.get_market_cap(stock)
+                market_cap = us_get_company_info.get_market_cap(ts_code)
                 # 市值必须大于等于10亿
                 if (market_cap < 10 * 10000 * 10000):
                     continue

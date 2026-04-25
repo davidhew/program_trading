@@ -42,13 +42,7 @@ pip download -r requirements.txt \
     --python-version 312
 
 ##在mac端为python项目下载基于Mac Mini 上的 Docker 运行 Linux 容器的所有python包到本地
-pip download -r requirements-mac-mini-docker.txt \
-    -d ./packages_mac_m1 \
-    --platform manylinux2014_aarch64 \
-    --platform manylinux_2_17_aarch64 \
-    --platform manylinux_2_28_aarch64 \
-    --only-binary=:all: \
-    --python-version 312
+pip download -r requirements-mac-mini-docker.txt -d ./packages_mac_m1 --platform manylinux2014_aarch64 --platform manylinux_2_17_aarch64 --platform manylinux_2_28_aarch64 --only-binary=:all: --python-version 312
 
 #查看docker实例的日志路径
 docker inspect --format='{{.LogPath}}' <容器ID或容器名>

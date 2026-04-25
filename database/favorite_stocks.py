@@ -49,21 +49,30 @@ def update_stock(code:str, fields:dict ):
 
 # --- SELECT (查询) ---
 def query_stocks(tag_filter=None, code_filter=None, name_filter=None):
-    query = {}
+    # 基础 SQL
+    sql = "SELECT * FROM favorite_stocks WHERE 1=1"
+    params = []
 
-    # 按标签搜索（包含）
+    # 按标签模糊搜索
     if tag_filter:
-        query['tags'] = {'$like': f'%{tag_filter}%'}
+        sql += " AND tags LIKE %s"
+        params.append(f"%{tag_filter}%")
 
-    # 按代码搜索（精确匹配）
+    # 按代码模糊搜索
     if code_filter:
-        query['code'] = {'$like': f'%{code_filter}%'}
+        sql += " AND code LIKE %s"
+        params.append(f"%{code_filter}%")
 
-    # 按名称搜索（模糊匹配）
+    # 按名称模糊搜索
     if name_filter:
-        query['name'] = {'$like': f'%{name_filter}%'}
+        sql += " AND name LIKE %s"
+        params.append(f"%{name_filter}%")
 
-    return table.find(**query, order_by=['-create_time'], _limit=50)
+    # 排序 + 限制
+    sql += " ORDER BY create_time DESC LIMIT 50"
+
+    # 执行原生 SQL（最稳定，不会失效）
+    return list(db.query(sql, params))
 
 # --- 根据股票代码 code 查询单条股票信息 ---
 def get_stock_by_code(code):

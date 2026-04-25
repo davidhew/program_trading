@@ -48,15 +48,22 @@ def update_stock(code:str, fields:dict ):
 
 
 # --- SELECT (查询) ---
-def query_stocks(tag_filter=None):
-    if tag_filter:
-        # 简单模糊查询
-        results = table.find(tags={'like': f'%{tag_filter}%'})
-    else:
-        # 获取全部数据
-        results = table.find(order_by=['-create_time'], _limit=50)
+def query_stocks(tag_filter=None, code_filter=None, name_filter=None):
+    query = {}
 
-    return list(results)
+    # 按标签搜索（包含）
+    if tag_filter:
+        query['tags'] = {'$like': f'%{tag_filter}%'}
+
+    # 按代码搜索（精确匹配）
+    if code_filter:
+        query['code'] = {'$like': f'%{code_filter}%'}
+
+    # 按名称搜索（模糊匹配）
+    if name_filter:
+        query['name'] = {'$like': f'%{name_filter}%'}
+
+    return table.find(**query, order_by=['-create_time'], _limit=50)
 
 # --- 根据股票代码 code 查询单条股票信息 ---
 def get_stock_by_code(code):

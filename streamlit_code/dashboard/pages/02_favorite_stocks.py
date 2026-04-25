@@ -27,22 +27,31 @@ if st.session_state.page == 'list':
 
     # 功能 3：按标签搜索
     search_tag = st.text_input("按标签搜索 (留空显示全部)", "")
+    search_code = st.text_input("按代码搜索 (模糊匹配)", "")
+    search_name = st.text_input("按名称搜索 (模糊匹配)", "")
 
-    stocks = favorite_stocks_table.query_stocks(tag_filter=search_tag if search_tag else None)
+    # 查询数据（三个条件独立生效）
+    stocks = favorite_stocks_table.query_stocks(
+        tag_filter=search_tag.strip() if search_tag.strip() else None,
+        code_filter=search_code.strip() if search_code.strip() else None,
+        name_filter=search_name.strip() if search_name.strip() else None
+    )
 
     # 功能 1：展示列表
     if stocks:
         # 使用表格表头
-        cols = st.columns([1, 2, 2, 1])
+        cols = st.columns([1, 2, 1,2, 1])
         cols[0].write("**代码**")
         cols[1].write("**名称**")
-        cols[2].write("**标签**")
-        cols[3].write("**操作**")
+        cols[2].write("**市场**")
+        cols[3].write("**标签**")
+        cols[4].write("**操作**")
 
         for s in stocks:
             cols = st.columns([1, 2, 2, 1])
             cols[0].write(s['code'])
             cols[1].write(s['name'])
+            cols[2].write(s['market'])
             cols[2].write(s['tags'])
             # 功能 2：选中一行并进入编辑
             if cols[3].button("编辑", key=f"edit_{s['code']}"):

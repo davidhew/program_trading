@@ -16,6 +16,7 @@ docker-compose down
 if [ "$1" == "mode=test" ]; then
     echo "检测到测试模式，准备运行 main.py..."
 
+    docker-compose build
     # 测试模式通常使用 run，运行完即销毁（--rm），不影响正式容器
     APP_ENV=test docker-compose run --rm quant_bot python main.py
 

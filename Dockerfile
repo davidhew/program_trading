@@ -4,9 +4,6 @@ FROM python:3.12-slim
 # 2. 设置工作目录
 WORKDIR /app
 
-# 降低 OpenSSL 的默认安全级别，从 2 降到 1，以兼容更多 HTTPS 握手协议；否则在docker容器里访问fred会有ssl的问题
-RUN sed -i 's/CipherString = DEFAULT@SECLEVEL=2/CipherString = DEFAULT@SECLEVEL=1/g' /etc/ssl/openssl.cnf
-
 # 3. 设置时区环境变量（构建时也会生效）
 ENV TZ=Asia/Shanghai
 

@@ -32,8 +32,8 @@ def add_stock(code, name, tags, business, advantage,disadvantage,milestones):
         'advantage':advantage,
         'disadvantage':disadvantage,
         'milestones': milestones,
-        'create_time': datetime.datetime.now(),
-        'update_time':datetime.datetime.now()
+        'create_time': datetime.now(),
+        'update_time':datetime.now()
     })
     print(f"✅ 已插入: {name}")
 

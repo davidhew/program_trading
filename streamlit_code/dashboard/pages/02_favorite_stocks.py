@@ -48,7 +48,7 @@ if st.session_state.page == 'list':
         cols[4].write("**操作**")
 
         for s in stocks:
-            cols = st.columns([1, 2, 2, 1])
+            cols = st.columns([1, 2, 1,2, 1])
             cols[0].write(s['code'])
             cols[1].write(s['name'])
             cols[2].write(s['market'])

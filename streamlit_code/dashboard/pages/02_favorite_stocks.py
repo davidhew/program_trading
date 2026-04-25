@@ -52,9 +52,9 @@ if st.session_state.page == 'list':
             cols[0].write(s['code'])
             cols[1].write(s['name'])
             cols[2].write(s['market'])
-            cols[2].write(s['tags'])
+            cols[3].write(s['tags'])
             # 功能 2：选中一行并进入编辑
-            if cols[3].button("编辑", key=f"edit_{s['code']}"):
+            if cols[4].button("编辑", key=f"edit_{s['code']}"):
                 st.session_state.edit_code = s['code']
                 st.session_state.page = 'edit'
                 st.rerun()

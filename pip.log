@@ -1,0 +1,199 @@
+Collecting appnope==0.1.4 (from -r requirements-mac-mini-docker.txt (line 1))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/appnope-0.1.4-py2.py3-none-any.whl
+Collecting asttokens==3.0.1 (from -r requirements-mac-mini-docker.txt (line 2))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/asttokens-3.0.1-py3-none-any.whl
+Collecting attrs==25.4.0 (from -r requirements-mac-mini-docker.txt (line 3))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/attrs-25.4.0-py3-none-any.whl
+Collecting backcall==0.2.0 (from -r requirements-mac-mini-docker.txt (line 4))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/backcall-0.2.0-py2.py3-none-any.whl
+Collecting beautifulsoup4==4.14.3 (from -r requirements-mac-mini-docker.txt (line 5))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/beautifulsoup4-4.14.3-py3-none-any.whl
+Collecting bleach==6.3.0 (from -r requirements-mac-mini-docker.txt (line 6))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/bleach-6.3.0-py3-none-any.whl
+Collecting bs4==0.0.2 (from -r requirements-mac-mini-docker.txt (line 7))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/bs4-0.0.2-py2.py3-none-any.whl
+Collecting certifi==2026.1.4 (from -r requirements-mac-mini-docker.txt (line 8))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/certifi-2026.1.4-py3-none-any.whl
+Collecting cffi==2.0.0 (from -r requirements-mac-mini-docker.txt (line 9))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/cffi-2.0.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl
+Collecting charset-normalizer==3.4.4 (from -r requirements-mac-mini-docker.txt (line 10))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/charset_normalizer-3.4.4-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl
+Collecting curl_cffi==0.14.0 (from -r requirements-mac-mini-docker.txt (line 11))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/curl_cffi-0.14.0-cp39-abi3-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl
+Collecting decorator==5.2.1 (from -r requirements-mac-mini-docker.txt (line 12))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/decorator-5.2.1-py3-none-any.whl
+Collecting defusedxml==0.7.1 (from -r requirements-mac-mini-docker.txt (line 13))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/defusedxml-0.7.1-py2.py3-none-any.whl
+Collecting et_xmlfile==2.0.0 (from -r requirements-mac-mini-docker.txt (line 14))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/et_xmlfile-2.0.0-py3-none-any.whl
+Collecting executing==2.2.1 (from -r requirements-mac-mini-docker.txt (line 15))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/executing-2.2.1-py2.py3-none-any.whl
+Collecting fastjsonschema==2.21.2 (from -r requirements-mac-mini-docker.txt (line 16))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/fastjsonschema-2.21.2-py3-none-any.whl
+Collecting html5lib==1.1 (from -r requirements-mac-mini-docker.txt (line 17))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/html5lib-1.1-py2.py3-none-any.whl
+Collecting idna==3.11 (from -r requirements-mac-mini-docker.txt (line 18))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/idna-3.11-py3-none-any.whl
+Collecting ipython==8.12.3 (from -r requirements-mac-mini-docker.txt (line 19))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/ipython-8.12.3-py3-none-any.whl
+Collecting jedi==0.19.2 (from -r requirements-mac-mini-docker.txt (line 20))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/jedi-0.19.2-py2.py3-none-any.whl
+Collecting Jinja2==3.1.6 (from -r requirements-mac-mini-docker.txt (line 21))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/jinja2-3.1.6-py3-none-any.whl
+Collecting jsonpath-ng (from -r requirements-mac-mini-docker.txt (line 22))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/jsonpath_ng-1.8.0-py3-none-any.whl
+Collecting jsonschema==4.26.0 (from -r requirements-mac-mini-docker.txt (line 23))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/jsonschema-4.26.0-py3-none-any.whl
+Collecting jsonschema-specifications==2025.9.1 (from -r requirements-mac-mini-docker.txt (line 24))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/jsonschema_specifications-2025.9.1-py3-none-any.whl
+Collecting jupyter_client==8.8.0 (from -r requirements-mac-mini-docker.txt (line 25))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/jupyter_client-8.8.0-py3-none-any.whl
+Collecting jupyter_core==5.9.1 (from -r requirements-mac-mini-docker.txt (line 26))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/jupyter_core-5.9.1-py3-none-any.whl
+Collecting jupyterlab_pygments==0.3.0 (from -r requirements-mac-mini-docker.txt (line 27))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/jupyterlab_pygments-0.3.0-py3-none-any.whl
+Collecting llvmlite==0.44.0 (from -r requirements-mac-mini-docker.txt (line 28))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/llvmlite-0.44.0-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl
+Collecting lxml==6.0.2 (from -r requirements-mac-mini-docker.txt (line 29))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/lxml-6.0.2-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl
+Collecting MarkupSafe==3.0.3 (from -r requirements-mac-mini-docker.txt (line 30))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/markupsafe-3.0.3-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl
+Collecting matplotlib-inline==0.2.1 (from -r requirements-mac-mini-docker.txt (line 31))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/matplotlib_inline-0.2.1-py3-none-any.whl
+Collecting mistune==3.2.0 (from -r requirements-mac-mini-docker.txt (line 32))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/mistune-3.2.0-py3-none-any.whl
+Collecting nbclient==0.10.4 (from -r requirements-mac-mini-docker.txt (line 33))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/nbclient-0.10.4-py3-none-any.whl
+Collecting nbconvert==7.17.0 (from -r requirements-mac-mini-docker.txt (line 34))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/nbconvert-7.17.0-py3-none-any.whl
+Collecting nbformat==5.10.4 (from -r requirements-mac-mini-docker.txt (line 35))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/nbformat-5.10.4-py3-none-any.whl
+Collecting numba==0.61.2 (from -r requirements-mac-mini-docker.txt (line 36))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/numba-0.61.2-cp312-cp312-manylinux_2_28_aarch64.whl
+Collecting numpy==2.2.6 (from -r requirements-mac-mini-docker.txt (line 37))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/numpy-2.2.6-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
+Collecting openpyxl==3.1.5 (from -r requirements-mac-mini-docker.txt (line 38))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/openpyxl-3.1.5-py2.py3-none-any.whl
+Collecting packaging==26.0 (from -r requirements-mac-mini-docker.txt (line 39))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/packaging-26.0-py3-none-any.whl
+Collecting pandas==3.0.0 (from -r requirements-mac-mini-docker.txt (line 40))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/pandas-3.0.0-cp312-cp312-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl
+Collecting pandas-ta==0.4.71b0 (from -r requirements-mac-mini-docker.txt (line 41))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/pandas_ta-0.4.71b0-py3-none-any.whl
+Collecting pandocfilters==1.5.1 (from -r requirements-mac-mini-docker.txt (line 42))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/pandocfilters-1.5.1-py2.py3-none-any.whl
+Collecting parso==0.8.6 (from -r requirements-mac-mini-docker.txt (line 43))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/parso-0.8.6-py2.py3-none-any.whl
+Collecting pexpect==4.9.0 (from -r requirements-mac-mini-docker.txt (line 44))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/pexpect-4.9.0-py2.py3-none-any.whl
+Collecting pickleshare==0.7.5 (from -r requirements-mac-mini-docker.txt (line 45))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/pickleshare-0.7.5-py2.py3-none-any.whl
+Collecting platformdirs==4.9.1 (from -r requirements-mac-mini-docker.txt (line 46))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/platformdirs-4.9.1-py3-none-any.whl
+Collecting prompt_toolkit==3.0.52 (from -r requirements-mac-mini-docker.txt (line 47))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/prompt_toolkit-3.0.52-py3-none-any.whl
+Collecting ptyprocess==0.7.0 (from -r requirements-mac-mini-docker.txt (line 48))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/ptyprocess-0.7.0-py2.py3-none-any.whl
+Collecting PySocks==1.7.1 (from -r requirements-mac-mini-docker.txt (line 49))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/PySocks-1.7.1-py3-none-any.whl
+Collecting pure_eval==0.2.3 (from -r requirements-mac-mini-docker.txt (line 50))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/pure_eval-0.2.3-py3-none-any.whl
+Collecting pycparser==3.0 (from -r requirements-mac-mini-docker.txt (line 51))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/pycparser-3.0-py3-none-any.whl
+Collecting Pygments==2.19.2 (from -r requirements-mac-mini-docker.txt (line 52))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/pygments-2.19.2-py3-none-any.whl
+Collecting python-dateutil==2.9.0.post0 (from -r requirements-mac-mini-docker.txt (line 54))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/python_dateutil-2.9.0.post0-py2.py3-none-any.whl
+Collecting python-dotenv==1.2.1 (from -r requirements-mac-mini-docker.txt (line 55))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/python_dotenv-1.2.1-py3-none-any.whl
+Collecting pyzmq==26.2.0 (from -r requirements-mac-mini-docker.txt (line 56))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/pyzmq-26.2.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
+Collecting referencing==0.37.0 (from -r requirements-mac-mini-docker.txt (line 57))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/referencing-0.37.0-py3-none-any.whl
+Collecting requests==2.32.5 (from -r requirements-mac-mini-docker.txt (line 58))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/requests-2.32.5-py3-none-any.whl
+Collecting rpds-py==0.30.0 (from -r requirements-mac-mini-docker.txt (line 59))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/rpds_py-0.30.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
+Collecting schedule==1.2.2 (from -r requirements-mac-mini-docker.txt (line 60))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/schedule-1.2.2-py3-none-any.whl
+Collecting simplejson==3.20.2 (from -r requirements-mac-mini-docker.txt (line 61))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/simplejson-3.20.2-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
+Collecting six==1.17.0 (from -r requirements-mac-mini-docker.txt (line 62))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/six-1.17.0-py2.py3-none-any.whl
+Collecting soupsieve==2.8.3 (from -r requirements-mac-mini-docker.txt (line 63))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/soupsieve-2.8.3-py3-none-any.whl
+Collecting stack-data==0.6.3 (from -r requirements-mac-mini-docker.txt (line 64))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/stack_data-0.6.3-py3-none-any.whl
+Collecting tabulate==0.9.0 (from -r requirements-mac-mini-docker.txt (line 65))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/tabulate-0.9.0-py3-none-any.whl
+Collecting tinycss2==1.4.0 (from -r requirements-mac-mini-docker.txt (line 66))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/tinycss2-1.4.0-py3-none-any.whl
+Collecting tornado==6.5.4 (from -r requirements-mac-mini-docker.txt (line 67))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/tornado-6.5.4-cp39-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
+Collecting tqdm==4.67.3 (from -r requirements-mac-mini-docker.txt (line 68))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/tqdm-4.67.3-py3-none-any.whl
+Collecting traitlets==5.14.3 (from -r requirements-mac-mini-docker.txt (line 69))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/traitlets-5.14.3-py3-none-any.whl
+Collecting tushare==1.4.24 (from -r requirements-mac-mini-docker.txt (line 70))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/tushare-1.4.24-py3-none-any.whl
+Collecting typing_extensions==4.15.0 (from -r requirements-mac-mini-docker.txt (line 71))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/typing_extensions-4.15.0-py3-none-any.whl
+Collecting urllib3==2.6.3 (from -r requirements-mac-mini-docker.txt (line 72))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/urllib3-2.6.3-py3-none-any.whl
+Collecting wcwidth==0.6.0 (from -r requirements-mac-mini-docker.txt (line 73))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/wcwidth-0.6.0-py3-none-any.whl
+Collecting webencodings==0.5.1 (from -r requirements-mac-mini-docker.txt (line 74))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/webencodings-0.5.1-py2.py3-none-any.whl
+Collecting websocket-client==1.9.0 (from -r requirements-mac-mini-docker.txt (line 75))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/websocket_client-1.9.0-py3-none-any.whl
+Collecting xlrd==2.0.2 (from -r requirements-mac-mini-docker.txt (line 76))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/xlrd-2.0.2-py2.py3-none-any.whl
+Collecting yarg==0.1.9 (from -r requirements-mac-mini-docker.txt (line 77))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/yarg-0.1.9-py2.py3-none-any.whl
+Collecting fredapi==0.5.2 (from -r requirements-mac-mini-docker.txt (line 78))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/fredapi-0.5.2-py3-none-any.whl
+Collecting streamlit==1.56.0 (from -r requirements-mac-mini-docker.txt (line 79))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/streamlit-1.56.0-py3-none-any.whl
+Collecting altair==6.0.0 (from -r requirements-mac-mini-docker.txt (line 80))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/altair-6.0.0-py3-none-any.whl
+Collecting blinker==1.9.0 (from -r requirements-mac-mini-docker.txt (line 81))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/blinker-1.9.0-py3-none-any.whl
+Collecting cachetools==7.0.5 (from -r requirements-mac-mini-docker.txt (line 82))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/cachetools-7.0.5-py3-none-any.whl
+Collecting click==8.3.2 (from -r requirements-mac-mini-docker.txt (line 83))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/click-8.3.2-py3-none-any.whl
+Collecting gitpython==3.1.46 (from -r requirements-mac-mini-docker.txt (line 84))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/gitpython-3.1.46-py3-none-any.whl
+Collecting gitdb==4.0.12 (from -r requirements-mac-mini-docker.txt (line 85))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/gitdb-4.0.12-py3-none-any.whl
+Collecting pillow==12.2.0 (from -r requirements-mac-mini-docker.txt (line 86))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/pillow-12.2.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl
+Collecting protobuf==7.34.1 (from -r requirements-mac-mini-docker.txt (line 87))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/protobuf-7.34.1-cp310-abi3-manylinux2014_aarch64.whl
+Collecting pydeck==0.9.1 (from -r requirements-mac-mini-docker.txt (line 88))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/pydeck-0.9.1-py2.py3-none-any.whl
+Collecting smmap==5.0.3 (from -r requirements-mac-mini-docker.txt (line 89))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/smmap-5.0.3-py3-none-any.whl
+Collecting tenacity==9.1.4 (from -r requirements-mac-mini-docker.txt (line 90))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/tenacity-9.1.4-py3-none-any.whl
+Collecting toml==0.10.2 (from -r requirements-mac-mini-docker.txt (line 91))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/toml-0.10.2-py2.py3-none-any.whl
+Collecting narwhals==2.18.1 (from -r requirements-mac-mini-docker.txt (line 92))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/narwhals-2.18.1-py3-none-any.whl
+Collecting pyarrow==23.0.1 (from -r requirements-mac-mini-docker.txt (line 93))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/pyarrow-23.0.1-cp312-cp312-manylinux_2_28_aarch64.whl
+Collecting watchdog==6.0.0 (from -r requirements-mac-mini-docker.txt (line 94))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/watchdog-6.0.0-py3-none-manylinux2014_aarch64.whl
+Collecting plotly==6.6.0 (from -r requirements-mac-mini-docker.txt (line 95))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/plotly-6.6.0-py3-none-any.whl
+Collecting dataset==2.0.0 (from -r requirements-mac-mini-docker.txt (line 96))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/dataset-2.0.0-py3-none-any.whl
+Collecting sqlalchemy (from -r requirements-mac-mini-docker.txt (line 97))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/sqlalchemy-2.0.49-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl
+Collecting alembic==1.18.4 (from -r requirements-mac-mini-docker.txt (line 98))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/alembic-1.18.4-py3-none-any.whl
+Collecting mako==1.3.11 (from -r requirements-mac-mini-docker.txt (line 99))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/mako-1.3.11-py3-none-any.whl
+Collecting pymysql==1.1.2 (from -r requirements-mac-mini-docker.txt (line 100))
+  File was already downloaded /Users/hewei/PycharmProjects/program_trading/packages_mac_m1/pymysql-1.1.2-py3-none-any.whl
+Successfully downloaded appnope asttokens attrs backcall beautifulsoup4 bleach bs4 certifi cffi charset-normalizer curl_cffi decorator defusedxml et_xmlfile executing fastjsonschema html5lib idna ipython prompt_toolkit jedi parso Jinja2 jsonschema jsonschema-specifications jupyter_client jupyter_core jupyterlab_pygments llvmlite lxml MarkupSafe matplotlib-inline mistune nbclient nbconvert nbformat numba numpy openpyxl packaging pandas pandas-ta pandocfilters pexpect pickleshare platformdirs ptyprocess PySocks pure_eval pycparser Pygments python-dateutil python-dotenv pyzmq referencing requests urllib3 rpds-py schedule simplejson six soupsieve stack-data tabulate tinycss2 tornado tqdm traitlets tushare typing_extensions wcwidth webencodings websocket-client xlrd yarg fredapi streamlit altair blinker cachetools click gitpython gitdb pillow protobuf pydeck smmap tenacity toml narwhals pyarrow watchdog plotly dataset alembic mako pymysql sqlalchemy jsonpath-ng

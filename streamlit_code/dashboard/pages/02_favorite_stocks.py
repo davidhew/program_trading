@@ -30,11 +30,39 @@ if st.session_state.page == 'list':
     search_code = st.text_input("按代码搜索 (模糊匹配)", "")
     search_name = st.text_input("按名称搜索 (模糊匹配)", "")
 
-    # 查询数据（三个条件独立生效）
-    stocks = favorite_stocks_table.query_stocks(
+    # 分页参数
+    page_size = 20
+
+    # ======================
+    # 先查询总数，计算总页数
+    # ======================
+    total_count = favorite_stocks_table.query_stocks_count(
         tag_filter=search_tag.strip() if search_tag.strip() else None,
         code_filter=search_code.strip() if search_code.strip() else None,
         name_filter=search_name.strip() if search_name.strip() else None
+    )
+
+    total_pages = (total_count + page_size - 1) / page_size if total_count > 0 else 1
+
+    # ======================
+    # 页码选择下拉框（0 ~ total_pages-1）
+    # ======================
+    if total_pages > 0:
+        page_options = list(range(total_pages))
+    else:
+        page_options = [0]
+
+    current_page = st.selectbox("页码（从0开始）", page_options, index=0)
+
+    # ======================
+    # 查询当前页数据
+    # ======================
+    stocks = favorite_stocks_table.query_stocks_by_page(
+        tag_filter=search_tag.strip() if search_tag.strip() else None,
+        code_filter=search_code.strip() if search_code.strip() else None,
+        name_filter=search_name.strip() if search_name.strip() else None,
+        page=current_page,
+        page_size=page_size
     )
 
     # 功能 1：展示列表

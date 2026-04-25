@@ -47,31 +47,54 @@ def update_stock(code:str, fields:dict ):
     print(f"🔄 已更新代码为 {code} 的股票情况")
 
 
-# --- SELECT (查询) ---
-def query_stocks(tag_filter=None, code_filter=None, name_filter=None):
-    # 基础 SQL
-    sql = "SELECT * FROM favorite_stocks WHERE 1=1"
+# ==============================
+# 1. 查询符合条件的总数
+# ==============================
+def query_stocks_count(tag_filter=None, code_filter=None, name_filter=None):
+    sql = "SELECT COUNT(*) AS total FROM favorite_stocks WHERE 1=1"
     params = {}
 
-    # 按标签模糊搜索
     if tag_filter:
         sql += " AND tags LIKE :tag"
         params["tag"] = f"%{tag_filter}%"
 
-    # 按代码模糊搜索
     if code_filter:
         sql += " AND code LIKE :code"
         params["code"] = f"%{code_filter}%"
 
-    # 按名称模糊搜索
     if name_filter:
         sql += " AND name LIKE :name"
         params["name"] = f"%{name_filter}%"
 
-    # 排序
-    sql += " ORDER BY create_time DESC LIMIT 50"
+    res = list(db.query(sql, **params))
+    return res[0]['total'] if res else 0
 
-    # dataset 正确传参方式（字典）
+
+# ==============================
+# 2. 分页查询数据
+# ==============================
+def query_stocks_by_page(tag_filter=None, code_filter=None, name_filter=None, page=0, page_size=20):
+    offset = page * page_size  # 因为页码从0开始，直接乘
+
+    sql = "SELECT * FROM favorite_stocks WHERE 1=1"
+    params = {}
+
+    if tag_filter:
+        sql += " AND tags LIKE :tag"
+        params["tag"] = f"%{tag_filter}%"
+
+    if code_filter:
+        sql += " AND code LIKE :code"
+        params["code"] = f"%{code_filter}%"
+
+    if name_filter:
+        sql += " AND name LIKE :name"
+        params["name"] = f"%{name_filter}%"
+
+    sql += " ORDER BY create_time DESC LIMIT :limit OFFSET :offset"
+    params["limit"] = page_size
+    params["offset"] = offset
+
     return list(db.query(sql, **params))
 
 # --- 根据股票代码 code 查询单条股票信息 ---

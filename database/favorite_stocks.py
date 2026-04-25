@@ -11,7 +11,7 @@ secrets = secrets_config.load_external_config()
 
 # 1. 连接数据库 (如果文件不存在，会自动创建)
 # 使用 SQLite 并在本地生成 stocks_manager.db 文件
-db_url="'mysql+pymysql://"+secrets.get("DB_USER")+":"+secrets.get("DB_PASSWD")+"@"+secrets.get("DB_SERVER")+":3306/"+secrets.get("DB_NAME")+"?charset=utf8"
+db_url="'mysql+pymysql://"+secrets.get("DB_USER")+":"+secrets.get("DB_PASSWD")+"@"+secrets.get("DB_SERVER")+":3306/"+secrets.get("DB_NAME")+"?charset=utf8'"
 print("db_url"+db_url)
 #db = dataset.connect('mysql+pymysql://user:pass@host:port/dbname?charset=utf8mb4')
 db = dataset.connect(db_url)

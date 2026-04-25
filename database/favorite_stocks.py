@@ -23,11 +23,12 @@ table = db['favorite_stocks']
 
 # --- INSERT (插入) ---
 # 插入时不需要预先定义字段，dataset 会根据字典的 key 自动生成列
-def add_stock(code, name, tags, business, advantage,disadvantage,milestones):
+def add_stock(code, name, tags, market,business, advantage,disadvantage,milestones):
     table.insert({
         'code': code,
         'name': name,
         'tags': ",".join(tags),  # 建议存为逗号分隔字符串，或使用 JSON 格式
+        'market': market,
         'business': business,
         'advantage':advantage,
         'disadvantage':disadvantage,

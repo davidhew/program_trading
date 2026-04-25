@@ -26,6 +26,7 @@ RUN pip install --no-cache-dir \
 COPY ./streamlit_code/dashboard/ .
 COPY config.py .
 COPY ./utility/ ./utility/
+COPY ./database/ ./database/
 COPY .env.dev .
 COPY .env.prod .
 COPY .env.test .

@@ -32,6 +32,7 @@ from us_select_stock_strategy import us_bottoming_out
 from us_select_stock_strategy import us_price_below_MA200
 from us_macro_indexs import get_net_liquidity
 from us_macro_indexs import get_credit_spread
+from database import favorite_stocks
 setup_logging()
 
 def print_hi(name):
@@ -45,8 +46,8 @@ def print_hi(name):
     #us_one_year_highest.compute(date_str)
     #us_mc_lessthancash.compute()
     #us_vip_stocks_rsi.compute()
-    us_low_accrual_company.compute()
-
+    #us_low_accrual_company.compute()
+    favorite_stocks.test_add_stock()
 
     #print(type(fileds_to_use))
     #sd.init_data()

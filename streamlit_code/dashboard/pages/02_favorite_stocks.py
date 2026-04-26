@@ -105,6 +105,8 @@ elif st.session_state.page == 'edit':
         new_advantage = st.text_area("优势", value=stock_data.get('advantage', ''))
         new_disadvantage = st.text_area("劣势", value=stock_data.get('disadvantage', ''))
         new_milestones = st.text_area("重要里程碑", value=stock_data.get('milestones', ''))
+        new_institution_view = st.text_area("机构观点", value=stock_data.get('institution_view', ''))
+
 
         submit_button = st.form_submit_button("保存更新")
 
@@ -118,7 +120,8 @@ elif st.session_state.page == 'edit':
                 'business': new_business,
                 'advantage': new_advantage,
                 'disadvantage': new_disadvantage,
-                'milestones': new_milestones
+                'milestones': new_milestones,
+                'institution_view': new_institution_view
             }
             favorite_stocks_table.update_stock(stock_code, update_data)
             st.success("✅ 数据库已更新！")
@@ -141,6 +144,7 @@ elif st.session_state.page == 'add':
         advantage = st.text_area("优势")
         disadvantage = st.text_area("劣势")
         milestones = st.text_area("重要里程碑")
+        institution_view = st.text_area("机构观点")
 
         # 保存按钮
         save_btn = st.form_submit_button("✅ 保存")
@@ -158,7 +162,8 @@ elif st.session_state.page == 'add':
                     business=business,
                     advantage=advantage,
                     disadvantage=disadvantage,
-                    milestones=milestones
+                    milestones=milestones,
+                    institution_view=institution_view
                 )
                 st.success("✅ 股票添加成功！")
                 # 返回列表

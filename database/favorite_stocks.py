@@ -11,7 +11,7 @@ secrets = secrets_config.load_external_config()
 
 # 1. 连接数据库 (如果文件不存在，会自动创建)
 # 使用 SQLite 并在本地生成 stocks_manager.db 文件
-db_url="mysql+pymysql://"+secrets.get("DB_USER")+":"+secrets.get("DB_PASSWD")+"@"+secrets.get("DB_SERVER")+":3306/"+secrets.get("DB_NAME")+"?charset=utf8"
+db_url="mysql+pymysql://"+secrets.get("DB_USER")+":"+secrets.get("DB_PASSWD")+"@"+secrets.get("DB_SERVER")+":3306/"+secrets.get("DB_NAME")+"?charset=utf8&autocommit=true"
 print("db_url:"+db_url)
 #db = dataset.connect('mysql+pymysql://user:pass@host:port/dbname?charset=utf8mb4')
 db = dataset.connect(db_url)
@@ -23,7 +23,7 @@ table = db['favorite_stocks']
 
 # --- INSERT (插入) ---
 # 插入时不需要预先定义字段，dataset 会根据字典的 key 自动生成列
-def add_stock(code, name, tags, market,business, advantage,disadvantage,milestones):
+def add_stock(code, name, tags, market,business, advantage,disadvantage,milestones,institution_view):
     table.insert({
         'code': code,
         'name': name,
@@ -33,6 +33,7 @@ def add_stock(code, name, tags, market,business, advantage,disadvantage,mileston
         'advantage':advantage,
         'disadvantage':disadvantage,
         'milestones': milestones,
+        'institution_view': institution_view,
         'create_time': datetime.now(),
         'update_time':datetime.now()
     })

@@ -48,7 +48,7 @@ if st.session_state.page == 'list':
     # 页码选择下拉框（0 ~ total_pages-1）
     # ======================
     if total_pages > 0:
-        page_options = list(range(total_pages))
+        page_options = list(range(int(total_pages)))
     else:
         page_options = [0]
 

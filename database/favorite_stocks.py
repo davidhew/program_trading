@@ -110,16 +110,6 @@ def test_add_stock():
     add_stock('600519', '贵州茅台', ['白酒', '大消费'], '高端白酒生产', '2023年利润新高','政策持续打压','暂无明显时间计划')
 
 
-# B. 查询所有
-print("\n--- 当前所有关注股票 ---")
-for s in query_stocks():
-    print(f"[{s['code']}] {s['name']} - 标签: {s['tags']}")
-
-# C. 按条件查询 (基于标签)
-print("\n--- 筛选【新能源】标签 ---")
-energy_stocks = query_stocks('新能源')
-for s in energy_stocks:
-    print(f"找到: {s['name']}")
 
 
 # E. 顺便提一下 DELETE (删除)

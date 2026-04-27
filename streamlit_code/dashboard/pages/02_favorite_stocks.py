@@ -19,8 +19,8 @@ if st.session_state.page == 'list':
 
     # 搜索框
     search_tag = st.text_input("按标签搜索 (留空显示全部)", "")
-    search_code = st.text_input("按代码搜索", "")
-    search_name = st.text_input("按名称搜索", "")
+    search_code = st.text_input("按代码搜索 (模糊匹配)", "")
+    search_name = st.text_input("按名称搜索 (模糊匹配)", "")
 
     page_size = 20
 
@@ -31,7 +31,7 @@ if st.session_state.page == 'list':
         name_filter=search_name.strip() or None
     )
 
-    total_pages = (total_count + page_size - 1) / page_size if total_count > 0 else 1
+    total_pages = (total_count + page_size - 1) // page_size if total_count > 0 else 1
     page_options = list(range(int(total_pages))) if total_pages > 0 else [0]
     current_page = st.selectbox("页码（从0开始）", page_options, index=0)
 
@@ -66,48 +66,54 @@ if st.session_state.page == 'list':
     else:
         st.info("暂无匹配的股票数据")
 
-# --- 2. 编辑页面（富文本已集成） ---
+# --- 2. 编辑页面（修复：给每个jodit加唯一key） ---
 elif st.session_state.page == 'edit':
     stock_code = st.session_state.edit_code
     stock_data = favorite_stocks_table.get_stock_by_code(stock_code)
 
     st.title(f"📝 编辑股票: {stock_data['name']} ({stock_code})")
 
-    with st.form("edit_form"):
+    # 注意：这里不把富文本编辑器放进st.form里，而是直接用session_state存值
+    st.subheader("📊 主营业务（富文本，支持粘贴图片）")
+    new_business = st_jodit(
+        value=stock_data.get('business', ''),
+        config={"minHeight": 250, "uploader": {"insertImageAsBase64URI": True}},
+        key="edit_business"
+    )
+
+    st.subheader("📈 优势（富文本）")
+    new_advantage = st_jodit(
+        value=stock_data.get('advantage', ''),
+        config={"minHeight": 200, "uploader": {"insertImageAsBase64URI": True}},
+        key="edit_advantage"
+    )
+
+    st.subheader("📉 劣势（富文本）")
+    new_disadvantage = st_jodit(
+        value=stock_data.get('disadvantage', ''),
+        config={"minHeight": 200, "uploader": {"insertImageAsBase64URI": True}},
+        key="edit_disadvantage"
+    )
+
+    st.subheader("🏆 重要里程碑（富文本）")
+    new_milestones = st_jodit(
+        value=stock_data.get('milestones', ''),
+        config={"minHeight": 200, "uploader": {"insertImageAsBase64URI": True}},
+        key="edit_milestones"
+    )
+
+    st.subheader("🏛 机构观点（富文本）")
+    new_institution_view = st_jodit(
+        value=stock_data.get('institution_view', ''),
+        config={"minHeight": 250, "uploader": {"insertImageAsBase64URI": True}},
+        key="edit_institution_view"
+    )
+
+    # 其他简单字段可以放form里，不冲突
+    with st.form("edit_basic_form"):
         new_name = st.text_input("股票名称", value=stock_data['name'])
         new_tags = st.text_input("标签 (逗号分隔)", value=stock_data['tags'])
         new_market = st.text_input("市场", value=stock_data.get('market', ''))
-
-        st.subheader("📊 主营业务")
-        new_business = st_jodit(
-            value=stock_data.get('business', ''),
-            config={"minHeight": 250, "uploader": {"insertImageAsBase64URI": True}}
-        )
-
-        st.subheader("📈 优势")
-        new_advantage = st_jodit(
-            value=stock_data.get('advantage', ''),
-            config={"minHeight": 200, "uploader": {"insertImageAsBase64URI": True}}
-        )
-
-        st.subheader("📉 劣势")
-        new_disadvantage = st_jodit(
-            value=stock_data.get('disadvantage', ''),
-            config={"minHeight": 200, "uploader": {"insertImageAsBase64URI": True}}
-        )
-
-        st.subheader("🏆 重要里程碑")
-        new_milestones = st_jodit(
-            value=stock_data.get('milestones', ''),
-            config={"minHeight": 200, "uploader": {"insertImageAsBase64URI": True}}
-        )
-
-        st.subheader("🏛 机构观点")
-        new_institution_view = st_jodit(
-            value=stock_data.get('institution_view', ''),
-            config={"minHeight": 250, "uploader": {"insertImageAsBase64URI": True}}
-        )
-
         submit_button = st.form_submit_button("保存更新")
 
         if submit_button:
@@ -123,40 +129,59 @@ elif st.session_state.page == 'edit':
                 'institution_view': new_institution_view
             }
             favorite_stocks_table.update_stock(stock_code, update_data)
-            st.success("✅ 保存成功！")
+            st.success("✅ 保存成功！支持图片永久保存～")
 
     if st.button("返回列表"):
         st.session_state.page = 'list'
         st.session_state.edit_code = None
         st.rerun()
 
-# --- 3. 添加页面（富文本已集成） ---
+# --- 3. 添加页面（修复：给每个jodit加唯一key，移出form） ---
 elif st.session_state.page == 'add':
     st.title("➕ 添加新股票")
 
-    with st.form("add_form"):
+    # 先收集富文本内容（移出form）
+    st.subheader("📊 主营业务（支持粘贴图片）")
+    business = st_jodit(
+        value="",
+        config={"minHeight": 250, "uploader": {"insertImageAsBase64URI": True}},
+        key="add_business"
+    )
+
+    st.subheader("📈 优势")
+    advantage = st_jodit(
+        value="",
+        config={"minHeight": 200, "uploader": {"insertImageAsBase64URI": True}},
+        key="add_advantage"
+    )
+
+    st.subheader("📉 劣势")
+    disadvantage = st_jodit(
+        value="",
+        config={"minHeight": 200, "uploader": {"insertImageAsBase64URI": True}},
+        key="add_disadvantage"
+    )
+
+    st.subheader("🏆 重要里程碑")
+    milestones = st_jodit(
+        value="",
+        config={"minHeight": 200, "uploader": {"insertImageAsBase64URI": True}},
+        key="add_milestones"
+    )
+
+    st.subheader("🏛 机构观点")
+    institution_view = st_jodit(
+        value="",
+        config={"minHeight": 250, "uploader": {"insertImageAsBase64URI": True}},
+        key="add_institution_view"
+    )
+
+    # 基础字段放在form里提交
+    with st.form("add_basic_form"):
         code = st.text_input("股票代码（必填）")
         name = st.text_input("股票名称（必填）")
         tags = st.text_input("标签（逗号分隔）")
         market = st.text_input("所属市场")
-
-        st.subheader("📊 主营业务")
-        business = st_jodit(
-            value="",
-            config={"minHeight": 250, "uploader": {"insertImageAsBase64URI": True}}
-        )
-
-        st.subheader("📈 优势")
-        advantage = st_jodit(value="", config={"minHeight": 200, "uploader": {"insertImageAsBase64URI": True}})
-
-        st.subheader("📉 劣势")
-        disadvantage = st_jodit(value="", config={"minHeight": 200, "uploader": {"insertImageAsBase64URI": True}})
-
-        st.subheader("🏆 重要里程碑")
-        milestones = st_jodit(value="", config={"minHeight": 200, "uploader": {"insertImageAsBase64URI": True}})
-
-        st.subheader("🏛 机构观点")
-        institution_view = st_jodit(value="", config={"minHeight": 250, "uploader": {"insertImageAsBase64URI": True}})
 
         save_btn = st.form_submit_button("✅ 保存")
 

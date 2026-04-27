@@ -1,2 +1,0 @@
-ALTER TABLE favorite_stocks 
-ADD COLUMN market VARCHAR(64) DEFAULT '' COMMENT '所属市场';

@@ -1,6 +1,5 @@
 import streamlit as st
 from streamlit_jodit import st_jodit
-
 from database import favorite_stocks as favorite_stocks_table
 
 # --- 状态初始化 ---
@@ -11,84 +10,86 @@ if 'edit_code' not in st.session_state:
 if 'view_code' not in st.session_state:
     st.session_state.view_code = None
 
-# ==========================
-# 🔥 修复1：CSS（背景完整覆盖整行 + 双击区域）
-# ==========================
+# 处理 URL 参数实现 JS 到 Streamlit 的通信
+params = st.query_params
+if "view_code" in params:
+    st.session_state.view_code = params["view_code"]
+    st.query_params.clear() # 处理完清空，防止刷新重复触发
+if "edit_code" in params:
+    st.session_state.edit_code = params["edit_code"]
+    st.session_state.page = 'edit'
+    st.query_params.clear()
+
+# --- 2. CSS 样式修复 ---
 st.markdown("""
 <style>
-/* 股票卡片：完整覆盖整行 */
-.stock-row-container {
-    background-color: #E6F4EA;
-    border-radius: 8px;
-    margin: 6px 0;
-    cursor: pointer;
-    transition: all 0.2s;
-    padding: 14px 10px;
-}
-.stock-row-container:hover {
-    background-color: #D4EDDC;
-}
-/* 分割线 */
-.divider-line {
-    height: 1px;
-    background: #E0E0E0;
-    margin: 2px 0;
-}
-/* 全屏弹窗 */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0,0,0,0.7);
-    z-index: 9999;
+/* 股票整行容器：Flex 布局模拟列 */
+.stock-row-wrapper {
     display: flex;
     align-items: center;
-    justify-content: center;
+    background-color: #E6F4EA;
+    border-radius: 8px;
+    margin: 8px 0;
+    padding: 12px 15px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border: 1px solid transparent;
+}
+.stock-row-wrapper:hover {
+    background-color: #D4EDDC;
+    border: 1px solid #B7E1CD;
+}
+
+/* 列宽度比例控制 (需与表头对应) */
+.col-code { flex: 1; font-weight: bold; }
+.col-name { flex: 2; }
+.col-market { flex: 1; }
+.col-tags { flex: 2; color: #555; font-size: 0.9em; }
+.col-action { flex: 1; text-align: right; }
+
+/* 模拟按钮样式 */
+.edit-link {
+    background: white;
+    border: 1px solid #ccc;
+    padding: 4px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+}
+.edit-link:hover {
+    background: #f0f0f0;
+}
+
+/* 全屏弹窗样式保持不变 */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.8); z-index: 99999;
+    display: flex; align-items: center; justify-content: center;
 }
 .modal-box {
-    background: white;
-    width: 94vw;
-    height: 90vh;
-    border-radius: 12px;
-    padding: 30px;
-    overflow-y: auto;
-    position: relative;
-}
-.close-btn {
-    position: absolute;
-    top: 20px;
-    right: 25px;
-    background: #ff4444;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 15px;
-    cursor: pointer;
+    background: white; width: 90vw; height: 85vh;
+    border-radius: 12px; padding: 40px; overflow-y: auto; position: relative;
 }
 </style>
 
-<!-- 双击触发 JS -->
 <script>
-function openDetail(code) {
-    window.parent.location.href = window.parent.location.pathname + "?view_code=" + code;
+// 双击跳转：修改父级 URL 参数触发 Streamlit 重绘
+function handleDblClick(code) {
+    const url = new URL(window.parent.location.href);
+    url.searchParams.set("view_code", code);
+    window.parent.location.href = url.href;
+}
+// 单击编辑跳转
+function handleEdit(code) {
+    const url = new URL(window.parent.location.href);
+    url.searchParams.set("edit_code", code);
+    window.parent.location.href = url.href;
 }
 </script>
 """, unsafe_allow_html=True)
 
-# ==========================
-# 读取 URL 参数
-# ==========================
-query_params = st.query_params
-view_code_js = query_params.get("view_code", None)
-
-if view_code_js:
-    st.session_state.view_code = view_code_js
-    st.query_params.clear()
-
-# --- 列表页面 ---
+# --- 3. 列表逻辑 ---
 if st.session_state.page == 'list':
     st.title("📈 重点关注股票列表")
 
@@ -96,110 +97,86 @@ if st.session_state.page == 'list':
         st.session_state.page = 'add'
         st.rerun()
 
-    # 搜索
-    search_tag = st.text_input("按标签搜索", "")
-    search_code = st.text_input("按代码搜索", "")
-    search_name = st.text_input("按名称搜索", "")
+    # 搜索栏 (简化展示)
+    c1, c2, c3 = st.columns(3)
+    search_tag = c1.text_input("标签搜索")
+    search_code = c2.text_input("代码搜索")
+    search_name = c3.text_input("名称搜索")
 
-    page_size = 20
+    # 分页逻辑 (保持你的原逻辑)
     total_count = favorite_stocks_table.query_stocks_count(
         tag_filter=search_tag.strip() or None,
         code_filter=search_code.strip() or None,
         name_filter=search_name.strip() or None
     )
-
-    total_pages = (total_count + page_size - 1) // page_size if total_count > 0 else 1
-    page_options = list(range(total_pages))
-    current_page = st.selectbox("页码（从0开始）", page_options, index=0)
+    total_pages = max((total_count + 19) // 20, 1)
+    current_page = st.selectbox("页码", list(range(total_pages)))
 
     stocks = favorite_stocks_table.query_stocks_by_page(
         tag_filter=search_tag.strip() or None,
         code_filter=search_code.strip() or None,
         name_filter=search_name.strip() or None,
-        page=current_page,
-        page_size=page_size
+        page=current_page, page_size=20
     )
 
-    # 表头
-    cols = st.columns([1,2,1,2,1])
-    cols[0].write("**代码**")
-    cols[1].write("**名称**")
-    cols[2].write("**市场**")
-    cols[3].write("**标签**")
-    cols[4].write("操作")
+    # 渲染自定义表头
+    st.markdown("""
+        <div style="display: flex; padding: 10px 15px; font-weight: bold; color: #666; border-bottom: 2px solid #eee;">
+            <div class="col-code">代码</div>
+            <div class="col-name">名称</div>
+            <div class="col-market">市场</div>
+            <div class="col-tags">标签</div>
+            <div class="col-action">操作</div>
+        </div>
+    """, unsafe_allow_html=True)
 
-    # ==========================
-    # 🔥 修复2：双击事件绑定（整行都可点击）
-    # ==========================
+    # 渲染每一行
     if stocks:
-        for idx, s in enumerate(stocks):
+        for s in stocks:
             code = s['code']
-
-            # 用一个完整的div包裹整行，并绑定双击事件
-            st.markdown(f'''
-            <div class="stock-row-container" ondblclick="openDetail('{code}')">
-            ''', unsafe_allow_html=True)
-
-            cols = st.columns([1,2,1,2,1])
-            cols[0].write(s['code'])
-            cols[1].write(s['name'])
-            cols[2].write(s.get('market', ''))
-            cols[3].write(s.get('tags', ''))
-            if cols[4].button("编辑", key=f"edit_{code}"):
-                st.session_state.edit_code = code
-                st.session_state.page = 'edit'
-                st.rerun()
-
-            st.markdown('</div>', unsafe_allow_html=True)
-
-            # 分割线
-            if idx != len(stocks)-1:
-                st.markdown('<div class="divider-line"></div>', unsafe_allow_html=True)
+            tags_display = s.get('tags', '')
+            # 使用一个完整的 HTML 块渲染整行
+            st.markdown(f"""
+                <div class="stock-row-wrapper" ondblclick="handleDblClick('{code}')">
+                    <div class="col-code">{code}</div>
+                    <div class="col-name">{s['name']}</div>
+                    <div class="col-market">{s.get('market', '')}</div>
+                    <div class="col-tags">{tags_display}</div>
+                    <div class="col-action">
+                        <a href="javascript:void(0)" class="edit-link" onclick="handleEdit('{code}')">编辑</a>
+                    </div>
+                </div>
+            """, unsafe_allow_html=True)
     else:
-        st.info("暂无匹配的股票数据")
+        st.info("暂无数据")
 
-# ==========================
-# 双击弹出全屏详情页
-# ==========================
-if st.session_state.get('view_code'):
-    code = st.session_state.view_code
-    stock = favorite_stocks_table.get_stock_by_code(code)
+    # --- 4. 详情弹窗 (Modal) ---
+    if st.session_state.view_code:
+        stock = favorite_stocks_table.get_stock_by_code(st.session_state.view_code)
+        if stock:
+            # 弹窗 HTML 结构
+            st.markdown(f"""
+            <div class="modal-overlay">
+                <div class="modal-box">
+                    <div style="display:flex; justify-content: space-between; align-items: center;">
+                        <h1>📊 {stock['name']} ({stock['code']})</h1>
+                        <a href="/" target="_self" style="background:#ff4444; color:white; padding:8px 20px; border-radius:6px; text-decoration:none;">关闭详情</a>
+                    </div>
+                    <hr>
+                    <p><b>市场:</b> {stock.get('market', '-')} | <b>标签:</b> {stock.get('tags', '-')}</p>
+                    <h3>📌 主营业务</h3>{stock.get('business', '暂无')}
+                    <h3>📌 优势</h3>{stock.get('advantage', '暂无')}
+                    <h3>📌 劣势</h3>{stock.get('disadvantage', '暂无')}
+                    <h3>📌 机构观点</h3>{stock.get('institution_view', '暂无')}
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
 
-    st.markdown('''
-    <div class="modal-overlay">
-        <div class="modal-box">
-    ''', unsafe_allow_html=True)
+            # 备选：如果需要在 Modal 内使用 Streamlit 组件，
+            # 则不能用上面的全 HTML，但目前双击弹窗建议保持这种纯 HTML 覆盖层。
 
-    if st.button("❌ 关闭详情页", key="close_modal"):
-        st.session_state.view_code = None
-        st.rerun()
 
-    st.title(f"📊 {stock['name']} ({code})")
-    st.markdown(f"**市场**: {stock.get('market','-')} | **标签**: {stock.get('tags','-')}")
-    st.divider()
-
-    st.subheader("📌 主营业务")
-    st.markdown(stock.get('business','<p>暂无内容</p>'), unsafe_allow_html=True)
-    st.divider()
-
-    st.subheader("📌 优势")
-    st.markdown(stock.get('advantage','<p>暂无内容</p>'), unsafe_allow_html=True)
-    st.divider()
-
-    st.subheader("📌 劣势")
-    st.markdown(stock.get('disadvantage','<p>暂无内容</p>'), unsafe_allow_html=True)
-    st.divider()
-
-    st.subheader("📌 重要里程碑")
-    st.markdown(stock.get('milestones','<p>暂无内容</p>'), unsafe_allow_html=True)
-    st.divider()
-
-    st.subheader("📌 机构观点")
-    st.markdown(stock.get('institution_view','<p>暂无内容</p>'), unsafe_allow_html=True)
-
-    st.markdown('</div></div>', unsafe_allow_html=True)
-
-# --- 编辑页面 ---
+# ---5. 编辑页面 ---
 elif st.session_state.page == 'edit':
     stock = favorite_stocks_table.get_stock_by_code(st.session_state.edit_code)
     st.title(f"📝 编辑 {stock['name']}")

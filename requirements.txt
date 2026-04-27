@@ -82,3 +82,4 @@ fredapi==0.5.2
 streamlit
 plotly
 dataset
+streamlit-jodit

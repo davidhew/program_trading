@@ -100,6 +100,7 @@ mako==1.3.11
 pymysql==1.1.2
 greenlet==3.2.5
 cryptography>=42.0.0
+streamlit_jodit==3.1.0
 
 
 

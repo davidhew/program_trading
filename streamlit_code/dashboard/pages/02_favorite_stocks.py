@@ -1,8 +1,6 @@
 import streamlit as st
 from streamlit_jodit import st_jodit
 
-from database import favorite_stocks as favorite_stocks_table
-
 # --- 状态初始化 ---
 if 'page' not in st.session_state:
     st.session_state.page = 'list'
@@ -12,7 +10,7 @@ if 'view_code' not in st.session_state:
     st.session_state.view_code = None
 
 # ==========================
-# 🔥 核心：全局 CSS + 双击 JS
+# 全局 CSS + 双击 JS（无报错版）
 # ==========================
 st.markdown("""
 <style>
@@ -70,26 +68,28 @@ st.markdown("""
 }
 </style>
 
-<!-- 双击触发 JS：把 code 存入 input 并自动刷新 -->
 <script>
+// 双击触发：通过 Streamlit 路由刷新传递代码
 function setViewCode(code) {
-    const input = window.parent.document.createElement('input');
-    input.type = 'hidden';
-    input.id = 'view_code_trigger';
-    input.value = code;
-    window.parent.document.body.appendChild(input);
-    window.parent.location.reload();
+    window.parent.location.href = window.parent.location.pathname + "?view_code=" + code;
 }
 </script>
 """, unsafe_allow_html=True)
 
 # ==========================
-# JS 监听：获取双击传来的股票代码
+# 修复：新版 Streamlit 获取参数（无 experimental）
 # ==========================
-view_code_js = st.experimental_query_params.get("view_code", None)
+query_params = st.query_params  # 新版官方写法
+view_code_js = query_params.get("view_code", None)
+
 if view_code_js:
     st.session_state.view_code = view_code_js
-    st.experimental_query_params.update(view_code="")  # 清空
+    st.query_params.clear()  # 清空参数
+
+# ==========================
+# 数据库导入
+# ==========================
+from database import favorite_stocks as favorite_stocks_table
 
 # --- 列表页面 ---
 if st.session_state.page == 'list':
@@ -111,7 +111,7 @@ if st.session_state.page == 'list':
         name_filter=search_name.strip() or None
     )
 
-    total_pages = (total_count + page_size - 1) / page_size if total_count > 0 else 1
+    total_pages = (total_count + page_size - 1) // page_size if total_count > 0 else 1
     page_options = list(range(total_pages))
     current_page = st.selectbox("页码（从0开始）", page_options, index=0)
 
@@ -131,13 +131,10 @@ if st.session_state.page == 'list':
     cols[3].write("**标签**")
     cols[4].write("操作")
 
-    # ==========================
     # 股票列表（双击打开）
-    # ==========================
     if stocks:
         for idx, s in enumerate(stocks):
             code = s['code']
-            # 整行卡片 + 双击事件
             st.markdown(f'''
             <div class="stock-card" ondblclick="setViewCode('{code}')">
             ''', unsafe_allow_html=True)
@@ -161,7 +158,7 @@ if st.session_state.page == 'list':
         st.info("暂无股票")
 
 # ==========================
-# 🔥 双击弹出：全屏只读详情页
+# 双击弹出：全屏只读详情页
 # ==========================
 if st.session_state.get('view_code'):
     code = st.session_state.view_code

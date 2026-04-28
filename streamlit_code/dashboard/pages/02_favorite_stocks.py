@@ -192,6 +192,8 @@ elif st.session_state.page == 'edit':
         st.write("---")
         # 1. 业务描述
         st.markdown("###业务描述")
+        old_business = st_jodit(stock.get('business', ''))
+        st.write(f"数据类型是: {type(old_business)}")
         new_business = st_jodit(stock.get('business', ''), key="ed_b")
         st.markdown("###竞争优势")
         new_advantage = st_jodit(stock.get('advantage', ''), key="ed_a")

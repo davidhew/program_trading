@@ -45,4 +45,4 @@ html_content = f"""
 </script>
 """
 
-st.html(html_content)
+st.html(html_content, unsafe_allow_javascript=True)

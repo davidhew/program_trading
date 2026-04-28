@@ -190,10 +190,19 @@ elif st.session_state.page == 'edit':
         # 修复：将编辑器放在 form 之外或确保 key 唯一
         # Jodit 编辑器在某些 Streamlit 版本中不能很好地在 form 里初始化
         st.write("---")
-        b_val = st_jodit(stock.get('business', '业务'), key="ed_b")
-        a_val = st_jodit(stock.get('advantage', '优势'), key="ed_a")
-        d_val = st_jodit(stock.get('disadvantage', '劣势'), key="ed_d")
-        i_val = st_jodit(stock.get('institution_view', '机构观点'), key="ed_i")
+        # 1. 业务描述
+        st.markdown("###业务描述")
+        new_business = st_jodit(stock.get('business', ''), key="ed_b")
+        st.markdown("###竞争优势")
+        new_advantage = st_jodit(stock.get('advantage', ''), key="ed_a")
+        st.markdown("###竞争劣势&风险")
+        new_disadvantage = st_jodit(stock.get('disadvantage', ''), key="ed_d")
+
+        st.markdown("###机构观点")
+        new_institution_view = st_jodit(stock.get('institution_view', ''), key="ed_i")
+
+        st.markdown("###重要里程碑")
+        new_milestones = st_jodit(stock.get('milestones', ''), key="ed_m")
 
         with st.form("save_form"):
             name = st.text_input("股票名称", value=stock['name'])
@@ -203,8 +212,8 @@ elif st.session_state.page == 'edit':
             if st.form_submit_button("💾 保存更新"):
                 favorite_stocks_table.update_stock(edit_code, {
                     "name": name, "market": market, "tags": tags,
-                    "business": b_val, "advantage": a_val,
-                    "disadvantage": d_val, "institution_view": i_val
+                    "business": new_business, "advantage": new_advantage,
+                    "disadvantage": new_disadvantage, "institution_view": new_institution_view,"milestones": new_milestones
                 })
                 st.success("更新成功！")
                 st.session_state.page = 'list'

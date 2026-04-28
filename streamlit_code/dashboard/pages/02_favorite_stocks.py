@@ -200,7 +200,6 @@ elif st.session_state.page == 'edit':
 
         st.markdown("###机构观点")
         old_institution_view = str(stock.get('institution_view', ''))
-        print("institution_view:"+old_institution_view)
         new_institution_view = st_jodit(value=old_institution_view, key="ed_i")
 
         st.markdown("###重要里程碑")
@@ -217,6 +216,7 @@ elif st.session_state.page == 'edit':
         with col1:
             # 使用普通的 st.button
             if st.button("💾 保存更新", type="primary"):
+                print("new_business is:"+new_business)
                 favorite_stocks_table.update_stock(edit_code, {
                     "name": name,
                     "market": market,

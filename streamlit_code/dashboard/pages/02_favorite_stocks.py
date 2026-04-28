@@ -33,7 +33,7 @@ if "e_code" in params:
 # ==========================
 # 3. 样式与脚本修复 (解决 React #231 报错)
 # ==========================
-st.markdown("""
+st.html("""
 <style>
 .stock-row-container {
     display: flex;
@@ -103,7 +103,7 @@ function setupListeners() {
 // 每隔一秒检查一次是否有新行渲染出来
 setInterval(setupListeners, 1000);
 </script>
-""", unsafe_allow_html=True)
+""", unsafe_allow_javascript=True)
 
 # ==========================
 # 4. 详情弹窗逻辑

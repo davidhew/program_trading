@@ -69,4 +69,4 @@ st.html(f"""
            <button class="edit-trigger" style="cursor:pointer; padding:2px 8px;">编辑</button>
        </div>
    </div>
-   """, unsafe_allow_html=True)
+   """)

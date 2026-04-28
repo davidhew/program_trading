@@ -199,7 +199,9 @@ elif st.session_state.page == 'edit':
         new_disadvantage = st_jodit(stock.get('disadvantage', ''), key="ed_d")
 
         st.markdown("###机构观点")
-        new_institution_view = st_jodit(stock.get('institution_view', ''), key="ed_i")
+        old_institution_view = str(stock.get('institution_view', ''))
+        print("institution_view:"+old_institution_view)
+        new_institution_view = st_jodit(value=old_institution_view, key="ed_i")
 
         st.markdown("###重要里程碑")
         new_milestones = st_jodit(stock.get('milestones', ''), key="ed_m")

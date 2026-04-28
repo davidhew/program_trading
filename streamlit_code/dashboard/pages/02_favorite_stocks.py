@@ -206,26 +206,41 @@ elif st.session_state.page == 'edit':
         st.markdown("###重要里程碑")
         new_milestones = st_jodit(stock.get('milestones', ''), key="ed_m")
 
-        with st.form("save_form"):
-            name = st.text_input("股票名称", value=stock['name'])
-            market = st.text_input("市场", value=stock.get('market', ''))
-            tags = st.text_input("标签", value=stock.get('tags', ''))
 
-            if st.form_submit_button("💾 保存更新"):
+        name = st.text_input("股票名称", value=stock['name'])
+        market = st.text_input("市场", value=stock.get('market', ''))
+        tags = st.text_input("标签", value=stock.get('tags', ''))
+
+        # 3. 操作按钮布局
+        col1, col2 = st.columns([1, 5])
+
+        with col1:
+            # 使用普通的 st.button
+            if st.button("💾 保存更新", type="primary"):
                 favorite_stocks_table.update_stock(edit_code, {
-                    "name": name, "market": market, "tags": tags,
-                    "business": new_business, "advantage": new_advantage,
-                    "disadvantage": new_disadvantage, "institution_view": new_institution_view,"milestones": new_milestones
+                    "name": name,
+                    "market": market,
+                    "tags": tags,
+                    "business": new_business,
+                    "advantage": new_advantage,
+                    "disadvantage": new_disadvantage,
+                    "institution_view": new_institution_view,
+                    "milestones": new_milestones
                 })
                 st.success("更新成功！")
+                # 延迟一下再跳转，确保用户看到成功提示
+                import time
+
+                time.sleep(1)
                 st.session_state.page = 'list'
                 st.session_state.edit_code = None
                 st.rerun()
 
-        if st.button("🔙 取消"):
-            st.session_state.page = 'list'
-            st.session_state.edit_code = None
-            st.rerun()
+        with col2:
+            if st.button("🔙 取消"):
+                st.session_state.page = 'list'
+                st.session_state.edit_code = None
+                st.rerun()
 
 # ==========================
 # 7. 添加页面 (略)

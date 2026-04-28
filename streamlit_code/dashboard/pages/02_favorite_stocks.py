@@ -218,6 +218,7 @@ elif st.session_state.page == 'edit':
             if st.button("💾 保存更新", type="primary"):
                 print("new_business is:"+new_business)
                 favorite_stocks_table.update_stock(edit_code, {
+                    "code":edit_code,
                     "name": name,
                     "market": market,
                     "tags": tags,

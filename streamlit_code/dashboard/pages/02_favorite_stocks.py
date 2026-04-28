@@ -190,10 +190,10 @@ elif st.session_state.page == 'edit':
         # 修复：将编辑器放在 form 之外或确保 key 唯一
         # Jodit 编辑器在某些 Streamlit 版本中不能很好地在 form 里初始化
         st.write("---")
-        b_val = st_jodit(stock.get('business', ''), key="ed_b")
-        a_val = st_jodit(stock.get('advantage', ''), key="ed_a")
-        d_val = st_jodit(stock.get('disadvantage', ''), key="ed_d")
-        i_val = st_jodit(stock.get('institution_view', ''), key="ed_i")
+        b_val = st_jodit(stock.get('business', '业务'), key="ed_b")
+        a_val = st_jodit(stock.get('advantage', '优势'), key="ed_a")
+        d_val = st_jodit(stock.get('disadvantage', '劣势'), key="ed_d")
+        i_val = st_jodit(stock.get('institution_view', '机构观点'), key="ed_i")
 
         with st.form("save_form"):
             name = st.text_input("股票名称", value=stock['name'])

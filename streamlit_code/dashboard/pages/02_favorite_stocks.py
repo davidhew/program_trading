@@ -193,16 +193,15 @@ elif st.session_state.page == 'edit':
         # 1. 业务描述
         st.markdown("###业务描述")
         old_business = st_jodit(value=stock.get('business', ''))
-        st.write(f"数据类型是: {type(old_business)}")
-        new_business = st_jodit(stock.get('business', ''), key="ed_b")
+
+        new_business = st_jodit(value=stock.get('business', ''), key="ed_b")
         st.markdown("###竞争优势")
-        new_advantage = st_jodit(stock.get('advantage', ''), key="ed_a")
+        new_advantage = st_jodit(value=stock.get('advantage', ''), key="ed_a")
         st.markdown("###竞争劣势&风险")
-        new_disadvantage = st_jodit(stock.get('disadvantage', ''), key="ed_d")
+        new_disadvantage = st_jodit(value=stock.get('disadvantage', ''), key="ed_d")
 
         st.markdown("###机构观点")
-        old_institution_view = str(stock.get('institution_view', ''))
-        new_institution_view = st_jodit(value=old_institution_view, key="ed_i")
+        new_institution_view = st_jodit(value=stock.get('institution_view', ''), key="ed_i")
 
         st.markdown("###重要里程碑")
         new_milestones = st_jodit(stock.get('milestones', ''), key="ed_m")

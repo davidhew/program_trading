@@ -116,16 +116,17 @@ if st.session_state.view_code:
         <div class="modal-overlay">
             <div class="modal-box">
                 <div style="display:flex; justify-content:space-between;">
-                    <h2>📊 {stock['name']} ({code})</h2>
-                    <a href="/" target="_self" style="padding:8px 15px; background:#444; color:white; border-radius:5px; text-decoration:none;">关闭</a>
+                    <h4>📊 {stock['name']} ({code})</h4>
+                    <a href="/" target="_self" style="padding:4px 15px; background:#444; color:white; border-radius:5px; text-decoration:none;">关闭</a>
                 </div>
                 <hr>
                 <div style="line-height:1.6;">
                     <p><b>市场:</b> {stock.get('market', '-')} | <b>标签:</b> {stock.get('tags', '-')}</p>
-                    <h4>📌 主营业务</h4><div>{stock.get('business', '暂无内容')}</div>
-                    <h4>📌 优势</h4><div>{stock.get('advantage', '暂无内容')}</div>
-                    <h4>📌 劣势</h4><div>{stock.get('disadvantage', '暂无内容')}</div>
-                    <h4>📌 机构观点</h4><div>{stock.get('institution_view', '暂无内容')}</div>
+                    <p><b>主营业务</b></p><div>{stock.get('business', '暂无内容')}</div>
+                    <p><b>优势</b></p><div>{stock.get('advantage', '暂无内容')}</div>
+                    <p><b>劣势</b></p><div>{stock.get('disadvantage', '暂无内容')}</div>
+                    <p><b>重要里程碑</b></p><div>{stock.get('milestones', '暂无内容')}</div>
+                    <p><b>机构观点</b></p>><div>{stock.get('institution_view', '暂无内容')}</div>
                 </div>
             </div>
         </div>
@@ -192,8 +193,6 @@ elif st.session_state.page == 'edit':
         st.write("---")
         # 1. 业务描述
         st.markdown("###业务描述")
-        old_business = st_jodit(value=stock.get('business', ''))
-
         new_business = st_jodit(value=stock.get('business', ''), key="ed_b")
         st.markdown("###竞争优势")
         new_advantage = st_jodit(value=stock.get('advantage', ''), key="ed_a")

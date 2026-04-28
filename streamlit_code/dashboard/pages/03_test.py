@@ -1,6 +1,6 @@
 import streamlit as st
 
-print("st query_params are:"+st.query_params)
+print("st query_params are:"+str(st.query_params))
 
 # 建议将数据定义和 HTML 构造逻辑放在一起
 html_content = f"""

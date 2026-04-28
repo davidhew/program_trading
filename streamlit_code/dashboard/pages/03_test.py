@@ -1,5 +1,7 @@
 import streamlit as st
 
+print("st query_params are:"+st.query_params)
+
 # 建议将数据定义和 HTML 构造逻辑放在一起
 html_content = f"""
 <div class="stock-row-container" data-code="TSLA">

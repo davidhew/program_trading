@@ -116,8 +116,8 @@ if st.session_state.view_code:
         <div class="modal-overlay">
             <div class="modal-box">
                 <div style="display:flex; justify-content:space-between;">
-                    <h4>📊 {stock['name']} ({code})</h4>
-                    <a href="/" target="_self" style="padding:4px 15px; background:#444; color:white; border-radius:5px; text-decoration:none;">关闭</a>
+                    <p><b>📊 {stock['name']} ({code})</b></p>
+                    <a href="/favorite_stocks" target="_self" style="padding:4px 15px; background:#444; color:white; border-radius:5px; text-decoration:none;">关闭</a>
                 </div>
                 <hr>
                 <div style="line-height:1.6;">
@@ -126,7 +126,7 @@ if st.session_state.view_code:
                     <p><b>优势</b></p><div>{stock.get('advantage', '暂无内容')}</div>
                     <p><b>劣势</b></p><div>{stock.get('disadvantage', '暂无内容')}</div>
                     <p><b>重要里程碑</b></p><div>{stock.get('milestones', '暂无内容')}</div>
-                    <p><b>机构观点</b></p>><div>{stock.get('institution_view', '暂无内容')}</div>
+                    <p><b>机构观点</b></p><div>{stock.get('institution_view', '暂无内容')}</div>
                 </div>
             </div>
         </div>

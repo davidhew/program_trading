@@ -203,7 +203,7 @@ elif st.session_state.page == 'edit':
         new_institution_view = st_jodit(value=stock.get('institution_view', ''), key="ed_i")
 
         st.markdown("###重要里程碑")
-        new_milestones = st_jodit(stock.get('milestones', ''), key="ed_m")
+        new_milestones = st_jodit(value=stock.get('milestones', ''), key="ed_m")
 
 
         name = st.text_input("股票名称", value=stock['name'])

@@ -246,8 +246,64 @@ elif st.session_state.page == 'edit':
 # ==========================
 # 7. 添加页面 (略)
 # ==========================
+# ==========================
+# 7. 添加页面 (完整版 - 集成富文本)
+# ==========================
 elif st.session_state.page == 'add':
     st.title("➕ 添加新股票")
-    if st.button("返回"):
-        st.session_state.page = 'list'
-        st.rerun()
+
+    # 普通输入字段
+    st.write("---")
+    code = st.text_input("股票代码（必填）")
+    name = st.text_input("股票名称（必填）")
+    market = st.text_input("市场（如：A股,美股）")
+    tags = st.text_input("标签（逗号分隔，如：AI,新能源,算力）")
+
+    # 富文本编辑器区域
+    st.write("---")
+    st.markdown("### 业务描述（富文本）")
+    business = st_jodit(value="", key="add_business")
+
+    st.markdown("### 竞争优势（富文本）")
+    advantage = st_jodit(value="", key="add_advantage")
+
+    st.markdown("### 竞争劣势&风险（富文本）")
+    disadvantage = st_jodit(value="", key="add_disadvantage")
+
+    st.markdown("### 机构观点（富文本）")
+    institution_view = st_jodit(value="", key="add_institution_view")
+
+    st.markdown("### 重要里程碑（富文本）")
+    milestones = st_jodit(value="", key="add_milestones")
+
+
+
+    # 按钮区域
+    col1, col2 = st.columns([1, 5])
+    with col1:
+        if st.button("✅ 保存股票", type="primary"):
+            if not code or not name:
+                st.error("❌ 股票代码和名称不能为空！")
+            else:
+                # 插入数据库
+                favorite_stocks_table.add_stock(
+                    code=code.strip(),
+                    name=name.strip(),
+                    market=market.strip(),
+                    tags=tags.strip(),
+                    business=business,
+                    advantage=advantage,
+                    disadvantage=disadvantage,
+                    institution_view=institution_view,
+                    milestones=milestones
+                )
+                st.success("✅ 股票添加成功！")
+                import time
+                time.sleep(1)
+                st.session_state.page = "list"
+                st.rerun()
+
+    with col2:
+        if st.button("🔙 返回列表"):
+            st.session_state.page = "list"
+            st.rerun()

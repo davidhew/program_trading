@@ -287,10 +287,10 @@ elif st.session_state.page == 'add':
             else:
                 # 插入数据库
                 favorite_stocks_table.add_stock(
-                    code=code.strip(),
-                    name=name.strip(),
-                    market=market.strip(),
-                    tags=tags.strip(),
+                    code=code,
+                    name=name,
+                    market=market,
+                    tags=tags,
                     business=business,
                     advantage=advantage,
                     disadvantage=disadvantage,

@@ -18,6 +18,8 @@ if 'search_code' not in st.session_state:
     st.session_state.search_code = ""
 if 'search_tag' not in st.session_state:
     st.session_state.search_tag = ""
+if 'name_tag' not in st.session_state:
+    st.session_state.search_name = ""
 if 'current_page' not in st.session_state:
     st.session_state.current_page = 1
 

@@ -353,7 +353,7 @@ elif st.session_state.page == 'add':
                     code=code,
                     name=name,
                     market=market,
-                    tags=tags,
+                    tags=",".join((tags or "").split()),
                     business=business,
                     advantage=advantage,
                     disadvantage=disadvantage,

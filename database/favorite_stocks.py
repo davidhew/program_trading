@@ -36,7 +36,7 @@ def add_stock(code, name, tags, market,business, advantage,disadvantage,mileston
     table.insert({
         'code': code,
         'name': name,
-        'tags': ",".join(tags),  # 建议存为逗号分隔字符串，或使用 JSON 格式
+        'tags': tags,  # 建议存为逗号分隔字符串，或使用 JSON 格式
         'market': market,
         'business': business,
         'advantage':advantage,

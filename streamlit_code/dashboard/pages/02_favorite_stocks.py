@@ -18,7 +18,7 @@ if 'search_code' not in st.session_state:
     st.session_state.search_code = ""
 if 'search_tag' not in st.session_state:
     st.session_state.search_tag = ""
-if 'name_tag' not in st.session_state:
+if 'search_name' not in st.session_state:
     st.session_state.search_name = ""
 if 'current_page' not in st.session_state:
     st.session_state.current_page = 1
@@ -178,7 +178,7 @@ if st.session_state.page == 'list':
         if search_code != st.session_state.search_code or search_tag != st.session_state.search_tag or search_name!=st.session_state.search_name:
             st.session_state.search_code = search_code
             st.session_state.search_tag = search_tag
-            st.session_state.search_name=search_name
+            st.session_state.search_name = search_name
             st.session_state.current_page = 1
             st.rerun()
     total_count = favorite_stocks_table.query_stocks_count(tag_filter=search_tag,code_filter=search_code,name_filter=search_name)
@@ -197,7 +197,7 @@ if st.session_state.page == 'list':
         st.session_state.current_page = selected_page
         st.rerun()
 
-    stocks = favorite_stocks_table.query_stocks_by_page(st.session_state.current_page-1, page_size=PAGE_SIZE)
+    stocks = favorite_stocks_table.query_stocks_by_page(tag_filter=search_tag,code_filter=search_code,name_filter=search_name,page=st.session_state.current_page-1, page_size=PAGE_SIZE)
 
     # --- 列表展示 ---
     st.write(f"共找到 {total_count} 条记录，当前第 {st.session_state.current_page}/{total_pages} 页")

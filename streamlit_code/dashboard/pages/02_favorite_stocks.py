@@ -280,7 +280,7 @@ elif st.session_state.page == 'edit':
                     "code":edit_code,
                     "name": name,
                     "market": market,
-                    "tags": tags,
+                    "tags": ",".join((tags or "").split()),
                     "business": new_business,
                     "advantage": new_advantage,
                     "disadvantage": new_disadvantage,

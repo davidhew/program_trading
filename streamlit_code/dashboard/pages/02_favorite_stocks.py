@@ -145,6 +145,7 @@ if st.session_state.view_code:
                     <p><b>劣势</b></p><div>{stock.get('disadvantage', '暂无内容')}</div>
                     <p><b>重要里程碑</b></p><div>{stock.get('milestones', '暂无内容')}</div>
                     <p><b>机构观点</b></p><div>{stock.get('institution_view', '暂无内容')}</div>
+                    <p><b>财报信息</b></p><div>{stock.get('financial_statements', '暂无内容')}</div>
                 </div>
             </div>
         </div>
@@ -253,11 +254,15 @@ elif st.session_state.page == 'edit':
         st.markdown("###竞争劣势&风险")
         new_disadvantage = st_jodit(value=stock.get('disadvantage', ''), key="ed_d")
 
+        st.markdown("###重要里程碑")
+        new_milestones = st_jodit(value=stock.get('milestones', ''), key="ed_m")
+
         st.markdown("###机构观点")
         new_institution_view = st_jodit(value=stock.get('institution_view', ''), key="ed_i")
 
-        st.markdown("###重要里程碑")
-        new_milestones = st_jodit(value=stock.get('milestones', ''), key="ed_m")
+
+        st.markdown("###财报信息")
+        new_financial_statements = st_jodit(value=stock.get('financial_statements', ''), key="ed_f")
 
 
         name = st.text_input("股票名称", value=stock['name'])
@@ -280,6 +285,7 @@ elif st.session_state.page == 'edit':
                     "advantage": new_advantage,
                     "disadvantage": new_disadvantage,
                     "institution_view": new_institution_view,
+                    "financial_statements": new_financial_statements,
                     "milestones": new_milestones
                 })
                 st.success("更新成功！")
@@ -315,20 +321,23 @@ elif st.session_state.page == 'add':
 
     # 富文本编辑器区域
     st.write("---")
-    st.markdown("### 业务描述（富文本）")
+    st.markdown("### 业务描述")
     business = st_jodit(value="", key="add_business")
 
-    st.markdown("### 竞争优势（富文本）")
+    st.markdown("### 竞争优势")
     advantage = st_jodit(value="", key="add_advantage")
 
-    st.markdown("### 竞争劣势&风险（富文本）")
+    st.markdown("### 竞争劣势&风险")
     disadvantage = st_jodit(value="", key="add_disadvantage")
 
-    st.markdown("### 机构观点（富文本）")
+    st.markdown("### 机构观点")
     institution_view = st_jodit(value="", key="add_institution_view")
 
-    st.markdown("### 重要里程碑（富文本）")
+    st.markdown("### 重要里程碑")
     milestones = st_jodit(value="", key="add_milestones")
+
+    st.markdown("###财报信息")
+    financial_statements = st_jodit(value="", key="financial_statements")
 
 
 
@@ -349,7 +358,8 @@ elif st.session_state.page == 'add':
                     advantage=advantage,
                     disadvantage=disadvantage,
                     institution_view=institution_view,
-                    milestones=milestones
+                    milestones=milestones,
+                    financial_statements=financial_statements
                 )
                 st.success("✅ 股票添加成功！")
                 import time

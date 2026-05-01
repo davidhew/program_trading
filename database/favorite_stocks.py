@@ -32,7 +32,7 @@ table = db['favorite_stocks']
 # --- INSERT (插入) ---
 # 插入时不需要预先定义字段，dataset 会根据字典的 key 自动生成列
 @db_monitor(db)
-def add_stock(code, name, tags, market,business, advantage,disadvantage,milestones,institution_view):
+def add_stock(code, name, tags, market,business, advantage,disadvantage,milestones,institution_view,financial_statements):
     table.insert({
         'code': code,
         'name': name,
@@ -43,6 +43,7 @@ def add_stock(code, name, tags, market,business, advantage,disadvantage,mileston
         'disadvantage':disadvantage,
         'milestones': milestones,
         'institution_view': institution_view,
+        'financial_statements': financial_statements,
         'create_time': datetime.now(),
         'update_time':datetime.now()
     })

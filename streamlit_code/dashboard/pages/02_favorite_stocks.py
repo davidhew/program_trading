@@ -1,4 +1,5 @@
 import streamlit as st
+import math
 from streamlit_jodit import st_jodit
 from database import favorite_stocks as favorite_stocks_table
 
@@ -11,6 +12,14 @@ if 'edit_code' not in st.session_state:
     st.session_state.edit_code = None
 if 'view_code' not in st.session_state:
     st.session_state.view_code = None
+
+# 初始化搜索与分页状态
+if 'search_code' not in st.session_state:
+    st.session_state.search_code = ""
+if 'search_tag' not in st.session_state:
+    st.session_state.search_tag = ""
+if 'current_page' not in st.session_state:
+    st.session_state.current_page = 1
 
 # ==========================
 # 2. 核心：处理 URL 参数 (放在最前面)
@@ -65,6 +74,13 @@ st.html("""
 .modal-box {
     background: white; width: 85vw; height: 85vh;
     border-radius: 12px; padding: 30px; overflow-y: auto; color: black;
+}
+/* 搜索框容器样式 */
+.search-container {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
 }
 </style>
 
@@ -145,8 +161,44 @@ if st.session_state.page == 'list':
     if st.button("➕ 添加股票"):
         st.session_state.page = 'add'
         st.rerun()
+    with st.container():
+        col_search1, col_search2,col_search3 = st.columns(3)
+        with col_search1:
+            search_code = st.text_input("股票代码搜索", value=st.session_state.search_code,
+                                        placeholder="输入代码模糊搜索...")
+        with col_search2:
+            search_name = st.text_input("股票名称搜索", value=st.session_state.search_name,
+                                       placeholder="输入名称模糊搜索...")
+        with col_search3:
+            search_tag = st.text_input("股票标签搜索", value=st.session_state.search_tag,
+                                       placeholder="输入标签模糊搜索...")
+        # 如果搜索词改变，重置页码到第1页
+        if search_code != st.session_state.search_code or search_tag != st.session_state.search_tag or search_name!=st.session_state.search_name:
+            st.session_state.search_code = search_code
+            st.session_state.search_tag = search_tag
+            st.session_state.search_name=search_name
+            st.session_state.current_page = 1
+            st.rerun()
+    total_count = favorite_stocks_table.query_stocks_count(tag_filter=search_tag,code_filter=search_code,name_filter=search_name)
+    PAGE_SIZE=20
+    total_pages = math.ceil(total_count / PAGE_SIZE) if total_count > 0 else 1
 
-    stocks = favorite_stocks_table.query_stocks_by_page(page=0, page_size=50)
+    page_options = list(range(1, total_pages + 1))
+    selected_page = st.selectbox(
+        "跳转至页码",
+        options=page_options,
+        index=st.session_state.current_page - 1 if st.session_state.current_page <= total_pages else 0,
+        key="page_selector"
+    )
+
+    if selected_page != st.session_state.current_page:
+        st.session_state.current_page = selected_page
+        st.rerun()
+
+    stocks = favorite_stocks_table.query_stocks_by_page(st.session_state.current_page-1, page_size=PAGE_SIZE)
+
+    # --- 列表展示 ---
+    st.write(f"共找到 {total_count} 条记录，当前第 {st.session_state.current_page}/{total_pages} 页")
 
     # 表头
     st.markdown("""

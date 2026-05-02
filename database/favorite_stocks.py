@@ -22,7 +22,13 @@ db_url="mysql+pymysql://"+secrets.get("DB_USER")+":"+secrets.get("DB_PASSWD")+"@
 print("db_url:"+db_url)
 #db = dataset.connect('mysql+pymysql://user:pass@host:port/dbname?charset=utf8mb4')
 # 每隔 3600 秒回收连接，防止 MySQL 8 小时断连导致的事务异常
-db = dataset.connect(db_url, engine_kwargs={'pool_recycle': 3600})
+db = dataset.connect(
+    'mysql+pymysql://user:password@localhost/dbname',
+    engine_kwargs={
+        'pool_recycle': 3600, # Re-establish connection every hour
+        'pool_pre_ping': True # Check if connection is alive before every query
+    }
+)
 
 
 # 2. 获取表对象 (如果表不存在，会在第一次插入数据时自动创建)

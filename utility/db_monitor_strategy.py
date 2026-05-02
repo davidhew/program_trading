@@ -5,7 +5,6 @@
 import traceback
 import functools
 import config
-from utility import im_messenger
 from datetime import datetime
 
 import logging

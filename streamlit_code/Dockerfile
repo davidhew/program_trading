@@ -30,6 +30,7 @@ COPY ./database/ ./database/
 COPY .env.dev .
 COPY .env.prod .
 COPY .env.test .
+COPY ./program_trading_log.log .
 
 # 4. 暴露 Streamlit 默认端口
 EXPOSE 8501

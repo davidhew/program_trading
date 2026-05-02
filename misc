@@ -53,6 +53,7 @@ docker ps
 
 #查看实时日志
 docker logs -f stock_analyzer
+docker logs -f stock_dashboard
 
 |----修改了什么？------------|是否需要 Build？|---------	原因-------------------------|
 | Python 代码 (.py 文件)    |	   否      |因为有 volumes 挂载，容器直接读取宿主机文件。  |

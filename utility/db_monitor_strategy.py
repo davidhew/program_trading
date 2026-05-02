@@ -9,7 +9,7 @@ from datetime import datetime
 
 import logging
 
-logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
+logging.basicConfig(filename=config.DASHBOARD_LOG_FILE_PATH, level=logging.INFO)
 logger = logging.getLogger()
 
 def db_monitor(db_instance):

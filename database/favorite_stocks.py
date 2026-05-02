@@ -12,7 +12,7 @@ from utility.db_monitor_strategy import db_monitor
 
 from utility import secrets_config as secrets_config
 
-logging.basicConfig(filename=config.LOG_FILE_PATH, level=logging.INFO)
+logging.basicConfig(filename=config.DASHBOARD_LOG_FILE_PATH, level=logging.INFO)
 logger = logging.getLogger()
 secrets = secrets_config.load_external_config()
 
@@ -23,7 +23,7 @@ print("db_url:"+db_url)
 #db = dataset.connect('mysql+pymysql://user:pass@host:port/dbname?charset=utf8mb4')
 # 每隔 3600 秒回收连接，防止 MySQL 8 小时断连导致的事务异常
 db = dataset.connect(
-    'mysql+pymysql://user:password@localhost/dbname',
+    db_url,
     engine_kwargs={
         'pool_recycle': 3600, # Re-establish connection every hour
         'pool_pre_ping': True # Check if connection is alive before every query

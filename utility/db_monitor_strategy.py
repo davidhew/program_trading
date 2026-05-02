@@ -24,6 +24,7 @@ def db_monitor(db_instance):
     def decorator(func):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
+            logger.warning("db monitor")
             try:
 
                 result = func(*args, **kwargs)

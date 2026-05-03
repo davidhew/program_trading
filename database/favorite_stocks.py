@@ -26,7 +26,8 @@ db = dataset.connect(
     db_url,
     engine_kwargs={
         'pool_recycle': 3600, # Re-establish connection every hour
-        'pool_pre_ping': True # Check if connection is alive before every query
+        'pool_pre_ping': True, # Check if connection is alive before every query
+        'pool_size': 10
     }
 )
 

@@ -33,6 +33,7 @@ def db_monitor(db_instance):
                 # 1. 【关键修复步骤】立即重置连接池，防止 PendingRollbackError 蔓延
                 try:
                     logger.warning(f"检测到数据库异常，正在重置连接池: {func.__name__}")
+                    db_instance.session.rollback()
                     db_instance.engine.dispose()
                 except Exception as dispose_e:
                     logger.error(f"释放数据库连接失败: {dispose_e}")

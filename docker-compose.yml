@@ -21,6 +21,8 @@ services:
       - .:/app              # 将当前代码目录映射到容器
       - /Users/weihe/stock/stock_datas:/app/stock_datas
       - /Users/weihe/stock/secret_config:/app/secret_config:ro #敏感信息配置文件映射
+      - /Users/weihe/stock/logs:/app/logs
+
     working_dir: /app
     # 使用变量替换，格式为 ${变量名:-默认值}
     command: python jobStarter.py
@@ -42,7 +44,7 @@ services:
 
       - /Users/weihe/stock/stock_datas:/app/stock_datas:ro  # ro表示只读挂载，保护数据安全
       - /Users/weihe/stock/secret_config:/app/secret_config:ro #敏感信息配置文件映射
-      - /Users/weihe/stock/logs:/app/logs:rw
+      - /Users/weihe/stock/logs:/app/logs
     depends_on:
       - quant_bot
     restart: always

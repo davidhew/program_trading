@@ -29,6 +29,11 @@ def setup_logging():
     # 2. 创建文件处理器 (输出到文件)
     file_handler = logging.FileHandler(config.LOG_FILE_PATH)
     file_handler.setFormatter(formatter)
+
+    file_handler2 = logging.FileHandler(config.DASHBOARD_LOG_FILE_PATH)
+    file_handler2.setFormatter(formatter)
+
     logger.addHandler(file_handler)
+    logger.addHandler(file_handler2)
 
     return logger

@@ -42,6 +42,7 @@ services:
 
       - /Users/weihe/stock/stock_datas:/app/stock_datas:ro  # ro表示只读挂载，保护数据安全
       - /Users/weihe/stock/secret_config:/app/secret_config:ro #敏感信息配置文件映射
+      - /Users/weihe/stock/logs:/app/logs:rw
     depends_on:
       - quant_bot
     restart: always

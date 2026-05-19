@@ -5,18 +5,11 @@ import config
 
 from logging.handlers import RotatingFileHandler
 
-# 替换上面的 FileHandler
-# 每个文件最大 5MB，保留最后 3 个文件
-file_handler = RotatingFileHandler(
-    config.LOG_FILE_PATH,
-    maxBytes=5*1024*1024,
-    backupCount=3
-)
 
 def setup_logging():
     # 获取根日志记录器
-    logger = logging.getLogger()
-    logger.setLevel(logging.INFO)
+    core_logger = logging.getLogger("app_core")
+    core_logger.setLevel(logging.INFO)
 
     # 格式化器
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -24,16 +17,30 @@ def setup_logging():
     # 1. 创建控制台处理器 (输出到终端)
     console_handler = logging.StreamHandler()
     console_handler.setFormatter(formatter)
-    logger.addHandler(console_handler)
+    core_logger.addHandler(console_handler)
 
-    # 2. 创建文件处理器 (输出到文件)
-    file_handler = logging.FileHandler(config.LOG_FILE_PATH)
+    file_handler = RotatingFileHandler(
+        config.LOG_FILE_PATH,
+        maxBytes=5 * 1024 * 1024,
+        backupCount=3,
+        encoding='utf-8'  # 建议加上编码，防止跨境系统/跨平台乱码
+    )
+
+
     file_handler.setFormatter(formatter)
+    core_logger.addHandler(file_handler)
 
-    file_handler2 = logging.FileHandler(config.DASHBOARD_LOG_FILE_PATH)
+    # 获取根日志记录器
+    dashboard_logger = logging.getLogger("dashboard")
+    dashboard_logger.setLevel(logging.INFO)
+
+    file_handler2 = RotatingFileHandler(
+        config.DASHBOARD_LOG_FILE_PATH,
+        maxBytes=5 * 1024 * 1024,
+        backupCount=3,
+        encoding='utf-8'  # 建议加上编码，防止跨境系统/跨平台乱码
+    )
     file_handler2.setFormatter(formatter)
 
-    logger.addHandler(file_handler)
-    logger.addHandler(file_handler2)
-
-    return logger
+    dashboard_logger.addHandler(file_handler2)
+    dashboard_logger.addHandler(console_handler)

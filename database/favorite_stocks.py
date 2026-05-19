@@ -12,8 +12,7 @@ from utility.db_monitor_strategy import db_monitor
 
 from utility import secrets_config as secrets_config
 
-logging.basicConfig(filename=config.DASHBOARD_LOG_FILE_PATH, level=logging.INFO)
-logger = logging.getLogger()
+logger = logging.getLogger("dashboard")
 secrets = secrets_config.load_external_config()
 
 # 1. 连接数据库 (如果文件不存在，会自动创建)

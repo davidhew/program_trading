@@ -423,3 +423,19 @@ ERROR:root:do_get_income_statment 失败，ts_code:MSSWF，获取到的内容为
 ERROR:root:do_get_income_statment 失败，ts_code:MSSWF，状态码: 200
 ERROR:root:do_get_income_statment 失败，ts_code:MSSWF，获取到的内容为空
 ERROR:root:do_get_income_statment 失败，ts_code:MSSWF，状态码: 200
+INFO:alembic.runtime.plugins:setup plugin alembic.autogenerate.schemas
+INFO:alembic.runtime.plugins:setup plugin alembic.autogenerate.tables
+INFO:alembic.runtime.plugins:setup plugin alembic.autogenerate.types
+INFO:alembic.runtime.plugins:setup plugin alembic.autogenerate.constraints
+INFO:alembic.runtime.plugins:setup plugin alembic.autogenerate.defaults
+INFO:alembic.runtime.plugins:setup plugin alembic.autogenerate.comments
+INFO:root:db_url:mysql+pymysql://tiny_investor:bd6071@192.168.101.24:3306/invest_test?charset=utf8&autocommit=true
+WARNING:root:db monitor
+WARNING:root:检测到数据库异常，正在重置连接池: add_stock
+ERROR:root:函数 add_stock 运行崩溃:
+Traceback (most recent call last):
+  File "/Users/hewei/PycharmProjects/program_trading/utility/db_monitor_strategy.py", line 31, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+TypeError: add_stock() missing 3 required positional arguments: 'milestones', 'institution_view', and 'financial_statements'
+

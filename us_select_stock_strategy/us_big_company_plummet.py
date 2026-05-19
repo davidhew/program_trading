@@ -24,7 +24,7 @@ def compute():
         for stock_df in batch:
             # 一年认为是252个交易日，然后再用最后一个交易日去和这252个交易日价格相比，所以总共需要253个
             if (len(stock_df) < 253):
-                logger.info("us_big_company_plumet, %s's data less than one year!", stock_df.iloc[0]['ts_code'])
+                #logger.info("us_big_company_plumet, %s's data less than one year!", stock_df.iloc[0]['ts_code'])
                 continue
             else:
                 market_cap = us_get_company_info.get_market_cap(stock_df.iloc[-1]['ts_code'])

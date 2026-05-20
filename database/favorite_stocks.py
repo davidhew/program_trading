@@ -33,13 +33,16 @@ db = dataset.connect(
 
 
 # 2. 获取表对象 (如果表不存在，会在第一次插入数据时自动创建)
-table = db['favorite_stocks']
+def get_favorite_stocks_table():
+    """每次操作前或重置后，通过此函数安全获取表对象"""
+    return db['favorite_stocks']
 
 
 # --- INSERT (插入) ---
 # 插入时不需要预先定义字段，dataset 会根据字典的 key 自动生成列
 @db_monitor(db)
 def add_stock(code, name, tags, market,business, advantage,disadvantage,milestones,institution_view,financial_statements):
+    table = get_favorite_stocks_table()
     table.insert({
         'code': code,
         'name': name,
@@ -62,6 +65,7 @@ def add_stock(code, name, tags, market,business, advantage,disadvantage,mileston
 @db_monitor(db)
 def update_stock(code:str, fields:dict ):
     # 根据 code 定位，更新 business 字段
+    table = get_favorite_stocks_table()
     table.update(fields, ['code'])
     print(f"🔄 已更新代码为 {code} 的股票情况")
 
@@ -121,6 +125,7 @@ def query_stocks_by_page(tag_filter=None, code_filter=None, name_filter=None, pa
 # --- 根据股票代码 code 查询单条股票信息 ---
 @db_monitor(db)
 def get_stock_by_code(code):
+    table = get_favorite_stocks_table()
     # 精确查询：code 完全匹配
     stock = table.find_one(code=code)
     return stock  # 有数据返回字典，没有返回 None

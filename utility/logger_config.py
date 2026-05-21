@@ -29,6 +29,8 @@ def setup_logging():
 
     file_handler.setFormatter(formatter)
     core_logger.addHandler(file_handler)
+    # 【核心改动 1】阻止 core_logger 向 Root 传递
+    core_logger.propagate = False
 
     # 获取根日志记录器
     dashboard_logger = logging.getLogger("dashboard")
@@ -44,3 +46,10 @@ def setup_logging():
 
     dashboard_logger.addHandler(file_handler2)
     dashboard_logger.addHandler(console_handler)
+    # 【核心改动 2】阻止 dashboard_logger 向 Root 传递
+    dashboard_logger.propagate = False
+
+    # 可选：顺手给 Root Logger 穿件衣裳，防止第三方库（如 SQLAlchemy）打印裸日志
+    root_logger = logging.getLogger()
+    root_logger.setLevel(logging.WARNING)
+    root_logger.addHandler(console_handler)

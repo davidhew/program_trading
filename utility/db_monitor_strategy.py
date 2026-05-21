@@ -4,14 +4,12 @@
 '''
 import traceback
 import functools
-import config
 from datetime import datetime
 from dataset import Database
 
 import logging
 
-logging.basicConfig(filename=config.DASHBOARD_LOG_FILE_PATH, level=logging.INFO)
-logger = logging.getLogger()
+logger = logging.getLogger("dashboard")
 
 def db_monitor(db_instance:Database):
     """

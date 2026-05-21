@@ -5,7 +5,7 @@ import config as config
 import logging
 from utility.monitor_strategy import monitor_strategy
 
-logger = logging.getLogger("app_core")
+logger = logging.getLogger("dashboard")
 
 net_liquidity_file_name= "net_liquidity.csv"
 credit_spread_file_name= "credit_spread.csv"

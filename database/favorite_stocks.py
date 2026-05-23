@@ -28,7 +28,7 @@ def get_favorite_stocks_table():
 
 # --- INSERT (插入) ---
 # 插入时不需要预先定义字段，dataset 会根据字典的 key 自动生成列
-@db_monitor(db)
+@db_monitor(db_manager.get_database())
 def add_stock(code, name, tags, market,business, advantage,disadvantage,milestones,institution_view,financial_statements):
     table = get_favorite_stocks_table()
     table.insert({

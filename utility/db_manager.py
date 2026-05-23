@@ -35,5 +35,6 @@ db = init_database()
 def get_database():
     return db
 
+#数据库出现异常后，更新一下，丢弃掉旧的有问题的数据库连接
 def reset_database():
     db = init_database()

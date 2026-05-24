@@ -37,4 +37,28 @@ def get_database():
 
 #数据库出现异常后，更新一下，丢弃掉旧的有问题的数据库连接
 def reset_database():
-    db = init_database()
+    """数据库出现异常后，彻底销毁旧连接并生成全局新 db"""
+    global db  # 【核心修复】声明我们要修改的是外部作用域的全局变量 db
+
+    logger.warning("🔄 接收到重置数据库请求，正在启动重置策略...")
+
+    # 1. 优雅释放旧连接池资源，防止连接数泄露
+    if db is not None:
+        try:
+            #老的db已经出现问题，所以尝试对其进行rollback
+            db.rollback()
+            logger.info("正在销毁旧的数据库连接池...")
+            # 如果之前发生了连接污染，清除 dataset 的线程本地缓存
+            if hasattr(db, '_tlocal'):
+                db._tlocal.__dict__.clear()
+            db.engine.dispose()
+        except Exception as dispose_e:
+            logger.error(f"释放旧数据库资源时发生异常(可忽略): {dispose_e}")
+
+    # 2. 生成新连接并覆写全局变量
+    try:
+        db = init_database()
+        logger.info("✅ 成功重新生成数据库连接对象，全局变量已更新。")
+    except Exception as e:
+        logger.critical(f"❌ 重新初始化数据库彻底失败: {e}")
+        raise e

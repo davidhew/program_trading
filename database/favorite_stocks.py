@@ -9,7 +9,8 @@ import config
 import logging
 from utility.db_monitor_strategy import db_monitor
 from utility import db_manager
-
+from utility.logger_config import setup_logging
+setup_logging()
 
 from utility import secrets_config as secrets_config
 

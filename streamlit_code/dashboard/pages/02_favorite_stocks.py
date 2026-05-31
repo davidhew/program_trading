@@ -2,6 +2,8 @@ import streamlit as st
 import math
 from streamlit_jodit import st_jodit
 from database import favorite_stocks as favorite_stocks_table
+import logging
+logger = logging.getLogger("dashboard")
 
 # --- 1. 基础配置 ---
 st.set_page_config(layout="wide")
@@ -36,7 +38,7 @@ if "v_code" in params:
 
 # 如果 URL 中有 e_code，说明是要进入编辑
 if "e_code" in params:
-    print("e_code is:"+params["e_code"])
+    logger.info("e_code is:"+params["e_code"])
     st.session_state.edit_code = params["e_code"]
     st.session_state.page = 'edit'
     st.query_params.clear()
@@ -110,6 +112,7 @@ function setupListeners() {
             editBtn.addEventListener('click', (e) => {
                 e.stopPropagation(); // 阻止触发整行的双击/单击
                 const url = new URL(window.parent.location.href);
+                alert(code)
                 url.searchParams.set('e_code', code);
                 window.parent.location.href = url.href;
             });

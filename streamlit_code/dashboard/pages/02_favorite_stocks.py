@@ -92,6 +92,7 @@ st.html("""
 <script>
 // 动态绑定事件，避免 React 属性注入错误
 function setupListeners() {
+    alert("run setupListeners");
     const rows = window.parent.document.querySelectorAll('.stock-row-container');
     rows.forEach(row => {
         // 防止重复绑定
@@ -112,7 +113,6 @@ function setupListeners() {
             editBtn.addEventListener('click', (e) => {
                 e.stopPropagation(); // 阻止触发整行的双击/单击
                 const url = new URL(window.parent.location.href);
-                alert(code)
                 url.searchParams.set('e_code', code);
                 window.parent.location.href = url.href;
             });

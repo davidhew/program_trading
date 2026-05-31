@@ -36,6 +36,7 @@ if "v_code" in params:
 
 # 如果 URL 中有 e_code，说明是要进入编辑
 if "e_code" in params:
+    print("e_code is:"+params["e_code"])
     st.session_state.edit_code = params["e_code"]
     st.session_state.page = 'edit'
     st.query_params.clear()

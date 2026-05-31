@@ -47,6 +47,9 @@ if "e_code" in params:
 # ==========================
 # 3. 样式与脚本修复 (解决 React #231 报错)
 # ==========================
+# ==========================
+# 3. 样式与脚本修复 (完美解决 React #231 及动态刷新问题)
+# ==========================
 st.html("""
 <style>
 .stock-row-container {
@@ -90,40 +93,50 @@ st.html("""
 </style>
 
 <script>
-// 动态绑定事件，避免 React 属性注入错误
-function setupListeners() {
-    alert("run setupListeners");
-    const rows = window.parent.document.querySelectorAll('.stock-row-container');
-    rows.forEach(row => {
-        // 防止重复绑定
-        if (row.getAttribute('data-bound')) return;
+// 使用事件委托：直接监听父级 document 的全局点击与双击事件
+// 这样无论 Streamlit 如何局部刷新 DOM 列表，只要带有对应 class 的元素被触发，就能实时拿到它当前的最新 data-code。
+(function() {
+    const parentDoc = window.parent.document;
 
-        const code = row.getAttribute('data-code');
+    // 防止在全局范围内重复初始化监听器
+    if (parentDoc.__tmb_listeners_bound__) return;
 
-        // 双击查看详情
-        row.addEventListener('dblclick', () => {
-            const url = new URL(window.parent.location.href);
-            url.searchParams.set('v_code', code);
-            window.parent.location.href = url.href;
-        });
-
-        // 点击编辑按钮 (查找内部的编辑链接)
-        const editBtn = row.querySelector('.edit-trigger');
-        if (editBtn) {
-            editBtn.addEventListener('click', (e) => {
-                e.stopPropagation(); // 阻止触发整行的双击/单击
-                const url = new URL(window.parent.location.href);
-                url.searchParams.set('e_code', code);
-                window.parent.location.href = url.href;
-            });
+    // 1. 全局双击事件监听：查看详情
+    parentDoc.addEventListener('dblclick', function(e) {
+        // 向上寻找是否点击在 stock-row-container 行内部
+        const row = e.target.closest('.stock-row-container');
+        if (row) {
+            const code = row.getAttribute('data-code');
+            if (code) {
+                const url = new URL(parentDoc.location.href);
+                url.searchParams.set('v_code', code);
+                parentDoc.location.href = url.href;
+            }
         }
-
-        row.setAttribute('data-bound', 'true');
     });
-}
 
-// 每隔一秒检查一次是否有新行渲染出来
-setInterval(setupListeners, 1000);
+    // 2. 全局点击事件监听：处理编辑按钮点击
+    parentDoc.addEventListener('click', function(e) {
+        // 检查点击的元素是否是编辑按钮（或者其内部节点）
+        const editBtn = e.target.closest('.edit-trigger');
+        if (editBtn) {
+            e.stopPropagation(); // 阻止冒泡
+            const row = editBtn.closest('.stock-row-container');
+            if (row) {
+                const code = row.getAttribute('data-code');
+                if (code) {
+                    const url = new URL(parentDoc.location.href);
+                    url.searchParams.set('e_code', code);
+                    parentDoc.location.href = url.href;
+                }
+            }
+        }
+    });
+
+    // 标记已绑定状态，防止无限叠加
+    parentDoc.__tmb_listeners_bound__ = true;
+    console.log("Global event delegation for stock table successfully initialized.");
+})();
 </script>
 """, unsafe_allow_javascript=True)
 

@@ -17,7 +17,7 @@ if 'view_id' not in st.session_state:
 
 # 初始化搜索与分页状态
 if 'search_title' not in st.session_state:
-    st.session_state.search_code = ""
+    st.session_state.search_title = ""
 if 'search_tag' not in st.session_state:
     st.session_state.search_tag = ""
 if 'current_page' not in st.session_state:
@@ -176,7 +176,7 @@ if st.session_state.page == 'list':
         st.session_state.page = 'add'
         st.rerun()
     with st.container():
-        col_search1, col_search2,col_search3 = st.columns(3)
+        col_search1, col_search2 = st.columns(2)
         with col_search1:
             search_title = st.text_input("文档标题搜索", value=st.session_state.search_title,
                                         placeholder="输入标调模糊搜索...")

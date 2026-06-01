@@ -154,6 +154,7 @@ if st.session_state.view_id:
                 <hr>
                 <div style="line-height:1.6;">
                     <p><b>创建日期:</b> {doc.get('create_time', '-').strftime('%Y-%m-%d')}</p>
+                    <p><b>文章来源:</b> {doc.get('source', '-')}</p>
                     <p><b>标签:</b> {doc.get('tags', '-')}</p>
                     <p><b>内容</b></p><div>{doc.get('content', '暂无内容')}</div>
            
@@ -255,6 +256,7 @@ elif st.session_state.page == 'edit':
         st.write("---")
 
         title = st.text_input("标题", value=doc.get('title', ''))
+        source = st.text_input("文章来源", value=doc.get('source', ''))
         tags = st.text_input("标签", value=doc.get('tags', ''))
         # 1. 文档内容
         st.markdown("###内容")
@@ -272,6 +274,7 @@ elif st.session_state.page == 'edit':
                 knowledge_doc_table.update_doc(edit_id, {
 
                     "title": title,
+                    "source": source,
                     "tags": ",".join((tags or "").split()),
                     "content": new_content
                 })
@@ -302,6 +305,7 @@ elif st.session_state.page == 'add':
     # 普通输入字段
     st.write("---")
     title = st.text_input("标题（必填）")
+    source = st.text_input("文章来源")
     tags = st.text_input("标签（逗号分隔，如：AI,新能源,算力）")
 
     # 富文本编辑器区域
@@ -320,6 +324,7 @@ elif st.session_state.page == 'add':
                 # 插入数据库
                 knowledge_doc_table.add_doc(
                     title=title,
+                    source=source,
                     tags=",".join((tags or "").split()),
                     content=content
                 )

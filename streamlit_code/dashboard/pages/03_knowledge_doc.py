@@ -103,10 +103,10 @@ st.html("""
         // 向上寻找是否点击在 stock-row-container 行内部
         const row = e.target.closest('.doc-row-container');
         if (row) {
-            const doc-id = row.getAttribute('doc-id');
-            if (doc-id) {
+            const docId = row.getAttribute('doc-id');
+            if (docId) {
                 const url = new URL(parentDoc.location.href);
-                url.searchParams.set('v_id', doc-id);
+                url.searchParams.set('v_id', docId);
                 parentDoc.location.href = url.href;
             }
         }
@@ -120,10 +120,10 @@ st.html("""
             e.stopPropagation(); // 阻止冒泡
             const row = editBtn.closest('.doc-row-container');
             if (row) {
-                const doc-id = row.getAttribute('doc-id');
-                if (doc-id) {
+                const docId = row.getAttribute('doc-id');
+                if (docId) {
                     const url = new URL(parentDoc.location.href);
-                    url.searchParams.set('e_id', doc-id);
+                    url.searchParams.set('e_id', docId);
                     parentDoc.location.href = url.href;
                 }
             }
@@ -149,7 +149,7 @@ if st.session_state.view_id:
             <div class="modal-box">
                 <div style="display:flex; justify-content:space-between;">
                     <p><b>📊 {doc['title']} </b></p>
-                    <a href="/favorite_stocks" target="_self" style="padding:4px 15px; background:#444; color:white; border-radius:5px; text-decoration:none;">关闭</a>
+                    <a href="/knowledge_doc" target="_self" style="padding:4px 15px; background:#444; color:white; border-radius:5px; text-decoration:none;">关闭</a>
                 </div>
                 <hr>
                 <div style="line-height:1.6;">

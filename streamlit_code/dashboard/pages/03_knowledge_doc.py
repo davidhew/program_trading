@@ -50,7 +50,7 @@ if "e_id" in params:
 # ==========================
 st.html("""
 <style>
-.stock-row-container {
+.doc-row-container {
     display: flex;
     align-items: center;
     background-color: #E6F4EA;
@@ -61,12 +61,12 @@ st.html("""
     transition: background 0.2s;
     border: 1px solid transparent;
 }
-.stock-row-container:hover {
+.doc-row-container:hover {
     background-color: #D4EDDC;
     border-color: #B7E1CD;
 }
-.col-title { flex: 1; font-weight: bold; }
 .col-date { flex: 1; font-weight: bold; }
+.col-title { flex: 1; }
 .col-tags { flex: 2; color: #666; }
 .col-action { flex: 1; text-align: right; }
 

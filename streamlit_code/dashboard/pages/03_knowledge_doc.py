@@ -249,7 +249,7 @@ elif st.session_state.page == 'edit':
             st.session_state.page = 'list'
             st.rerun()
     else:
-        st.title(f"📝 编辑：{doc['name']}")
+        st.title(f"📝 编辑：{doc['title']}")
 
         # 修复：将编辑器放在 form 之外或确保 key 唯一
         # Jodit 编辑器在某些 Streamlit 版本中不能很好地在 form 里初始化

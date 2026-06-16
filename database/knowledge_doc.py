@@ -39,7 +39,7 @@ def add_doc(title, tags, source,content):
 # --- UPDATE (更新) ---
 # 只要指定“筛选条件”和“更新内容”即可
 @db_monitor(db_manager.get_database())
-def update_doc(id:str, fields:dict ):
+def update_doc(fields:dict ):
     table = get_doc_table()
     table.update(fields, ['id'])
     print(f"🔄 已更新id为 {id} 的文章")

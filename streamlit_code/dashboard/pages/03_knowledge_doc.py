@@ -271,8 +271,8 @@ elif st.session_state.page == 'edit':
             # 使用普通的 st.button
             if st.button("💾 保存更新", type="primary"):
 
-                knowledge_doc_table.update_doc(edit_id, {
-
+                knowledge_doc_table.update_doc({
+                    "id": edit_id,
                     "title": title,
                     "source": source,
                     "tags": ",".join((tags or "").split()),

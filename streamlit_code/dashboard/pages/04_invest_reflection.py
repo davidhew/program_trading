@@ -157,7 +157,7 @@ if st.session_state.view_id:
                     <p><b>标签:</b> {doc.get('tags', '-')}</p>
                     <p><b>内容</b></p><div>{doc.get('content', '暂无内容')}</div>
            
-                </div>
+        
  
         """, unsafe_allow_html=True)
         # 提供一个备用的 Streamlit 按钮清除状态

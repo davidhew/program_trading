@@ -158,8 +158,7 @@ if st.session_state.view_id:
                     <p><b>内容</b></p><div>{doc.get('content', '暂无内容')}</div>
            
                 </div>
-            </div>
-        </div>
+ 
         """, unsafe_allow_html=True)
         # 提供一个备用的 Streamlit 按钮清除状态
         if st.button("返回列表", key="back_btn_modal"):

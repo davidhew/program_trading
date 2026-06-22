@@ -170,7 +170,7 @@ if st.session_state.view_id:
 # 5. 主列表页面
 # ==========================
 if st.session_state.page == 'list':
-    st.title("知识库文档")
+    st.title("投资反思&感悟")
 
     if st.button("➕ 添加文档"):
         st.session_state.page = 'add'
